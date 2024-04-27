@@ -89,11 +89,11 @@ public:
     }
 };
 
-int main()
-{
-    Solution s;
-    string str = "({{{{}}}))";
-    cout << s.isValid(str) << endl;
-
-    return 0;
-}
+//int main()
+//{
+//    Solution s;
+//    string str = "({{{{}}}))";
+//    cout << s.isValid(str) << endl;
+//
+//    return 0;
+//}

@@ -97,7 +97,7 @@ int QueueSize(Queue* q)
 int QueueEmpty(Queue* q)
 {
 	assert(q);
-	return (int)(!q->_front);
+	return (int)(!!q->_front);
 }
 
 // Ïú»Ù¶ÓÁÐ 
@@ -121,10 +121,30 @@ void QueueDestroy(Queue* q)
 
 void QueueTest_01()
 {
+	Queue q1;
+	QueueInit(&q1);
 
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		QueuePush(&q1, i + 1);
+		printf("%d ", QueueBack(&q1));
+	}
+	printf("\nsize:%d\n", QueueSize(&q1));
+	while (QueueEmpty(&q1))
+	{
+		printf("%d ", QueueFront(&q1));
+		QueuePop(&q1);
+	}
+	printf("\nsize:%d\n", QueueSize(&q1));
+
+
+	QueueDestroy(&q1);
 }
 
 int main() {
+
+	QueueTest_01();
 
 	return 0;
 }
