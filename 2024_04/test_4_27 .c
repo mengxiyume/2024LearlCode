@@ -119,7 +119,10 @@ void QueueDestroy(Queue* q)
 	q->_rear = NULL;
 }
 
+void QueueTest_01()
+{
 
+}
 
 int main() {
 
