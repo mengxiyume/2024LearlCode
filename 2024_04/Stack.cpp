@@ -32,6 +32,9 @@ public:
     int size() {
         return m_iTop + 1;
     }
+    bool empty() {
+        return (bool)(m_iTop + 1);
+    }
 
     Stack() {
         m_arrData = nullptr;

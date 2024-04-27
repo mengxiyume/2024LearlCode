@@ -27,5 +27,8 @@
     <ClCompile Include="Stack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test_4_27 .c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
