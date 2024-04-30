@@ -97,7 +97,7 @@ int QueueSize(Queue* q)
 int QueueEmpty(Queue* q)
 {
 	assert(q);
-	return (int)(!!q->_front);
+	return (int)(!!!q->_front);
 }
 
 // оЗ╩ы╤сап 
