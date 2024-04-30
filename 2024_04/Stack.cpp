@@ -7,7 +7,7 @@ using namespace std;
 
 class Stack {
 public:
-    typedef char dataType;
+    typedef int dataType;
     dataType* m_arrData;
     int m_iTop;     //存放下标，负数为没有数据
     int m_nCapacity;
@@ -33,7 +33,7 @@ public:
         return m_iTop + 1;
     }
     bool empty() {
-        return (bool)(m_iTop + 1);
+        return !(bool)(m_iTop + 1);
     }
 
     Stack() {
@@ -89,11 +89,66 @@ public:
     }
 };
 
-//int main()
-//{
-//    Solution s;
-//    string str = "({{{{}}}))";
-//    cout << s.isValid(str) << endl;
-//
-//    return 0;
-//}
+class MyQueue {
+private:
+    Stack* outputStack;
+    Stack* inputStack;
+
+public:
+
+    MyQueue() {
+        outputStack = new Stack();
+        inputStack = new Stack();
+    }
+    ~MyQueue() {
+        delete(outputStack);
+        delete(inputStack);
+        inputStack = outputStack = nullptr;
+    }
+
+    void push(int x) {
+        inputStack->push(x);
+    }
+
+    int pop() {
+        int retQueueFrontData = this->peek();
+        outputStack->pop();
+        return retQueueFrontData;
+    }
+
+    int peek() {
+        if (outputStack->empty()) {
+            //这里题目要求可以不考虑无输入先调用情况
+            while (!inputStack->empty()) {
+                int newQueueBackData = inputStack->top();
+                inputStack->pop();
+                outputStack->push(newQueueBackData);
+            }
+        }
+        int retQueueFrontData = outputStack->top();
+        return retQueueFrontData;
+    }
+
+    bool empty() {
+        return (inputStack->empty() && outputStack->empty());
+    }
+};
+
+void test_01() {
+    MyQueue* myQueue = new MyQueue();
+    myQueue->push(1); // queue is: [1]
+    myQueue->push(2); // queue is: [1, 2] (leftmost is front of the queue)
+    cout << myQueue->peek() << endl; // return 1
+    cout << myQueue->pop() << endl; // return 1, queue is [2]
+    cout << myQueue->empty() << endl; // return false
+}
+
+int main() {
+    //Solution s;
+    //string str = "({{{{}}}))";
+    //cout << s.isValid(str) << endl;
+
+    test_01();
+
+    return 0;
+}

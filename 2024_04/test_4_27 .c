@@ -142,9 +142,9 @@ void QueueTest_01()
 	QueueDestroy(&q1);
 }
 
-int main() {
-
-	QueueTest_01();
-
-	return 0;
-}
+//int main() {
+//
+//	QueueTest_01();
+//
+//	return 0;
+//}
