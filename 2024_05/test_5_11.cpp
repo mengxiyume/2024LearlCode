@@ -238,8 +238,8 @@ void test_topK_02() {
 	remove(tempFileName);
 }
 
-int main() {
-	//test_topK_01();
-	test_topK_02();
-	return 0;
-}
+//int main() {
+//	//test_topK_01();
+//	test_topK_02();
+//	return 0;
+//}
