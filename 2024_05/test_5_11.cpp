@@ -153,7 +153,7 @@ void CreateRandomTestFile_TopK(const char* filePath, size_t k) {
 		int ran3 = ran2 != 0 ? (rand() % ran2) : 0;
 		HPData randValue = (HPData)((((((long long)ran1 + i) << ran2 ) >> ran3) + rand() % 2) % ((long long)MaxValue + 1));
 		randValue += rand() % 2 == 0 ? 0 : MinValue;
-		printf("ran1:%-10d <<%-5d >>%-5d randValue:%10d\n", ran1, ran2, ran3, randValue);
+		//printf("ran1:%-10d <<%-5d >>%-5d randValue:%10d\n", ran1, ran2, ran3, randValue);
 
 		//Ð´ÈëÎÄ¼þ
 		fwrite(&randValue, sizeof(randValue), 1, randomFile);
