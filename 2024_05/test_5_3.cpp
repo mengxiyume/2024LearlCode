@@ -194,7 +194,7 @@ public:
 		this->m_pData = newData;
 		this->m_nCapacity = count;
 		this->m_nSize = count;
-		memmove(this->m_pData, arr, count);
+		memmove(this->m_pData, arr, count * sizeof(HPData));
 
 		//向下调整建堆 n-log(n) O(N)……？？？
 		for (long long i = (this->m_nSize - 1 - 1) / 2; i >= 0; i--) {
@@ -361,10 +361,10 @@ void testHeapSort() {
 	putchar('\n');
 }
 
-int main() {
-
-	//heapTest_01();
-	testHeapSort();
-
-	return 0;
-}
+//int main() {
+//
+//	//heapTest_01();
+//	testHeapSort();
+//
+//	return 0;
+//}
