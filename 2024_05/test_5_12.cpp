@@ -27,13 +27,16 @@ public:
 		BinaryTreeNode*	left;	//左子树地址
 		BinaryTreeNode*	right;	//右子树地址
 	}BTNode, node;
-	size_t size;
+	size_t size;				//有效节点的数量
+	size_t depth;				//树的深度
 #pragma endregion
 
 #pragma region 构造相关重载
 	BinaryTree() {
-		this->size = 0;
 		this->m_nSize = 0;
+		this->size = this->m_nSize;
+		this->m_nDepth = 0;
+		this->depth = this->m_nDepth;
 		this->m_pTopNode = nullptr;
 	}
 
@@ -43,8 +46,10 @@ public:
 		this->m_pTopNode = nullptr;
 
 		//记录清理
-		this->size = 0;
 		this->m_nSize = 0;
+		this->size = this->m_nSize;
+		this->m_nDepth = 0;
+		this->depth = this->m_nDepth;
 	}
 #pragma endregion
 
@@ -69,6 +74,13 @@ public:
 		this->size = this->m_nSize;
 		return this->size;
 	}
+	//深度
+	size_t reDepth() {
+		size_t newDepth = getTreeDepth(this->m_pTopNode);
+		this->m_nDepth = newDepth;
+		this->depth = this->m_nDepth;
+		return this->depth;
+	}
 #pragma endregion
 
 	void BinTreeTestFunc();
@@ -77,6 +89,7 @@ private:
 #pragma region 内部变量
 	node* m_pTopNode;		//根节点
 	size_t	m_nSize;		//有效节点的数量
+	size_t m_nDepth;		//树的深度
 #pragma endregion
 
 #pragma region 内部操作函数
@@ -99,6 +112,18 @@ private:
 		return pNode == nullptr ?
 			0 :
 			1 + getTreeSize(pNode->left) + getTreeSize(pNode->right);
+	}
+
+	//深度
+	size_t getTreeDepth(node* pNode) {
+		//递归统计所有节点
+		size_t leftValue = 0;
+		size_t rightValue = 0;
+		return pNode == nullptr ?
+			0 :
+			1 + ((leftValue = getTreeDepth(pNode->left)) > (rightValue = getTreeDepth(pNode->right)) ? 
+				leftValue :
+				rightValue);
 	}
 
 	//后序遍历摧毁
@@ -185,6 +210,7 @@ void BinTree::BinTreeTestFunc() {
 
 	this->m_pTopNode = arr[0];
 	this->reSize();
+	this->reDepth();
 }
 
 void Test_BinaryTree_01() {
@@ -192,10 +218,10 @@ void Test_BinaryTree_01() {
 
 	//...	各种遍历
 	tree1->BinTreeTestFunc();
+	printf("size: %zd\tdepth: %zd\n", tree1->size, tree1->depth);
 	tree1->preOrder();
 	tree1->inOrder();
 	tree1->postOrder();
-	printf("size: %zd\n", tree1->size);
 
 	delete(tree1);
 	tree1 = nullptr;
