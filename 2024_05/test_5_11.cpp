@@ -207,8 +207,8 @@ void topkInputFromFile(size_t k, HPData* buffer, const char* filePath) {
 }
 
 void test_topK_02() {
-	size_t valueNum = 114514;
-	const char* tempFileName = "./topkTempRandomTestFileHeapDataTypeIsInt";
+	size_t valueNum = (size_t)25536;
+	const char* tempFileName = "./topkTempRandomTestFileHeapDataTypeIsInt.tmp";
 	CreateRandomTestFile_TopK(tempFileName, valueNum);
 
 	size_t k = 10;
