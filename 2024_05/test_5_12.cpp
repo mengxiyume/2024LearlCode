@@ -81,6 +81,10 @@ public:
 		this->depth = this->m_nDepth;
 		return this->depth;
 	}
+
+	size_t getLevelNodeCount(size_t k) {
+		return treeKLevelNodeCount(this->m_pTopNode, k);
+	}
 #pragma endregion
 
 	void BinTreeTestFunc();
@@ -109,21 +113,44 @@ private:
 
 	size_t getTreeSize(node* pNode) {
 		//递归统计所有节点
-		return pNode == nullptr ?
-			0 :
-			1 + getTreeSize(pNode->left) + getTreeSize(pNode->right);
+		//空节点不统计
+		if (pNode == nullptr) {
+			return 0;
+		}
+		//左右统计求和
+		size_t leftValue = getTreeSize(pNode->left);
+		size_t rightValue = getTreeSize(pNode->right);
+		return 1 + leftValue + rightValue;
 	}
 
 	//深度
 	size_t getTreeDepth(node* pNode) {
 		//递归统计所有节点
-		size_t leftValue = 0;
-		size_t rightValue = 0;
-		return pNode == nullptr ?
-			0 :
-			1 + ((leftValue = getTreeDepth(pNode->left)) > (rightValue = getTreeDepth(pNode->right)) ? 
-				leftValue :
-				rightValue);
+		//空节点不统计
+		if (pNode == nullptr) {
+			return 0;
+		}
+		//统计左右最深子树
+		size_t leftValue = getTreeDepth(pNode->left);
+		size_t rightValue = getTreeDepth(pNode->right);
+		return 1 + (leftValue > rightValue ? leftValue : rightValue);
+	}
+
+	size_t treeKLevelNodeCount(node* pNode, size_t k) {
+		//层序遍历，k迭代
+		//遍历到空节点
+		if (pNode == nullptr) {
+			return 0;
+		}
+		//遍历到目标节点
+		else if (k == 1) {
+			return 1;
+		}
+		//目标节点上层节点，向下收取统计数据
+		size_t leftValue = treeKLevelNodeCount(pNode->left, k - 1);
+		size_t rightValue = treeKLevelNodeCount(pNode->right, k - 1);
+		size_t sum = leftValue + rightValue;
+		return sum;
 	}
 
 	//后序遍历摧毁
@@ -208,6 +235,10 @@ void BinTree::BinTreeTestFunc() {
 	arr[3]->left = arr[4];
 	arr[3]->right = arr[5];
 
+	//层和的测试
+	node* tempNode = ByeOneNode(1144514);
+	arr[2]->right = tempNode;
+
 	this->m_pTopNode = arr[0];
 	this->reSize();
 	this->reDepth();
@@ -218,7 +249,9 @@ void Test_BinaryTree_01() {
 
 	//...	各种遍历
 	tree1->BinTreeTestFunc();
-	printf("size: %zd\tdepth: %zd\n", tree1->size, tree1->depth);
+	size_t k = 4;
+	size_t kLevelNodeCount = tree1->getLevelNodeCount(k);
+	printf("size: %zd  depth: %zd\n%zd Level Nodes Count:%zd\n", tree1->size, tree1->depth, k, kLevelNodeCount);
 	tree1->preOrder();
 	tree1->inOrder();
 	tree1->postOrder();
