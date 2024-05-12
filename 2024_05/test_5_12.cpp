@@ -85,6 +85,14 @@ public:
 	size_t getLevelNodeCount(size_t k) {
 		return treeKLevelNodeCount(this->m_pRoot, k);
 	}
+
+	node* find(BTData x) {
+		return find(this->m_pRoot, x);
+	}
+
+	bool isEmpty() {
+		return !(this->m_pRoot);
+	}
 #pragma endregion
 
 	void BinTreeTestFunc();
@@ -149,8 +157,28 @@ private:
 		//目标节点上层节点，向下收取统计数据
 		size_t leftValue = treeKLevelNodeCount(root->left, k - 1);
 		size_t rightValue = treeKLevelNodeCount(root->right, k - 1);
-		size_t sum = leftValue + rightValue;
-		return sum;
+		return leftValue + rightValue;
+	}
+	
+	node* find(node* root, BTData x) {
+		//到空节点返回空
+		if (root == nullptr) {
+			return nullptr;
+		}
+		//找到节点返回该节点的指针
+		else if (root->data == x) {
+			return root;
+		}
+		//当前节点不为寻找的节点时继续寻找,并向上传递找到的节点
+		node* leftPtr = find(root->left, x);
+		if (leftPtr != nullptr) {
+			return leftPtr;
+		}
+		node* rightPtr = find(root->right, x);
+		if (rightPtr != nullptr) {
+			return rightPtr;
+		}
+		return nullptr;
 	}
 
 	//后序遍历摧毁
@@ -251,7 +279,15 @@ void Test_BinaryTree_01() {
 	tree1->BinTreeTestFunc();
 	size_t k = 4;
 	size_t kLevelNodeCount = tree1->getLevelNodeCount(k);
-	printf("size: %zd  depth: %zd\n%zd Level Nodes Count:%zd\n", tree1->size, tree1->depth, k, kLevelNodeCount);
+	BinTree::BTData findData = 114454;
+	BinTree::node* findNode = tree1->find(findData);
+	printf("size: %zd  depth: %zd\n"
+		"%zd Level Nodes Count:%zd\n"
+		"find %p:->data= %d\n",
+		tree1->size, tree1->depth,
+		k, kLevelNodeCount,
+		findNode, findNode != nullptr ? findNode->data : 0xCCCCCCCC);
+
 	tree1->preOrder();
 	tree1->inOrder();
 	tree1->postOrder();
