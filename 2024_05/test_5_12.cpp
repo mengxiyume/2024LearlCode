@@ -37,13 +37,13 @@ public:
 		this->size = this->m_nSize;
 		this->m_nDepth = 0;
 		this->depth = this->m_nDepth;
-		this->m_pTopNode = nullptr;
+		this->m_pRoot = nullptr;
 	}
 
 	~BinaryTree() {
 		//遍历删除结构
-		treeDestroy(this->m_pTopNode);
-		this->m_pTopNode = nullptr;
+		treeDestroy(this->m_pRoot);
+		this->m_pRoot = nullptr;
 
 		//记录清理
 		this->m_nSize = 0;
@@ -55,35 +55,35 @@ public:
 
 #pragma region 二叉树常规操作
 	void preOrder() {
-		preOrder(this->m_pTopNode);
+		preOrder(this->m_pRoot);
 		putchar('\n');
 	}
 	void inOrder() {
-		inOrder(this->m_pTopNode);
+		inOrder(this->m_pRoot);
 		putchar('\n');
 	}
 	void postOrder() {
-		postOrder(this->m_pTopNode);
+		postOrder(this->m_pRoot);
 		putchar('\n');
 	}
 
 	//计数
 	size_t reSize() {
-		size_t newSize = getTreeSize(this->m_pTopNode);
+		size_t newSize = getTreeSize(this->m_pRoot);
 		this->m_nSize = newSize;
 		this->size = this->m_nSize;
 		return this->size;
 	}
 	//深度
 	size_t reDepth() {
-		size_t newDepth = getTreeDepth(this->m_pTopNode);
+		size_t newDepth = getTreeDepth(this->m_pRoot);
 		this->m_nDepth = newDepth;
 		this->depth = this->m_nDepth;
 		return this->depth;
 	}
 
 	size_t getLevelNodeCount(size_t k) {
-		return treeKLevelNodeCount(this->m_pTopNode, k);
+		return treeKLevelNodeCount(this->m_pRoot, k);
 	}
 #pragma endregion
 
@@ -91,7 +91,7 @@ public:
 
 private:
 #pragma region 内部变量
-	node* m_pTopNode;		//根节点
+	node* m_pRoot;		//根节点
 	size_t	m_nSize;		//有效节点的数量
 	size_t m_nDepth;		//树的深度
 #pragma endregion
@@ -111,35 +111,35 @@ private:
 		return newNode;
 	}
 
-	size_t getTreeSize(node* pNode) {
+	size_t getTreeSize(node* root) {
 		//递归统计所有节点
 		//空节点不统计
-		if (pNode == nullptr) {
+		if (root == nullptr) {
 			return 0;
 		}
 		//左右统计求和
-		size_t leftValue = getTreeSize(pNode->left);
-		size_t rightValue = getTreeSize(pNode->right);
+		size_t leftValue = getTreeSize(root->left);
+		size_t rightValue = getTreeSize(root->right);
 		return 1 + leftValue + rightValue;
 	}
 
 	//深度
-	size_t getTreeDepth(node* pNode) {
+	size_t getTreeDepth(node* root) {
 		//递归统计所有节点
 		//空节点不统计
-		if (pNode == nullptr) {
+		if (root == nullptr) {
 			return 0;
 		}
 		//统计左右最深子树
-		size_t leftValue = getTreeDepth(pNode->left);
-		size_t rightValue = getTreeDepth(pNode->right);
+		size_t leftValue = getTreeDepth(root->left);
+		size_t rightValue = getTreeDepth(root->right);
 		return 1 + (leftValue > rightValue ? leftValue : rightValue);
 	}
 
-	size_t treeKLevelNodeCount(node* pNode, size_t k) {
-		//层序遍历，k迭代
+	size_t treeKLevelNodeCount(node* root, size_t k) {
+		//遍历，k迭代
 		//遍历到空节点
-		if (pNode == nullptr) {
+		if (root == nullptr) {
 			return 0;
 		}
 		//遍历到目标节点
@@ -147,59 +147,59 @@ private:
 			return 1;
 		}
 		//目标节点上层节点，向下收取统计数据
-		size_t leftValue = treeKLevelNodeCount(pNode->left, k - 1);
-		size_t rightValue = treeKLevelNodeCount(pNode->right, k - 1);
+		size_t leftValue = treeKLevelNodeCount(root->left, k - 1);
+		size_t rightValue = treeKLevelNodeCount(root->right, k - 1);
 		size_t sum = leftValue + rightValue;
 		return sum;
 	}
 
 	//后序遍历摧毁
-	void treeDestroy(node* pTop) {
+	void treeDestroy(node* root) {
 		//TODO:摧毁树
 
-		if (pTop == nullptr) {
+		if (root == nullptr) {
 			return;
 		}
 
 		//摧毁左右子树，再摧毁自己
-		treeDestroy(pTop->left);
-		treeDestroy(pTop->right);
-		free(pTop);
-		pTop = nullptr;
+		treeDestroy(root->left);
+		treeDestroy(root->right);
+		free(root);
+		root = nullptr;
 	}
 
 	//遍历
-	void preOrder(node* pNode) {
-		if (pNode == nullptr) {
+	void preOrder(node* root) {
+		if (root == nullptr) {
 			printf("N ");
 			return;
 		}
 
-		printf("%d ", pNode->data);	//根
-		preOrder(pNode->left);		//左
-		preOrder(pNode->right);		//右
+		printf("%d ", root->data);	//根
+		preOrder(root->left);		//左
+		preOrder(root->right);		//右
 	}
 
-	void inOrder(node* pNode) {
-		if (pNode == nullptr) {
+	void inOrder(node* root) {
+		if (root == nullptr) {
 			printf("N ");
 			return;
 		}
 
-		inOrder(pNode->left);		//左
-		printf("%d ", pNode->data);	//根
-		inOrder(pNode->right);		//右
+		inOrder(root->left);		//左
+		printf("%d ", root->data);	//根
+		inOrder(root->right);		//右
 	}
 
-	void postOrder(node* pNode) {
-		if (pNode == nullptr) {
+	void postOrder(node* root) {
+		if (root == nullptr) {
 			printf("N ");
 			return;
 		}
 
-		postOrder(pNode->left);		//左
-		postOrder(pNode->right);	//右
-		printf("%d ", pNode->data);	//根
+		postOrder(root->left);		//左
+		postOrder(root->right);	//右
+		printf("%d ", root->data);	//根
 	}
 
 	////层序遍历
@@ -239,7 +239,7 @@ void BinTree::BinTreeTestFunc() {
 	node* tempNode = ByeOneNode(1144514);
 	arr[2]->right = tempNode;
 
-	this->m_pTopNode = arr[0];
+	this->m_pRoot = arr[0];
 	this->reSize();
 	this->reDepth();
 }
