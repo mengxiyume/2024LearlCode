@@ -86,6 +86,10 @@ public:
 		return treeKLevelNodeCount(this->m_pRoot, k);
 	}
 
+	size_t getLeafNodeCount() {
+		return getLeafNodeCount(this->m_pRoot);
+	}
+
 	node* find(BTData x) {
 		return find(this->m_pRoot, x);
 	}
@@ -93,6 +97,23 @@ public:
 	bool isEmpty() {
 		return !(this->m_pRoot);
 	}
+#pragma endregion
+
+#pragma region 操作符重载
+	//相等运算
+	bool operator==(const class BinaryTree &rightTree) {
+		//基础判断
+		if (this->m_nSize != rightTree.m_nSize	||
+			this->m_nDepth != rightTree.m_nDepth) {
+			return false;
+		}
+		if (this->m_pRoot == rightTree.m_pRoot) {
+			return true;
+		}
+		//内部结构及数值判断
+		return treeCompare(this->m_pRoot, rightTree.m_pRoot);
+	}
+
 #pragma endregion
 
 	void BinTreeTestFunc();
@@ -181,6 +202,21 @@ private:
 		return nullptr;
 	}
 
+	size_t getLeafNodeCount(node* root) {
+		if (root == nullptr) {
+			return 0;
+		}
+
+		if (root->left == nullptr && root->right == nullptr) {
+			return 1;
+		}
+
+		size_t leftValue = getLeafNodeCount(root->left);
+		size_t rightValue = getLeafNodeCount(root->right);
+
+		return leftValue + rightValue;
+	}
+
 	//后序遍历摧毁
 	void treeDestroy(node* root) {
 		//TODO:摧毁树
@@ -230,6 +266,33 @@ private:
 		printf("%d ", root->data);	//根
 	}
 
+	bool treeCompare(node* leftRoot, node* rightRoot) {
+		
+		//左右根树都为空
+		if (leftRoot == nullptr && rightRoot == nullptr) {
+			return true;
+		}
+		//左右根树其中一个为空
+		else if (leftRoot == nullptr || rightRoot == nullptr) {
+			return false;
+		}
+		//左右根树都不为空时比较根的值
+		else if (leftRoot->data != rightRoot->data) {
+			return false;
+		}
+		//左右根树都不为空且都相等，递归计算
+		bool leftValue = treeCompare(leftRoot->left, rightRoot->left);
+		if (leftValue == false) {
+			return false;
+		}
+		bool rightValue = treeCompare(leftRoot->right, rightRoot->right);
+		if (rightValue == false) {
+			return false;
+		}
+		//左右树等值且运算后返回值
+		return leftValue && rightValue;
+	}
+
 	////层序遍历
 	//void levelOrder(node* pNode) {
 	//	//空节点输出N
@@ -263,9 +326,9 @@ void BinTree::BinTreeTestFunc() {
 	arr[3]->left = arr[4];
 	arr[3]->right = arr[5];
 
-	//层和的测试
-	node* tempNode = ByeOneNode(1144514);
-	arr[2]->right = tempNode;
+	//额外节点的测试
+	node* tempNode = ByeOneNode(114514);
+	arr[1]->right = tempNode;
 
 	this->m_pRoot = arr[0];
 	this->reSize();
@@ -279,21 +342,41 @@ void Test_BinaryTree_01() {
 	tree1->BinTreeTestFunc();
 	size_t k = 4;
 	size_t kLevelNodeCount = tree1->getLevelNodeCount(k);
-	BinTree::BTData findData = 114454;
+	BinTree::BTData findData = 114514;
 	BinTree::node* findNode = tree1->find(findData);
 	printf("size: %zd  depth: %zd\n"
 		"%zd Level Nodes Count:%zd\n"
-		"find %p:->data= %d\n",
+		"Find %p:->data= %d\n"
+		"LeafNodeCount: %zd\n",
 		tree1->size, tree1->depth,
 		k, kLevelNodeCount,
-		findNode, findNode != nullptr ? findNode->data : 0xCCCCCCCC);
+		findNode, findNode != nullptr ? findNode->data : 0xCCCCCCCC,
+		tree1->getLeafNodeCount());
 
 	tree1->preOrder();
 	tree1->inOrder();
 	tree1->postOrder();
 
+	//同一棵树，应为true
+	BinTree* tree1_1 = tree1;
+	printf("相等？%d\n", (*tree1) == (*tree1_1));
+
+	BinTree* tree2 = new BinaryTree();
+	tree2->BinTreeTestFunc();
+	//两棵树，且内容相同，应为true
+	printf("相等？%d\n", *tree1 == *tree2);
+	//两棵树，且内容不同，应为false
+	tree2->find(114514)->data = 20;
+	printf("相等？%d\n", *tree1 == *tree2);
+
+	tree2->preOrder();
+
+	delete(tree2);
+	tree2 = nullptr;
+
 	delete(tree1);
 	tree1 = nullptr;
+	tree1_1 = nullptr;
 }
 
 int main() {
