@@ -470,6 +470,9 @@ void inOrderBinTree(BTNode* root) {
 	inOrderBinTree(root->right);
 }
 
+//输入不带空格 - "123#45#6#78"这样的,输入数据是前序输入
+//123#45#6#78 -> 35687421
+//123###45##6 -> 321546
 int main() {
 	char inputBuffer[128] = { 0 };
 	while (scanf("%s", inputBuffer) != EOF) { // 注意 while 处理多个 case
@@ -489,7 +492,7 @@ int main() {
 	return 0;
 }
 
-int main() {
-	Test_BinaryTree_02();
-	return 0;
-}
+//int main() {
+//	Test_BinaryTree_02();
+//	return 0;
+//}
