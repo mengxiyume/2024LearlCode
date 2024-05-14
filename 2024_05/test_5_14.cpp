@@ -343,14 +343,20 @@ class Solution {
 public:
 	bool isSubtree(TreeNode* root, TreeNode* subRoot) {
 		//遍历对比树
+		//传递的根节点已经为空时直接回归
 		if (root == nullptr) {
 			return false;
 		}
-
-		return
-			isSameTree(root, subRoot) ||
-			isSubtree(root->left, subRoot) ||
-			isSubtree(root->right, subRoot);
+		//root节点与subRoot节点值相同时进入子树对比
+		else if (root->val == subRoot->val && isSameTree(root, subRoot)) {
+			return true;
+		}
+		//不为合适节点时进行递归遍历
+		else {
+			return
+				isSubtree(root->left, subRoot) ||
+				isSubtree(root->right, subRoot);
+		}
 	}
 	bool isSameTree(TreeNode* p, TreeNode* q) {
 		//都为空返回true
@@ -385,6 +391,103 @@ public:
 		}
 	}
 };
+
+
+
+
+typedef char BinaryTreeNodeDataType, BTData;
+
+typedef struct BinaryTreeNode {
+	BTData data;
+	struct BinaryTreeNode* left;
+	struct BinaryTreeNode* right;
+}BTNode;
+
+//<param name="fromateInitStringZero">以'\0'结尾的格式化字符串</param>
+//<param name="position">控制当前从字符串的第几个字符开始行动的数值的指针</param>
+//<return>创建的树的根节点</return>
+BTNode* createBinTree(const char* fromateInitStringZero, size_t* position) {
+	//解析当前需要入队的字符
+	assert(fromateInitStringZero);
+
+	if (*fromateInitStringZero == '\0' || *(fromateInitStringZero + *position) == '\0') {
+		return NULL;
+	}
+
+	//根建立
+	char curData = *(fromateInitStringZero + *position);
+	(*position)++;
+	if (curData == '#') {
+		return NULL;
+	}
+
+	BTNode* newRootNode = (BTNode*)malloc(sizeof(BTNode));
+	assert(newRootNode);
+	newRootNode->data = curData;
+	newRootNode->left = NULL;
+	newRootNode->right = NULL;
+	if (*(fromateInitStringZero + *position) == '\0') {
+		return newRootNode;
+	}
+
+	//左子树建立
+	BTNode* newLeftRoot = createBinTree(fromateInitStringZero, position);
+	newRootNode->left = newLeftRoot;
+	if (*(fromateInitStringZero + *position) == '\0') {
+		return newRootNode;
+	}
+
+	//右子树建立
+	BTNode* newRightRoot = createBinTree(fromateInitStringZero, position);
+	newRootNode->right = newRightRoot;
+	if (*(fromateInitStringZero + *position) == '\0') {
+		return newRootNode;
+	}
+
+	//完成建立返回根节点
+	return newRootNode;
+}
+
+//摧毁给定根及子树
+void destroyBinTree(BTNode* root) {
+	if (root == NULL) {
+		return;
+	}
+	destroyBinTree(root->left);
+	destroyBinTree(root->right);
+	//后序遍历摧毁树，方便
+	free(root);
+	//*root = NULL;
+}
+
+//中序遍历给定根树
+void inOrderBinTree(BTNode* root) {
+	if (root == NULL) {
+		return;
+	}
+	inOrderBinTree(root->left);
+	printf("%c ", root->data);
+	inOrderBinTree(root->right);
+}
+
+int main() {
+	char inputBuffer[128] = { 0 };
+	while (scanf("%s", inputBuffer) != EOF) { // 注意 while 处理多个 case
+		// 64 位输出请用 printf("%lld") to 
+		//输入
+		//构建
+		size_t position = 0;
+		BTNode* curTree = createBinTree(inputBuffer, &position);
+		position = 0;
+		//输出
+		inOrderBinTree(curTree);
+		//回收空间
+		destroyBinTree(curTree);
+		curTree = NULL;
+	}
+
+	return 0;
+}
 
 int main() {
 	Test_BinaryTree_02();
