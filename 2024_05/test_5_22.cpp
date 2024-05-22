@@ -632,26 +632,26 @@ void LevelOrder(BTNode* root) {
 		BTNode* front = queue->front();
 		queue->pop();
 
-		////打印空
-		//if (front == nullptr) {
-		//	printf("N ");
-		//}
-		//else {
-		//	printf("%c ", front->data);
-		//	//下一层入队
-		//	queue->push(front->left);
-		//	queue->push(front->right);
-		//}
-
-		//不打印空
-		printf("%c ", front->data);
-		//下一层入队
-		if (front->left != nullptr) {
-			queue->push(front->left);
+		//打印空
+		if (front == nullptr) {
+			printf("N ");
 		}
-		if (front->right != nullptr) {
+		else {
+			printf("%c ", front->data);
+			//下一层入队
+			queue->push(front->left);
 			queue->push(front->right);
 		}
+
+		////不打印空
+		//printf("%c ", front->data);
+		////下一层入队
+		//if (front->left != nullptr) {
+		//	queue->push(front->left);
+		//}
+		//if (front->right != nullptr) {
+		//	queue->push(front->right);
+		//}
 
 		front = nullptr;
 	}
@@ -674,8 +674,71 @@ void LevelOrderTest() {
 	binTreeRoot = NULL;
 }
 
+//完全二叉树
+//层序遍历, 非完全二叉树的层序遍历不连续
+bool ComplateBinTree(BTNode* root) {
+	Queue* queue = new Queue();
+
+	if (root != nullptr) {
+		queue->push(root);
+	}
+	else {
+		delete(queue);
+		queue = nullptr;
+		//空树返回false
+		return false;
+	}
+
+	while (queue->empty() != true) {
+		//当前层出队
+		BTNode* front = queue->front();
+		queue->pop();
+
+		//遇到空节点退出循环
+		if (front == nullptr) {
+			break;
+		}
+		else {
+			//下一层入队
+			queue->push(front->left);
+			queue->push(front->right);
+		}
+
+		front = nullptr;
+	}
+	bool isComplate = true;
+	//监测剩余未遍历部分是否连续且为空
+	while (queue->empty() != true) {
+		BTNode* front = queue->front();
+		queue->pop();
+		if (front != nullptr) {
+			isComplate = false;
+			break;
+		}
+	}
+
+	delete(queue);
+	queue = nullptr;
+
+	return isComplate;
+}
+
+void ComplateTest() {
+	char szBuffer[1024] = "123##7##45##6##";
+	size_t pos = 0;
+	BTNode* binTreeRoot = createBinTree(szBuffer, &pos);
+
+	LevelOrder(binTreeRoot);
+	putchar('\n');
+	printf("isComplate:%d\n", ComplateBinTree(binTreeRoot));
+
+	destroyBinTree(binTreeRoot);
+	binTreeRoot = NULL;
+}
+
 int main() {
-	LevelOrderTest();
+	//LevelOrderTest();
+	ComplateTest();
 
 	return 0;
 }
