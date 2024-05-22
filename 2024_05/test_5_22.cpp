@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <iostream>
 using namespace std;
 
@@ -741,11 +742,15 @@ extern "C" {
 	#include "./Sort.h"
 }
 
-typedef int testSortDataType;
+typedef short testSortDataType;
 
 signed char testCompFunc(void* p1, void* p2) {
-	//return (*(testSortDataType*)p2) - (*(testSortDataType*)p1);		//	<	小于
-	return (*(testSortDataType*)p1) - (*(testSortDataType*)p2);		//	>	大于
+	//(*(testSortDataType*)p1) - (*(testSortDataType*)p2);		//	>	大于	//顺序
+
+	testSortDataType ret = (*(testSortDataType*)p1) - (*(testSortDataType*)p2);
+	return ret > 0;
+	//return ret = 0;
+	//return ret < 0;
 }
 
 compareFunc* comp1 = testCompFunc;
@@ -753,8 +758,9 @@ compareFunc* comp1 = testCompFunc;
 void SortTest_01() {
 	testSortDataType arr[] = { 39,8,9,6,4,12,5,2,1,10 };
 	
-	sort(arr, _countof(arr), sizeof(*arr), comp1);
+	//Sort(arr, _countof(arr), sizeof(*arr), comp1);
 	//SelectSort(arr, _countof(arr), sizeof(*arr), comp1);
+	BubbleSort(arr, _countof(arr), sizeof(*arr), comp1);
 
 	for (int i = 0; i < _countof(arr); i++) {
 		printf("%d ", arr[i]);
@@ -762,10 +768,46 @@ void SortTest_01() {
 	putchar('\n');
 }
 
+void SortTest_02() {
+	const int testBaseCount = 50000;
+	testSortDataType* randomValues = (testSortDataType*)malloc(testBaseCount * sizeof(testSortDataType));
+	assert(randomValues);
+	srand(time(0));
+
+	for (int i = 0; i < testBaseCount; i++) {
+		randomValues[i] = rand();
+	}
+
+	//testSortDataType randomValues[] = { 39, 8, 9, 6, 4, -12, 5, 2, 1, 10 };
+
+	//待测试排序算法列表
+	sortFunc* listFunc[] = { InsertSort, SelectSort, BubbleSort, (sortFunc*)qsort};
+
+	for (int i = 0; i < _countof(listFunc); i++) {
+		//数据准备
+		testSortDataType* arr = (testSortDataType*)malloc(testBaseCount * sizeof(testSortDataType));
+		assert(arr);
+		memmove(arr, randomValues, sizeof(testSortDataType) * testBaseCount);
+
+		//速度计算
+		clock_t begin = clock();
+		listFunc[i](arr, testBaseCount, sizeof(testSortDataType), comp1);
+		clock_t end = clock();
+		printf("func:%d, time:%ld ms\n", i, end - begin);
+
+		//空间回收
+		free(arr);
+		arr = NULL;
+	}
+	//free(randomValues);
+	//randomValues = NULL;
+}
+
 int main() {
 	//LevelOrderTest();
 	//ComplateTest();
-	SortTest_01();
+	//SortTest_01();
+	SortTest_02();
 
 	return 0;
 }

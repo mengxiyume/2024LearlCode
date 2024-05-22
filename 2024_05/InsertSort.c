@@ -9,7 +9,7 @@ void InsertSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* 
 	assert(singleDataSize);
 	assert(comp);
 
-	size_t i = 0;
+	int i = 0;
 	void* tmp = malloc(singleDataSize);
 	assert(tmp);
 	for (i = 0; i < arrCount - 1; i++)

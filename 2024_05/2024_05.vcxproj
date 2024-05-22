@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BubbleSort.c" />
     <ClCompile Include="InsertSort.c" />
     <ClCompile Include="SelectSort.c" />
     <ClCompile Include="Sort.c" />

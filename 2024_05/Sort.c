@@ -29,7 +29,7 @@ void swap(size_t size, void* p1, void* p2)
 	}
 }
 
-void sort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+void Sort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
 {	//TODO:写好排序之后再选一个效率高的调用
 	assert(arr);
 	assert(arrCount);
