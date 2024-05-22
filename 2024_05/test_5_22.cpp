@@ -631,8 +631,20 @@ void LevelOrder(BTNode* root) {
 		//当前层出队
 		BTNode* front = queue->front();
 		queue->pop();
-		printf("%c ", front->data);
 
+		////打印空
+		//if (front == nullptr) {
+		//	printf("N ");
+		//}
+		//else {
+		//	printf("%c ", front->data);
+		//	//下一层入队
+		//	queue->push(front->left);
+		//	queue->push(front->right);
+		//}
+
+		//不打印空
+		printf("%c ", front->data);
 		//下一层入队
 		if (front->left != nullptr) {
 			queue->push(front->left);
@@ -640,6 +652,7 @@ void LevelOrder(BTNode* root) {
 		if (front->right != nullptr) {
 			queue->push(front->right);
 		}
+
 		front = nullptr;
 	}
 
