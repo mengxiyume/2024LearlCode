@@ -142,6 +142,7 @@
     <ClCompile Include="BubbleSort.c" />
     <ClCompile Include="InsertSort.c" />
     <ClCompile Include="SelectSort.c" />
+    <ClCompile Include="ShellSort.c" />
     <ClCompile Include="Sort.c" />
     <ClCompile Include="test_5_11.cpp" />
     <ClCompile Include="test_5_12.cpp" />

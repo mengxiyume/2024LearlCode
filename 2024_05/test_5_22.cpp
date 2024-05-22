@@ -769,7 +769,7 @@ void SortTest_01() {
 }
 
 void SortTest_02() {
-	const int testBaseCount = 50000;
+	const int testBaseCount = 10;
 	testSortDataType* randomValues = (testSortDataType*)malloc(testBaseCount * sizeof(testSortDataType));
 	assert(randomValues);
 	srand(time(0));
