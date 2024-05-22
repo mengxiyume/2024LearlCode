@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\Sort">
+      <UniqueIdentifier>{bcb2e7af-3cc9-477f-ba12-ded4093aec17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Sort">
+      <UniqueIdentifier>{83b2fc6e-0823-4239-9a73-16a47b824907}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_5_3.cpp">
@@ -30,5 +36,19 @@
     <ClCompile Include="test_5_22.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="InsertSort.c">
+      <Filter>源文件\Sort</Filter>
+    </ClCompile>
+    <ClCompile Include="Sort.c">
+      <Filter>源文件\Sort</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectSort.c">
+      <Filter>源文件\Sort</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sort.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
