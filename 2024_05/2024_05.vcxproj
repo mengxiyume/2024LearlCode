@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="BubbleSort.c" />
     <ClCompile Include="InsertSort.c" />
+    <ClCompile Include="QuickSort.c" />
     <ClCompile Include="SelectSort.c" />
     <ClCompile Include="ShellSort.c" />
     <ClCompile Include="Sort.c" />

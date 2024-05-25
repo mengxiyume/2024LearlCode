@@ -51,6 +51,9 @@
     <ClCompile Include="ShellSort.c">
       <Filter>源文件\Sort</Filter>
     </ClCompile>
+    <ClCompile Include="QuickSort.c">
+      <Filter>源文件\Sort</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sort.h">

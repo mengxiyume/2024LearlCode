@@ -44,3 +44,5 @@ void InsertSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* 
 void SelectSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
 
 void BubbleSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+
+void ShellSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
