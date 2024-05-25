@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
-using namespace std;
 
 //typedef char BinaryTreeNodeDataType, BTData;
 //
@@ -744,13 +743,23 @@ extern "C" {
 
 typedef short testSortDataType;
 
+//返回true即为需要调换
 signed char testCompFunc(void* p1, void* p2) {
-	//(*(testSortDataType*)p1) - (*(testSortDataType*)p2);		//	>	大于	//顺序
-
-	testSortDataType ret = (*(testSortDataType*)p1) - (*(testSortDataType*)p2);
-	return ret > 0;
-	//return ret = 0;
-	//return ret < 0;
+	testSortDataType cmp = (*(testSortDataType*)p1) - (*(testSortDataType*)p2);
+	signed char ret = 0;
+	//升序		//1比2大则满足调换
+	if (cmp > 0) {
+		ret = 1;
+	}
+	else if (cmp < 0) {
+		ret = -1;
+	}
+	else {
+		ret =  0;
+	}
+	//升序直接返回，降序可加一个取负
+	return ret;
+	//return -ret;
 }
 
 compareFunc* comp1 = testCompFunc;
@@ -760,11 +769,14 @@ void SortTest_01() {
 	
 	//Sort(arr, _countof(arr), sizeof(*arr), comp1);
 	//SelectSort(arr, _countof(arr), sizeof(*arr), comp1);
-	ShellSort(arr, _countof(arr), sizeof(*arr), comp1);
+	//ShellSort(arr, _countof(arr), sizeof(*arr), comp1);
+	//InsertSort(arr, _countof(arr), sizeof(*arr), comp1);
+	//QuickSort(arr, _countof(arr), sizeof(*arr), comp1);
 
 	for (int i = 0; i < _countof(arr); i++) {
 		printf("%d ", arr[i]);
 	}
+
 	putchar('\n');
 }
 
@@ -781,12 +793,12 @@ void SortTest_02() {
 	//testSortDataType randomValues[] = { 39, 8, 9, 6, 4, -12, 5, 2, 1, 10 };
 
 	//待测试排序算法列表
-	sortFunc* listFunc[] = { ShellSort, (sortFunc*)qsort, InsertSort, SelectSort, BubbleSort};
+	sortFunc* listFunc[] = { ShellSort, QuickSort, (sortFunc*)qsort, InsertSort, SelectSort, BubbleSort};
 
+	//数据准备
+	testSortDataType* arr = (testSortDataType*)malloc(testBaseCount * sizeof(testSortDataType));
+	assert(arr);
 	for (int i = 0; i < _countof(listFunc); i++) {
-		//数据准备
-		testSortDataType* arr = (testSortDataType*)malloc(testBaseCount * sizeof(testSortDataType));
-		assert(arr);
 		memmove(arr, randomValues, sizeof(testSortDataType) * testBaseCount);
 
 		//速度计算
@@ -795,12 +807,13 @@ void SortTest_02() {
 		clock_t end = clock();
 		printf("func:%d, time:%ld ms\n", i, end - begin);
 
-		//空间回收
-		free(arr);
-		arr = NULL;
 	}
-	//free(randomValues);
-	//randomValues = NULL;
+	//空间回收
+	free(arr);
+	arr = NULL;
+
+	free(randomValues);
+	randomValues = NULL;
 }
 
 int main() {

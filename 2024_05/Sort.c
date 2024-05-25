@@ -14,6 +14,9 @@ void swap(size_t size, void* p1, void* p2)
 	assert(p1);
 	assert(p2);
 
+	if (p1 == p2)
+		return;
+
 	unsigned char* _1 = p1;
 	unsigned char* _2 = p2;
 	int i = 0;

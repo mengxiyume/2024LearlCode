@@ -19,12 +19,14 @@ void SelectSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* 
 		void* seleValue = (char*)arr + ((arrCount - i - 1) * singleDataSize);
 
 		for (j = 0; j < arrCount - i; j++) {
-			if (comp(((char*)arr + (j * singleDataSize)), seleValue) > 0) {
+			if (comp(((char*)arr + (j * singleDataSize)), seleValue) > 0) 
+			{
 				seleValue = (char*)arr + (j * singleDataSize);
 				ifExchange = 1;
 			}
 		}
-		if (ifExchange != 0) {
+		if (ifExchange != 0) 
+		{
 			swap(singleDataSize, seleValue, (char*)arr + (arrCount - i - 1) * singleDataSize);
 		}
 	}
