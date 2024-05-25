@@ -781,7 +781,7 @@ void SortTest_01() {
 }
 
 void SortTest_02() {
-	const int testBaseCount = 10000;
+	const int testBaseCount = 10000000;
 	testSortDataType* randomValues = (testSortDataType*)malloc(testBaseCount * sizeof(testSortDataType));
 	assert(randomValues);
 	srand(time(0));
@@ -793,7 +793,7 @@ void SortTest_02() {
 	//testSortDataType randomValues[] = { 39, 8, 9, 6, 4, -12, 5, 2, 1, 10 };
 
 	//待测试排序算法列表
-	sortFunc* listFunc[] = { ShellSort, QuickSort, (sortFunc*)qsort, InsertSort, SelectSort, BubbleSort};
+	sortFunc* listFunc[] = { ShellSort, QuickSort/*, (sortFunc*)qsort, InsertSort, SelectSort, BubbleSort*/};
 
 	//数据准备
 	testSortDataType* arr = (testSortDataType*)malloc(testBaseCount * sizeof(testSortDataType));

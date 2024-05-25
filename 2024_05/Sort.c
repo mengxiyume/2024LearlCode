@@ -39,5 +39,5 @@ void Sort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
 	assert(singleDataSize);
 	assert(comp);
 
-	InsertSort(arr, arrCount, singleDataSize, comp);
+	QuickSort(arr, arrCount, singleDataSize, comp);
 }

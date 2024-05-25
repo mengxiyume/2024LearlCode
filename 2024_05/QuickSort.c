@@ -12,7 +12,15 @@
 *	对两个区间再次分别进行同样的操作,直到递归遍历完成，数组有序
 */
 
-static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+/* 快排在面临近有序数组时容易一直处理最坏情况，时间复杂度O(N)
+*	如果并非每次都是最坏情况，则能够将时间复杂度拉到 O(N*logN)
+*	随机选key或三数取中则可以避免每次都选择最坏情况	//RANDOME!!!
+*		用随机数指定key，将其与left对比后调换，后流程相同
+*		拿到开头，中间以及结尾的元素，取中间值与left调换，后流程相同
+*	****- 今晚太累了，明天继续_202405260215am -****
+*/
+
+const static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
 
 void QuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
 {
@@ -24,7 +32,7 @@ void QuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* c
 	g_funcQuickSort(arr, arrCount, singleDataSize, comp);
 }
 
-static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+const static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
 {
 	size_t subKey = 0;				//key值的坐标
 	size_t left = 0;				//左指针下标
@@ -34,15 +42,11 @@ static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, c
 	while (left < right)
 	{
 		//left步进
-		while ((long long)left < (long long)right && comp((char*)arr + right * singleDataSize, (char*)arr + subKey * singleDataSize) >= 0)
-		{
+		while (left < right && comp((char*)arr + right * singleDataSize, (char*)arr + subKey * singleDataSize) >= 0)
 			right--;
-		}
 		//right步进
-		while ((long long)left < (long long)right && comp((char*)arr + left * singleDataSize, (char*)arr + subKey * singleDataSize) <= 0)
-		{
+		while (left < right && comp((char*)arr + left * singleDataSize, (char*)arr + subKey * singleDataSize) <= 0)
 			left++;
-		}
 		//交换找出的值
 		swap(singleDataSize, (char*)arr + left * singleDataSize, (char*)arr + right * singleDataSize);
 	}
@@ -51,10 +55,8 @@ static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, c
 	subKey = left;
 
 	//两端区域分别再次排序
-	if (subKey > 0) {
+	if (subKey > 0)
 		g_funcQuickSort(arr, subKey, singleDataSize, comp);
-	}
-	if (arrCount - subKey - 1 > 0) {
+	if (arrCount - subKey - 1 > 0)
 		g_funcQuickSort((char*)arr + (subKey + 1) * singleDataSize, arrCount - subKey - 1, singleDataSize, comp);
-	}
 }
