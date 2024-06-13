@@ -32,27 +32,65 @@ void QuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* c
 	g_funcQuickSort(arr, arrCount, singleDataSize, comp);
 }
 
+const static size_t g_funcGetMidNumPos(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+{
+	//取中间数
+	size_t leftPos = 0;
+	size_t midPos = arrCount / 2;
+	size_t rightPos = arrCount;
+
+	//不全等返回中间值
+	if (comp((char*)arr + leftPos * singleDataSize, (char*)arr + rightPos * singleDataSize) < 0)
+	{
+		if (comp((char*)arr + midPos * singleDataSize, (char*)arr + rightPos * singleDataSize) < 0)
+		{
+			return midPos;
+		}
+		else if (comp((char*)arr + rightPos * singleDataSize, (char*)arr + leftPos * singleDataSize) < 0)
+		{
+			return rightPos;
+		}
+	}
+	else
+	{
+		if (midPos > rightPos)
+		if (comp((char*)arr + midPos * singleDataSize, (char*)arr + rightPos * singleDataSize) > 0)
+		{
+			return midPos;
+		}
+		else if (comp((char*)arr + rightPos * singleDataSize, (char*)arr + leftPos * singleDataSize) > 0)
+		{
+			return leftPos;
+		}
+	}
+	//全相等默认返回首元素
+	return 0;
+}
+
 const static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
 {
 	size_t subKey = 0;				//key值的坐标
-	size_t left = 0;				//左指针下标
-	size_t right = arrCount - 1;	//右指针下标
+	size_t leftPos = 0;				//左指针下标
+	size_t rightPos = arrCount - 1;	//右指针下标
+
+	size_t midPos = g_funcGetMidNumPos(arr, arrCount, singleDataSize, comp);
+	swap(singleDataSize, (char*)arr + leftPos * singleDataSize, (char*)arr + midPos * singleDataSize);
 
 	//两端区域分离
-	while (left < right)
+	while (leftPos < rightPos)
 	{
 		//left步进
-		while (left < right && comp((char*)arr + right * singleDataSize, (char*)arr + subKey * singleDataSize) >= 0)
-			right--;
+		while (leftPos < rightPos && comp((char*)arr + rightPos * singleDataSize, (char*)arr + subKey * singleDataSize) >= 0)
+			rightPos--;
 		//right步进
-		while (left < right && comp((char*)arr + left * singleDataSize, (char*)arr + subKey * singleDataSize) <= 0)
-			left++;
+		while (leftPos < rightPos && comp((char*)arr + leftPos * singleDataSize, (char*)arr + subKey * singleDataSize) <= 0)
+			leftPos++;
 		//交换找出的值
-		swap(singleDataSize, (char*)arr + left * singleDataSize, (char*)arr + right * singleDataSize);
+		swap(singleDataSize, (char*)arr + leftPos * singleDataSize, (char*)arr + rightPos * singleDataSize);
 	}
 	//key值到中间
-	swap(singleDataSize, (char*)arr + left * singleDataSize, (char*)arr + subKey * singleDataSize);
-	subKey = left;
+	swap(singleDataSize, (char*)arr + leftPos * singleDataSize, (char*)arr + subKey * singleDataSize);
+	subKey = leftPos;
 
 	//两端区域分别再次排序
 	if (subKey > 0)

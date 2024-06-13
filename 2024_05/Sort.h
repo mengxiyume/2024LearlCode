@@ -6,11 +6,16 @@
 
 /// <summary>
 /// 用于比较的回调函数
+/// <para>返回参数一与参数二的关系值</para>
 /// <para>*传入指针为空时报错*</para>
 /// </summary>
 /// <param name="p1">第一个传入值的指针</param>
 /// <param name="p2">第二个传入值的指针</param>
-/// <returns>大于0时执行交换 | 小于或等于0时不执行交换</returns>
+/// <returns>
+/// <para>a &lt; b : ret &lt; 0</para>
+/// <para>a = b : ret = 0</para>
+/// <para>a &gt; b : ret &gt; 0</para>
+/// </returns>
 typedef signed char compareFunc(void* p1, void* p2);
 
 /// <summary>
