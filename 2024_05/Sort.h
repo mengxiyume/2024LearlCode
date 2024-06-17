@@ -16,7 +16,7 @@
 /// <para>a = b : ret = 0</para>
 /// <para>a &gt; b : ret &gt; 0</para>
 /// </returns>
-typedef signed char compareFunc(void* p1, void* p2);
+typedef signed char compareFunc(const void* p1, const void* p2);
 
 /// <summary>
 /// 排序
@@ -25,7 +25,7 @@ typedef signed char compareFunc(void* p1, void* p2);
 /// <param name="arrCount">数据的数量</param>
 /// <param name="singleDataSize">单个数据的大小</param>
 /// <param name="comp">用于比较的回调函数</param>
-typedef void sortFunc(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+typedef void sortFunc(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
 
 /// <summary>
 /// 交换
@@ -42,14 +42,14 @@ void swap(size_t size, void* p1, void* p2);
 /// <param name="arrCount">数据的数量</param>
 /// <param name="singleDataSize">单个数据的大小</param>
 /// <param name="comp">用于比较的回调函数</param>
-void Sort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+void Sort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
 
-void InsertSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+void InsertSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
 
-void SelectSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+void SelectSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
 
-void BubbleSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+void BubbleSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
 
-void ShellSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+void ShellSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
 
-void QuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+void QuickSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);

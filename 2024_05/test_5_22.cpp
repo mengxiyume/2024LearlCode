@@ -771,7 +771,7 @@ void SortTest_01() {
 	//SelectSort(arr, _countof(arr), sizeof(*arr), comp1);
 	//ShellSort(arr, _countof(arr), sizeof(*arr), comp1);
 	//InsertSort(arr, _countof(arr), sizeof(*arr), comp1);
-	//QuickSort(arr, _countof(arr), sizeof(*arr), comp1);
+	QuickSort(arr, _countof(arr), sizeof(*arr), comp1);
 
 	for (int i = 0; i < _countof(arr); i++) {
 		printf("%d ", arr[i]);
@@ -826,8 +826,8 @@ void SortTest_02() {
 int main() {
 	//LevelOrderTest();
 	//ComplateTest();
-	//SortTest_01();
-	SortTest_02();
+	SortTest_01();
+	//SortTest_02();
 
 	return 0;
 }

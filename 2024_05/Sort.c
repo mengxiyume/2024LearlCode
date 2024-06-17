@@ -8,7 +8,7 @@
 /// <param name="size">数据的大小</param>
 /// <param name="p1">数据1的地址</param>
 /// <param name="p2">数据2的地址</param>
-void swap(size_t size, void* p1, void* p2)
+const void swap(size_t size, const void* p1, const void* p2)
 {
 	assert(size);
 	assert(p1);
@@ -32,7 +32,7 @@ void swap(size_t size, void* p1, void* p2)
 	}
 }
 
-void Sort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+const void Sort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp)
 {	//TODO:写好排序之后再选一个效率高的调用
 	assert(arr);
 	assert(arrCount);

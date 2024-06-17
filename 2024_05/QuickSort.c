@@ -20,9 +20,10 @@
 *	****- 今晚太累了，明天继续_202405260215am -****
 */
 
-const static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp);
+const static void g_funcQuickSort_Hoare(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
+const static void g_funcQuickSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp);
 
-void QuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+void QuickSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp)
 {
 	assert(arr);
 	assert(arrCount);
@@ -32,7 +33,7 @@ void QuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* c
 	g_funcQuickSort(arr, arrCount, singleDataSize, comp);
 }
 
-const static size_t g_funcGetMidNumPos(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+const static size_t g_funcGetMidNumPos(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp)
 {
 	//取中间数
 	size_t leftPos = 0;
@@ -67,7 +68,53 @@ const static size_t g_funcGetMidNumPos(void* arr, size_t arrCount, size_t single
 	return 0;
 }
 
-const static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+//前后指针法
+/*
+* 初始时prev指针指向序列开头cur指针指向prev指针的后一个位置
+* 然后判断cur指针指向的数据是否小于key，若小于key，则prev后移一位，并将cur与prev指向的内容互换，然后cur指针++
+* 如果cur指向的数据大于key，则cur++继续
+* 当cur越界时，将prev指向的内容与key进行交换
+* 至此完成单趟排序，以二叉树遍历形式遍历整个数组
+*/
+const static void g_funcQuickSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp)
+{
+	size_t subKey = 0;
+	size_t prev = 0;
+	size_t cur = prev + 1;
+	//三数取中
+	size_t midPos = g_funcGetMidNumPos(arr, arrCount, singleDataSize, comp);
+	swap(singleDataSize, arr, (char*)arr + midPos * singleDataSize);
+	subKey = 0;
+
+	//单趟遍历
+	while (cur < arrCount)
+	{
+		//把比key大的数值往后推
+		//把比key小的数值往前放
+		//if (arr[cur] < arr[subKey])
+		//if (comp((char*)arr + cur, (char*)arr + subKey) < 0)
+		if (comp((char*)arr + cur, arr) < 0)
+		{
+			prev++;
+			//swap(arr + cur, arr + prev);
+			//交换cur与prev，使比key大的值在整体的靠后位置
+			swap(singleDataSize, (char*)arr + cur * singleDataSize, (char*)arr + prev * singleDataSize);
+		}
+		//每次对比无论何种情况cur指针都要向后移动1单位
+		cur++;
+	}
+	//swap(arr + subKey, arr + prev);
+	//完成单趟排序后将key值放到中间，key的位置就找到了
+	//swap(singleDataSize, (char*)arr + subKey * singleDataSize, (char*)arr + prev * singleDataSize);
+	swap(singleDataSize, arr, (char*)arr + prev * singleDataSize);
+
+	//剩余二叉树遍历
+	g_funcQuickSort(arr, prev, singleDataSize, comp);
+	g_funcQuickSort((char*)arr + prev + 1, arrCount - prev - 1 , singleDataSize, comp);
+}
+
+//原版
+const static void g_funcQuickSort_Hoare(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp)
 {
 	size_t subKey = 0;				//key值的坐标
 	size_t leftPos = 0;				//左指针下标
@@ -94,7 +141,7 @@ const static void g_funcQuickSort(void* arr, size_t arrCount, size_t singleDataS
 
 	//两端区域分别再次排序
 	if (subKey > 0)
-		g_funcQuickSort(arr, subKey, singleDataSize, comp);
+		g_funcQuickSort_Hoare(arr, subKey, singleDataSize, comp);
 	if (arrCount - subKey - 1 > 0)
-		g_funcQuickSort((char*)arr + (subKey + 1) * singleDataSize, arrCount - subKey - 1, singleDataSize, comp);
+		g_funcQuickSort_Hoare((char*)arr + (subKey + 1) * singleDataSize, arrCount - subKey - 1, singleDataSize, comp);
 }

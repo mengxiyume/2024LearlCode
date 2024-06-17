@@ -11,7 +11,7 @@
 //目标:大的更快换到后面的位置，小的数更快换到前面的位置
 //gap = 3 间距为gap的分为一组
 
-void ShellSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+void ShellSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp)
 {
 	assert(arr);
 	assert(arrCount);

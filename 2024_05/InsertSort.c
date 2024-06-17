@@ -2,7 +2,7 @@
 
 #include "./Sort.h"
 
-void InsertSort(void* arr, size_t arrCount, size_t singleDataSize, compareFunc* comp)
+void InsertSort(void* arr, const size_t arrCount, const size_t singleDataSize, const compareFunc* comp)
 {
 	assert(arr);
 	assert(arrCount);
