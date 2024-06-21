@@ -37,35 +37,70 @@ const static size_t g_funcGetMidNumPos(void* arr, const size_t arrCount, const s
 {
 	//取中间数
 	size_t leftPos = 0;
-	size_t midPos = arrCount / 2;
-	size_t rightPos = arrCount;
+	size_t rightPos = arrCount - 1;
+	size_t midPos = rightPos / 2;
 
-	//不全等返回中间值
-	if (comp((char*)arr + leftPos * singleDataSize, (char*)arr + rightPos * singleDataSize) < 0)
+	////从左到右
+	//if (left < mid)
+	//{
+	//	//left < mid < right - mid是中间值
+	//	if (mid < right)
+	//		return mid;
+	//	//right < left < mid - left是中间值
+	//	else if (left < right)
+	//		return left;
+	//	//left < right < mid - right是中间值
+	//	else
+	//		return right;
+	//}
+	////从右到左
+	//else
+	//{
+	//	//left > mid > right - mid是中间值
+	//	if (mid > right)
+	//		return mid;
+	//	//left > right > mid - right是中间值
+	//	else if (left > right)
+	//		return right
+	//	//right > left > mid - mid是中间值
+	//	else
+	//		return left;
+	//}
+
+	//从左到右
+	//if (left < mid)
+	//if (comp((char*)arr + leftPos * singleDataSize, (char*)arr + midPos * singleDataSize) < 0)
+	if (comp(arr, (char*)arr + midPos * singleDataSize) < 0)
 	{
+		//left < mid < right - mid是中间值
+		//if (mid < right)
 		if (comp((char*)arr + midPos * singleDataSize, (char*)arr + rightPos * singleDataSize) < 0)
-		{
 			return midPos;
-		}
-		else if (comp((char*)arr + rightPos * singleDataSize, (char*)arr + leftPos * singleDataSize) < 0)
-		{
+		//right < left < mid - left是中间值
+		//else if (left < right)
+		//else if (comp((char*)arr + leftPos * singleDataSize, (char*)arr + rightPos * singleDataSize) < 0)
+		else if (comp(arr, (char*)arr + rightPos * singleDataSize) < 0)
+			return leftPos;
+		//left < right < mid - right是中间值
+		else
 			return rightPos;
-		}
 	}
+	//从右到左
 	else
 	{
-		if (midPos > rightPos)
+		//left > mid > right - mid是中间值
+		//if (mid > right)
 		if (comp((char*)arr + midPos * singleDataSize, (char*)arr + rightPos * singleDataSize) > 0)
-		{
 			return midPos;
-		}
-		else if (comp((char*)arr + rightPos * singleDataSize, (char*)arr + leftPos * singleDataSize) > 0)
-		{
+		//left > right > mid - right是中间值
+		//else if (left > right)
+		//if (comp((char*)arr + leftPos * singleDataSize, (char*)arr + rightPos * singleDataSize) > 0)
+		if (comp(arr, (char*)arr + rightPos * singleDataSize) > 0)
+			return rightPos;
+		//right > left > mid - mid是中间值
+		else
 			return leftPos;
-		}
 	}
-	//全相等默认返回首元素
-	return 0;
 }
 
 //前后指针法
@@ -93,7 +128,7 @@ const static void g_funcQuickSort(void* arr, const size_t arrCount, const size_t
 		//把比key小的数值往前放
 		//if (arr[cur] < arr[subKey])
 		//if (comp((char*)arr + cur, (char*)arr + subKey) < 0)
-		if (comp((char*)arr + cur, arr) < 0)
+		if (comp((char*)arr + cur * singleDataSize, arr) < 0)
 		{
 			prev++;
 			//swap(arr + cur, arr + prev);
@@ -108,9 +143,11 @@ const static void g_funcQuickSort(void* arr, const size_t arrCount, const size_t
 	//swap(singleDataSize, (char*)arr + subKey * singleDataSize, (char*)arr + prev * singleDataSize);
 	swap(singleDataSize, arr, (char*)arr + prev * singleDataSize);
 
-	//剩余二叉树遍历
-	g_funcQuickSort(arr, prev, singleDataSize, comp);
-	g_funcQuickSort((char*)arr + prev + 1, arrCount - prev - 1 , singleDataSize, comp);
+	//遍历左右子树
+	if (prev > 2)
+		g_funcQuickSort(arr, prev, singleDataSize, comp);
+	if (arrCount - prev - 1 > 2)
+		g_funcQuickSort((char*)arr + (prev + 1) * singleDataSize, arrCount - prev - 1 , singleDataSize, comp);
 }
 
 //原版

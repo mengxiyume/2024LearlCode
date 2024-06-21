@@ -744,7 +744,7 @@ extern "C" {
 typedef short testSortDataType;
 
 //返回true即为需要调换
-signed char testCompFunc(void* p1, void* p2) {
+signed char testCompFunc(const void* p1, const void* p2) {
 	testSortDataType cmp = (*(testSortDataType*)p1) - (*(testSortDataType*)p2);
 	signed char ret = 0;
 	//升序		//1比2大则满足调换
@@ -771,6 +771,12 @@ void SortTest_01() {
 	//SelectSort(arr, _countof(arr), sizeof(*arr), comp1);
 	//ShellSort(arr, _countof(arr), sizeof(*arr), comp1);
 	//InsertSort(arr, _countof(arr), sizeof(*arr), comp1);
+
+	srand(time(0));
+	for (int i = 0; i < _countof(arr); i++) {
+		arr[i] = (rand() % 50) - 25;
+	}
+
 	QuickSort(arr, _countof(arr), sizeof(*arr), comp1);
 
 	for (int i = 0; i < _countof(arr); i++) {
@@ -827,7 +833,7 @@ int main() {
 	//LevelOrderTest();
 	//ComplateTest();
 	SortTest_01();
-	//SortTest_02();
+	SortTest_02();
 
 	return 0;
 }
