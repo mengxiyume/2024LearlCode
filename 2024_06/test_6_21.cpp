@@ -36,11 +36,11 @@ using test_06_21::x;
 * ----不同的域访问方式不同
 */
 
-int main() {
-	long long arr[7] = { 0 };
-	//域访问操作符无左操作数时访问全局域，无域访问操作符时先查找局部域，再查找全局域，自定的域内默认不在查找范围
-	cout << sizeof(test_06_21::arr) << " " << sizeof(::arr) << " " << sizeof(arr) << endl;
-
-	//cout << "Hello CPP!" << endl;
-	return 0;
-}
+//int main() {
+//	long long arr[7] = { 0 };
+//	//域访问操作符无左操作数时访问全局域，无域访问操作符时先查找局部域，再查找全局域，自定的域内默认不在查找范围
+//	cout << sizeof(test_06_21::arr) << " " << sizeof(::arr) << " " << sizeof(arr) << endl;
+//
+//	//cout << "Hello CPP!" << endl;
+//	return 0;
+//}
