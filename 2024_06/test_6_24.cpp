@@ -3,7 +3,6 @@
 #include <iostream>
 using namespace std;
 
-
 namespace defaultParams {
 
 	/* 函数缺省参数
