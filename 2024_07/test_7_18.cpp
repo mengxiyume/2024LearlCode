@@ -80,11 +80,11 @@ void Test02() {
 	//int& r = *pInt;		//该处的引用初始化时 pInt并未解引用，在使用时才会进行解引用操作
 	//cout << r << endl;	//在使用时发生解引用操作时程序崩溃
 }
-int main() {
-
-	Test01();
-	Test02();
-
-	cout << "Hello & !" << endl;
-	return 0;
-}
+//int main() {
+//
+//	Test01();
+//	Test02();
+//
+//	cout << "Hello & !" << endl;
+//	return 0;
+//}

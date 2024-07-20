@@ -18,5 +18,8 @@
     <ClCompile Include="test_7_18.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test_7_20.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
