@@ -69,8 +69,57 @@ void Test05() {
 	//这样定义的变量会自动销毁，看起来就像是现在的局部变量一样，离开作用域自动销毁
 }
 
+//范围For
+//语法来源于python，语法支持C++11及以上
+//自动获取数组中的值赋值给变量e，循环自动++和自动结束循环
+void Test06() {
+	//基础语法
+	int arry[] = { 1, 2, 3, 4 };
+	//e的变量名和类型不影响范围for语法，可以自己定义
+	for (auto e : arry) {
+		cout << e << endl;
+	}
+	//上述方法无法改变arry内的变量，如果想要改变可以使用auto变量
+	int i = 0;
+	for (auto& x : arry) {
+		x = ++i;
+		cout << x << endl;
+	}
+	//这个arry只能对数组使用，数组传参给函数之后函数拿到的是一个数组的地址
+	//也就是数组不支持传参，范围for的arry选项不支持数组的地址，所以得另寻他法
+}
+
+//void TestFor(int arr[]) {
+//	//arr为数组地址，范围for不支持使用地址填入范围栏
+//	for (int x : arr) {
+//		cout << x << ' ';
+//	}
+//	cout << endl;
+//}
+
+//属于C++的NULL类型为int
+//属于C语言的NULL类型为一个指针
+// C:	#define NULL ((void*)0)
+// C++:	#define NULL 0
+//所以在C++中表示指针的部分应使用nullptr替代C语言中的NULL，否则可能会出现奇怪的错误
+
+void TestNullType(int i) {
+	cout << "int" << endl;
+}
+void TestNullType(int* i) {
+	cout << "(void*)" << endl;
+}
+
+void Test07() {
+	TestNullType(NULL);	//这里直接就调用了参数为整形的重载
+	//在使用指针的环境下用NULL会导致在C++中的错误调用
+	//请在C++中使用nullptr代替NULL用于表示空指针
+	TestNullType(nullptr);
+	//nullptr为C++11引入的关键字，所以不需要引用像cstddef这样的头文件才能使用
+}
+
 int main() {
-	Test04();
+	Test07();
 	cout << "Hello inline!" << endl;
 	return 0;
 }
