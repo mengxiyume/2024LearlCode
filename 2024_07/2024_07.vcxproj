@@ -140,8 +140,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InlineTest.cpp" />
     <ClCompile Include="test_7_18.cpp" />
     <ClCompile Include="test_7_20.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InlineTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

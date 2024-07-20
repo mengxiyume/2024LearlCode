@@ -21,5 +21,13 @@
     <ClCompile Include="test_7_20.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="InlineTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InlineTest.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
