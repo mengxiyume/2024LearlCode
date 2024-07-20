@@ -41,6 +41,34 @@ void Test04() {
 	//如果有类似需要的场景可以直接在.h文件内书写内联函数
 }
 
+//auto类型 - 自动推导类型
+//auto会自动推导出表达式结果的类型，在复杂场景下可以精炼代码，（奇奇怪怪的地方使用有未发挥的力量/划掉）
+void Test05() {
+
+	//auto类型 - 它自己就把自己的类型算出来了.jpg
+	int a = 3;
+	char c = 'a';
+	auto sum = a + c;
+	//使用typeid来查看sum的类型
+	cout << typeid(sum).name() << endl;
+
+	//auto指针要求右值必须是指针
+	auto* pAuto = &c;
+	//auto指针在初始化完成之后类型就固定不可更改了
+	//pAuto = &a;
+	
+	//auto也有引用类型，使用方法与特性同auto指针，但具有引用的特性
+	auto& rAuto = sum;
+
+	//auto类型不能用来直接声明数组,也不能够作为函数题内的传递参数
+	//void TestAutoValueFunc(auto a, auto b);	//C++规定auto不能用作函数的接收参数类型
+	//auto autoArr[] = { 1, 2, 3 };	//C++规定auto不能直接用来声明数组
+
+	//auto在早期C语言中也存在过，已废弃
+	//C语言中的自动变量	/*auto int a = 0;*/
+	//这样定义的变量会自动销毁，看起来就像是现在的局部变量一样，离开作用域自动销毁
+}
+
 int main() {
 	Test04();
 	cout << "Hello inline!" << endl;
