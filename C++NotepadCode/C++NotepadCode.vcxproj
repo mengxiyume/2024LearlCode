@@ -144,6 +144,7 @@
     <ClCompile Include="testFunctionOverloading.cpp" />
     <ClCompile Include="testInputOutput.cpp" />
     <ClCompile Include="testNamespace.cpp" />
+    <ClCompile Include="testReference.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h" />
