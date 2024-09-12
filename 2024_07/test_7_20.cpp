@@ -118,8 +118,8 @@ void Test07() {
 	//nullptr为C++11引入的关键字，所以不需要引用像cstddef这样的头文件才能使用
 }
 
-int main() {
-	Test07();
-	cout << "Hello inline!" << endl;
-	return 0;
-}
+//int main() {
+//	//Test07();
+//	cout << "Hello inline!" << endl;
+//	return 0;
+//}
