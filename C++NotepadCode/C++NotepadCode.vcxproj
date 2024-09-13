@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="testAuto.cpp" />
     <ClCompile Include="testDefaultParameters.cpp" />
     <ClCompile Include="testFunctionOverloading.cpp" />
     <ClCompile Include="testInline.cpp" />
