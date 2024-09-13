@@ -146,6 +146,7 @@
     <ClCompile Include="testInline.cpp" />
     <ClCompile Include="testInputOutput.cpp" />
     <ClCompile Include="testNamespace.cpp" />
+    <ClCompile Include="testRangeFor.cpp" />
     <ClCompile Include="testReference.cpp" />
   </ItemGroup>
   <ItemGroup>
