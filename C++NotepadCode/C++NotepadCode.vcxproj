@@ -149,6 +149,7 @@
     <ClCompile Include="C++笔记1_初识C++\testRangeFor.cpp" />
     <ClCompile Include="C++笔记1_初识C++\testReference.cpp" />
     <ClCompile Include="C++笔记2_类和对象\main2.cpp" />
+    <ClCompile Include="C++笔记2_类和对象\testClassAndStruct.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 
 #include <iostream>
 using namespace std;
+#include "./testC++2_类和对象.h"
 
 int main2() {
 
