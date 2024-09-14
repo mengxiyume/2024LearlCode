@@ -74,5 +74,8 @@
     <ClInclude Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.h">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClInclude>
+    <ClInclude Include="C++笔记2_类和对象\testAccessSpecifiers.cpp">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

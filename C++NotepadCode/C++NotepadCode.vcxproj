@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C++笔记1_初识C++\testC++1_初识C++.h" />
+    <ClInclude Include="C++笔记2_类和对象\testAccessSpecifiers.cpp" />
     <ClInclude Include="C++笔记2_类和对象\testC++2_类和对象.h" />
     <ClInclude Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.h" />
     <ClInclude Include="test.h" />
