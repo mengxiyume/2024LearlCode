@@ -57,6 +57,9 @@
     <ClCompile Include="C++笔记2_类和对象\testClassAndStruct.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.cpp">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
@@ -66,6 +69,9 @@
       <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClInclude>
     <ClInclude Include="C++笔记2_类和对象\testC++2_类和对象.h">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.h">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 
+#include <iostream>
+using namespace std;
+
 //C++类(class)语法
 //类标识符 类名 {…};
 class CL {
@@ -12,6 +15,7 @@ struct ST {
 	//…
 };
 
-void testClassAndStruct() {
-
+int testClassAndStruct() {
+	cout << "Hello! Class!!!" << endl;
+	return 0;
 }
