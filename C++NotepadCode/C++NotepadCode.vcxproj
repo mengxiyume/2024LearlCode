@@ -139,17 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="C++笔记1_初识C++\main1.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testAuto.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testDefaultParameters.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testFunctionOverloading.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testInline.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testInputOutput.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testNamespace.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testRangeFor.cpp" />
+    <ClCompile Include="C++笔记1_初识C++\testReference.cpp" />
+    <ClCompile Include="C++笔记2_类和对象\main2.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="testAuto.cpp" />
-    <ClCompile Include="testDefaultParameters.cpp" />
-    <ClCompile Include="testFunctionOverloading.cpp" />
-    <ClCompile Include="testInline.cpp" />
-    <ClCompile Include="testInputOutput.cpp" />
-    <ClCompile Include="testNamespace.cpp" />
-    <ClCompile Include="testRangeFor.cpp" />
-    <ClCompile Include="testReference.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C++笔记1_初识C++\testC++1_初识C++.h" />
+    <ClInclude Include="C++笔记2_类和对象\testC++2_类和对象.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

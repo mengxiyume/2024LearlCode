@@ -13,39 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\C++笔记1_初识C++">
+      <UniqueIdentifier>{91b61734-4071-4156-bacd-c1f591f96c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记2_类和对象">
+      <UniqueIdentifier>{38cc1ebe-037e-4053-bac2-345f9d27831e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="testNamespace.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="testInputOutput.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="C++笔记1_初识C++\testAuto.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClCompile>
-    <ClCompile Include="testDefaultParameters.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="C++笔记1_初识C++\testDefaultParameters.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClCompile>
-    <ClCompile Include="testFunctionOverloading.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="C++笔记1_初识C++\testFunctionOverloading.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClCompile>
-    <ClCompile Include="testReference.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="C++笔记1_初识C++\testInline.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClCompile>
-    <ClCompile Include="testInline.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="C++笔记1_初识C++\testInputOutput.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClCompile>
-    <ClCompile Include="testAuto.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="C++笔记1_初识C++\testNamespace.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClCompile>
-    <ClCompile Include="testRangeFor.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="C++笔记1_初识C++\testRangeFor.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记1_初识C++\testReference.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记1_初识C++\main1.cpp">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记2_类和对象\main2.cpp">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记1_初识C++\testC++1_初识C++.h">
+      <Filter>源文件\C++笔记1_初识C++</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记2_类和对象\testC++2_类和对象.h">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
