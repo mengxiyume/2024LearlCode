@@ -5,3 +5,4 @@ int main2();
 int testClassAndStruct();
 int main_testClassDeclaraiAdDefinie();
 int main_AccessSpecifiers();
+int main_classScope();

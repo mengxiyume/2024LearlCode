@@ -12,6 +12,7 @@ private:
 	//к╫сп╣д
 };
 
+
 int main_AccessSpecifiers() {
 
 }

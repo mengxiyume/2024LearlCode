@@ -151,6 +151,8 @@
     <ClCompile Include="C++笔记2_类和对象\main2.cpp" />
     <ClCompile Include="C++笔记2_类和对象\testClassAndStruct.cpp" />
     <ClCompile Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.cpp" />
+    <ClCompile Include="C++笔记2_类和对象\testClassInstantiate.cpp" />
+    <ClCompile Include="C++笔记2_类和对象\testClassScope.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

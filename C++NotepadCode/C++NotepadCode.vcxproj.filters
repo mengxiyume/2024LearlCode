@@ -60,6 +60,12 @@
     <ClCompile Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记2_类和对象\testClassScope.cpp">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记2_类和对象\testClassInstantiate.cpp">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
