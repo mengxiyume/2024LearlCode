@@ -4,10 +4,9 @@
 using namespace std;
 #include "./testC++1_³õÊ¶C++.h"
 
-int main() {
+int main1() {
 	//return main_inputOutput();
 	return main_functionOverloading();
-
 
 	//cout << "Hello CPP!!!" << endl;
 	//return 0;

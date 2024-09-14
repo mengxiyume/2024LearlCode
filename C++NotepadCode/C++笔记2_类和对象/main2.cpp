@@ -5,7 +5,8 @@ using namespace std;
 #include "./testC++2_类和对象.h"
 
 int main2() {
+	return main_classSizeof();
 
-	cout << "Hello! Class!!!" << endl;
-	return 0;
+	//cout << "Hello! Class!!!" << endl;
+	//return 0;
 }

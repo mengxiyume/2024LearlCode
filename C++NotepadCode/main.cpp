@@ -4,7 +4,7 @@
 using namespace std;
 #include "test.h"
 
-int main1() {
+int main() {
 	//return main1();
 	return main2();
 
