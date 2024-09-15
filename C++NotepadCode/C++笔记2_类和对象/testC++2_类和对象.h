@@ -12,3 +12,4 @@ int main_classThisPointer();
 int main_defaultMemberFunction();
 int main_constructorFunction();
 int main_constMemberFunction();
+int main_staticMember();

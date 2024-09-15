@@ -81,6 +81,9 @@
     <ClCompile Include="testConstructorFunction.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
+    <ClCompile Include="testStaticMember.cpp">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
