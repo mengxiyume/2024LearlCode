@@ -156,6 +156,7 @@
     <ClCompile Include="C++笔记2_类和对象\testClassSizeof.cpp" />
     <ClCompile Include="C++笔记2_类和对象\testClassThisPointer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="testDefaultMemberFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C++笔记1_初识C++\testC++1_初识C++.h" />

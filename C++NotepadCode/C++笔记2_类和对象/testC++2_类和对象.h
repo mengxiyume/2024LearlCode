@@ -8,3 +8,4 @@ int main_AccessSpecifiers();
 int main_classScope();
 int main_classInstantiate();
 int main_classSizeof();
+int main_classThisPointer();
