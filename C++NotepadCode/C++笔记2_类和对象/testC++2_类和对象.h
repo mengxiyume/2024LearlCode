@@ -10,3 +10,5 @@ int main_classInstantiate();
 int main_classSizeof();
 int main_classThisPointer();
 int main_defaultMemberFunction();
+int main_constructorFunction();
+int main_constMemberFunction();

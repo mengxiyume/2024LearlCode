@@ -157,6 +157,7 @@
     <ClCompile Include="C++笔记2_类和对象\testClassThisPointer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="testConstMemberFunction.cpp" />
+    <ClCompile Include="testConstructorFunction.cpp" />
     <ClCompile Include="testDefaultMemberFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
