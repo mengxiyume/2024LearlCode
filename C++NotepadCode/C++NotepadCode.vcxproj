@@ -159,6 +159,7 @@
     <ClCompile Include="testConstMemberFunction.cpp" />
     <ClCompile Include="testConstructorFunction.cpp" />
     <ClCompile Include="testDefaultMemberFunction.cpp" />
+    <ClCompile Include="testFriend.cpp" />
     <ClCompile Include="testStaticMember.cpp" />
   </ItemGroup>
   <ItemGroup>
