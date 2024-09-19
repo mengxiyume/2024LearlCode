@@ -7,7 +7,8 @@ using namespace std;
 int main2() {
 	//return main_classSizeof();
 	//return main_constructorFunction();
-	return main_anonymousObject();
+	//return main_anonymousObject();
+	return main_objectAndOptmize();
 
 	//cout << "Hello! Class!!!" << endl;
 	//return 0;

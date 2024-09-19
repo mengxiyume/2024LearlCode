@@ -130,6 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,6 +162,7 @@
     <ClCompile Include="testConstructorFunction.cpp" />
     <ClCompile Include="testDefaultMemberFunction.cpp" />
     <ClCompile Include="testFriend.cpp" />
+    <ClCompile Include="testObjectAndOptmize.cpp" />
     <ClCompile Include="testStaticMember.cpp" />
   </ItemGroup>
   <ItemGroup>

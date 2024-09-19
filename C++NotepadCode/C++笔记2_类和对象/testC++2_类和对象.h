@@ -14,3 +14,4 @@ int main_constructorFunction();
 int main_constMemberFunction();
 int main_staticMember();
 int main_anonymousObject();
+int main_objectAndOptmize();
