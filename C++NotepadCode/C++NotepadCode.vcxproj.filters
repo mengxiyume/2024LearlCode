@@ -19,6 +19,9 @@
     <Filter Include="源文件\C++笔记2_类和对象">
       <UniqueIdentifier>{38cc1ebe-037e-4053-bac2-345f9d27831e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\C++笔记3_C++内存管理">
+      <UniqueIdentifier>{3a4aaa02-36ef-4b2b-bad4-8f7dcc31b01b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,7 +54,7 @@
     <ClCompile Include="C++笔记1_初识C++\main1.cpp">
       <Filter>源文件\C++笔记1_初识C++</Filter>
     </ClCompile>
-    <ClCompile Include="C++笔记2_类和对象\main2.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testAnonymousObject.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
     <ClCompile Include="C++笔记2_类和对象\testClassAndStruct.cpp">
@@ -60,10 +63,10 @@
     <ClCompile Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="C++笔记2_类和对象\testClassScope.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testClassInstantiate.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="C++笔记2_类和对象\testClassInstantiate.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testClassScope.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
     <ClCompile Include="C++笔记2_类和对象\testClassSizeof.cpp">
@@ -72,25 +75,28 @@
     <ClCompile Include="C++笔记2_类和对象\testClassThisPointer.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="testDefaultMemberFunction.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testConstMemberFunction.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="testConstMemberFunction.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testConstructorFunction.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="testConstructorFunction.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testDefaultMemberFunction.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="testStaticMember.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testFriend.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="testFriend.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testObjectAndOptmize.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="testAnonymousObject.cpp">
+    <ClCompile Include="C++笔记2_类和对象\testStaticMember.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
-    <ClCompile Include="testObjectAndOptmize.cpp">
+    <ClCompile Include="C++笔记2_类和对象\main2.cpp">
+      <Filter>源文件\C++笔记2_类和对象</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记2_类和对象\testAccessSpecifiers.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClCompile>
   </ItemGroup>
@@ -105,9 +111,6 @@
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClInclude>
     <ClInclude Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.h">
-      <Filter>源文件\C++笔记2_类和对象</Filter>
-    </ClInclude>
-    <ClInclude Include="C++笔记2_类和对象\testAccessSpecifiers.cpp">
       <Filter>源文件\C++笔记2_类和对象</Filter>
     </ClInclude>
   </ItemGroup>
