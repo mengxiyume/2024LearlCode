@@ -165,6 +165,7 @@
     <ClCompile Include="C++笔记2_类和对象\testObjectAndOptmize.cpp" />
     <ClCompile Include="C++笔记2_类和对象\testStaticMember.cpp" />
     <ClCompile Include="C++笔记3_C++内存管理\main3.cpp" />
+    <ClCompile Include="C++笔记3_C++内存管理\testPlacementNew.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

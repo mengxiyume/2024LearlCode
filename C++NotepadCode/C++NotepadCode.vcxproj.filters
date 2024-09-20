@@ -102,6 +102,9 @@
     <ClCompile Include="C++笔记3_C++内存管理\main3.cpp">
       <Filter>源文件\C++笔记3_C++内存管理</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记3_C++内存管理\testPlacementNew.cpp">
+      <Filter>源文件\C++笔记3_C++内存管理</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
