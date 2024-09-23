@@ -14,5 +14,6 @@ private:
 
 
 int main_AccessSpecifiers() {
-
+	cout << "Hello! access-specifiers!!!" << endl;
+	return 0;
 }
