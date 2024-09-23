@@ -166,6 +166,9 @@
     <ClCompile Include="C++笔记2_类和对象\testStaticMember.cpp" />
     <ClCompile Include="C++笔记3_C++内存管理\main3.cpp" />
     <ClCompile Include="C++笔记3_C++内存管理\testPlacementNew.cpp" />
+    <ClCompile Include="C++笔记4_模板\main4.cpp" />
+    <ClCompile Include="C++笔记4_模板\testTemplateClass.cpp" />
+    <ClCompile Include="C++笔记4_模板\testTemplateFunction.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +177,7 @@
     <ClInclude Include="C++笔记2_类和对象\testClassDeclaraiAdDefinie.h" />
     <ClInclude Include="C++笔记3_C++内存管理\testC++3_内存管理.h" />
     <ClInclude Include="C++笔记3_C++内存管理\testCppMemoryController.h" />
+    <ClInclude Include="C++笔记4_模板\testC++4_模板.h" />
     <ClInclude Include="test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

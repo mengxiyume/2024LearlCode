@@ -22,6 +22,9 @@
     <Filter Include="源文件\C++笔记3_C++内存管理">
       <UniqueIdentifier>{3a4aaa02-36ef-4b2b-bad4-8f7dcc31b01b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\C++笔记4_模板">
+      <UniqueIdentifier>{5d66d256-8aee-473d-b0b0-7b8a09d2c6f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -105,6 +108,15 @@
     <ClCompile Include="C++笔记3_C++内存管理\testPlacementNew.cpp">
       <Filter>源文件\C++笔记3_C++内存管理</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记4_模板\main4.cpp">
+      <Filter>源文件\C++笔记4_模板</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记4_模板\testTemplateClass.cpp">
+      <Filter>源文件\C++笔记4_模板</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记4_模板\testTemplateFunction.cpp">
+      <Filter>源文件\C++笔记4_模板</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
@@ -124,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="C++笔记3_C++内存管理\testCppMemoryController.h">
       <Filter>源文件\C++笔记3_C++内存管理</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记4_模板\testC++4_模板.h">
+      <Filter>源文件\C++笔记4_模板</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

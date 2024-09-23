@@ -7,7 +7,8 @@ using namespace std;
 int main() {
 	//return main1();
 	//return main2();
-	return main3();
+	//return main3();
+	return main4();
 
 	//cout << "Hello! CPP!" << endl;
 	//return 0;
