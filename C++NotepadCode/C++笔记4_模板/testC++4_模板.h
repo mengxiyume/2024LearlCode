@@ -3,4 +3,4 @@
 int main4();
 
 int main_templateFunction();
-int main_templateClass();
+int main_classTemplate();

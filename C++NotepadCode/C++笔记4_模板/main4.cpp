@@ -7,7 +7,7 @@ using namespace std;
 
 int main4() {
 	
-	return main_templateFunction();
-	//return main_templateClass();
+	//return main_templateFunction();
+	return main_classTemplate();
 	//cout << "Hello!World!!!" << endl;
 }
