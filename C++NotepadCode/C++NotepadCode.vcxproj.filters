@@ -25,6 +25,27 @@
     <Filter Include="源文件\C++笔记4_模板">
       <UniqueIdentifier>{5d66d256-8aee-473d-b0b0-7b8a09d2c6f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\C++笔记5_STL">
+      <UniqueIdentifier>{dc02aa3f-9323-4aac-8df1-0f26aafeca72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记5_STL\容器">
+      <UniqueIdentifier>{8fcc91bc-83e3-4f01-b2e3-06d1de708cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记5_STL\迭代器">
+      <UniqueIdentifier>{9ad3cdc7-61b1-44d0-bbf0-6da753480f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记5_STL\仿函数">
+      <UniqueIdentifier>{606e996a-938a-4544-bbd4-858b0d682e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记5_STL\空间配置器">
+      <UniqueIdentifier>{d6ccaad5-8894-4f08-84f0-806d7afbba0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记5_STL\配接器">
+      <UniqueIdentifier>{5f2bac47-cef6-4c84-a5e3-aef2a5dcf8e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记5_STL\算法">
+      <UniqueIdentifier>{84083c4f-2d01-4b5f-b926-c456dc576b5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,6 +138,30 @@
     <ClCompile Include="C++笔记4_模板\testTemplateFunction.cpp">
       <Filter>源文件\C++笔记4_模板</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记5_STL\main5.cpp">
+      <Filter>源文件\C++笔记5_STL</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记5_STL\算法\main_algorithm.cpp">
+      <Filter>源文件\C++笔记5_STL\算法</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记5_STL\配接器\main_adapter.cpp">
+      <Filter>源文件\C++笔记5_STL\配接器</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记5_STL\空间配置器\main_spaceConfigurator.cpp">
+      <Filter>源文件\C++笔记5_STL\空间配置器</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记5_STL\仿函数\main_functor.cpp">
+      <Filter>源文件\C++笔记5_STL\仿函数</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记5_STL\迭代器\main_iterator.cpp">
+      <Filter>源文件\C++笔记5_STL\迭代器</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记5_STL\容器\main_container.cpp">
+      <Filter>源文件\C++笔记5_STL\容器</Filter>
+    </ClCompile>
+    <ClCompile Include="C++笔记5_STL\容器\string.cpp">
+      <Filter>源文件\C++笔记5_STL\容器</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
@@ -139,6 +184,27 @@
     </ClInclude>
     <ClInclude Include="C++笔记4_模板\testC++4_模板.h">
       <Filter>源文件\C++笔记4_模板</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\testC++5_STL.h">
+      <Filter>源文件\C++笔记5_STL</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\算法\algorithm.h">
+      <Filter>源文件\C++笔记5_STL\算法</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\配接器\adapter.h">
+      <Filter>源文件\C++笔记5_STL\配接器</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\空间配置器\spaceConfigurator.h">
+      <Filter>源文件\C++笔记5_STL\空间配置器</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\仿函数\functor.h">
+      <Filter>源文件\C++笔记5_STL\仿函数</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\迭代器\iterator.h">
+      <Filter>源文件\C++笔记5_STL\迭代器</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\容器\container.h">
+      <Filter>源文件\C++笔记5_STL\容器</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
