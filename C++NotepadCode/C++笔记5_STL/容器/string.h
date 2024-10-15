@@ -12,9 +12,14 @@ namespace emansis {
 		iterator begin();
 		iterator end();
 #pragma endregion
+#pragma region ²Ù×÷·ûÖØÔØ
+		char& operator[](size_t index);
+		string& operator+=(char ch);
+		string& operator+=(string str);
+#pragma endregion
+
 		const char* c_str() const;
 		size_t size() const;
-		char& operator[](size_t index);
 		void reserve(size_t newCapacity);
 		void push_back(char ch);
 		void append(const string& src);

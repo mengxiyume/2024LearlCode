@@ -27,6 +27,19 @@ namespace emansis {
 		return m_pData + m_uSize + 1;
 	}
 #pragma endregion
+#pragma region 操作符重载
+	char& string::operator[](size_t index) {
+		return m_pData[index];
+	}
+	string& string::operator+=(char ch) {
+		push_back(ch);
+		return *this;
+	}
+	string& string::operator+=(string str) {
+		append(str);
+		return *this;
+	}
+#pragma endregion
 
 	const char* string::c_str() const {
 		return m_pData;
@@ -34,10 +47,6 @@ namespace emansis {
 	size_t string::size() const {
 		return m_uSize;
 	}
-	char& string::operator[](size_t index) {
-		return m_pData[index];
-	}
-
 	//更改空间大小
 	void string::reserve(size_t newCapacity) {
 		if (m_uCapacity == newCapacity)
@@ -56,7 +65,6 @@ namespace emansis {
 		m_pData = pNewData;
 		m_uCapacity = newCapacity;
 	}
-
 	void string::push_back(char ch) {
 		//空间检测
 		if (m_uSize + 1 >= m_uCapacity) {
@@ -68,7 +76,6 @@ namespace emansis {
 		m_pData[m_uSize + 1] = '\0';
 		++m_uSize;
 	}
-
 	void string::append(const string& src) {
 		//空间检测
 		size_t len = src.size();
@@ -86,10 +93,16 @@ int main_container_string() {
 	emansis::string str = "Hello world!!!";
 
 	std::cout << str.c_str() << std::endl;
-	str.push_back('(');
+	str += '(';
 	std::cout << str.c_str() << std::endl;
-	str.append(emansis::string("TAT"));
+	str += "TAT";
 	std::cout << str.c_str() << std::endl;
+
+	//std::cout << str.c_str() << std::endl;
+	//str.push_back('(');
+	//std::cout << str.c_str() << std::endl;
+	//str.append(emansis::string("TAT"));
+	//std::cout << str.c_str() << std::endl;
 
 	//for (auto e : str) {
 	//	std::cout << e << ' ';
