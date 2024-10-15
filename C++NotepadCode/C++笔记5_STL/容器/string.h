@@ -1,6 +1,8 @@
 #pragma once
 #include <cstddef>
 namespace emansis {
+	size_t npos = -1;
+
 	class string {
 	public:
 #pragma region 构造相关
@@ -23,6 +25,10 @@ namespace emansis {
 		void reserve(size_t newCapacity);
 		void push_back(char ch);
 		void append(const string& src);
+
+		void insert(size_t pos, char ch);
+		void insert(size_t pos, const char* src);
+		void erase(size_t pos, size_t len = npos);
 
 	private:
 		char* m_pData;

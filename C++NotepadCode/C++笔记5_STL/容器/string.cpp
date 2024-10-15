@@ -86,6 +86,61 @@ namespace emansis {
 		strcpy(m_pData + m_uSize, src.c_str());
 		m_uSize += len;
 	}
+	void string::insert(size_t pos, char ch) {
+		//在pos位置插入一个字符ch
+
+		//空间检测
+		if (m_uSize + 1 >= m_uCapacity) {
+			size_t newCapacity = m_uCapacity ? m_uCapacity * 2 : 4;
+			reserve(newCapacity);
+		}
+		//将pos之后的字符向后移动一位
+		size_t end = m_uSize + 1;
+		while (end > pos) {
+			m_pData[end] = m_pData[end - 1];
+			--end;
+		}
+		//插入字符
+		m_pData[pos] = ch;
+		++m_uSize;
+	}
+	void string::insert(size_t pos, const char* src) {
+		//在pos位置插入一个字符串src
+		
+		size_t len = strlen(src);
+		//空间检测
+		if (m_uSize + len >= m_uCapacity) {
+			reserve(m_uSize + len);
+		}
+
+		//数据移动
+		size_t end = m_uSize + len;
+		while (end > pos + len - 1) {
+			m_pData[end] = m_pData[end - len];
+			--end;
+		}
+
+		//字符串写入
+		memcpy(m_pData + pos, src, len);
+		m_uSize += len;
+	}
+	void string::erase(size_t pos, size_t len) {
+		//从pos位置向后删除len个字符
+
+		//越界处理
+		assert(pos < m_uSize);
+
+		//超量删除处理
+		if (len == npos) {
+			m_pData[pos] = '\0';
+			m_uSize = pos;
+		}
+		//一般删除处理
+		else {
+			strcpy(m_pData + pos, m_pData + pos + len);
+			m_uSize -= len;
+		}
+	}
 }
 
 #include <iostream>
@@ -93,10 +148,22 @@ int main_container_string() {
 	emansis::string str = "Hello world!!!";
 
 	std::cout << str.c_str() << std::endl;
-	str += '(';
+	str.insert(6, "my ");
 	std::cout << str.c_str() << std::endl;
-	str += "TAT";
+	str.erase(6, 3);
 	std::cout << str.c_str() << std::endl;
+	str.erase(5);
+	std::cout << str.c_str() << std::endl;
+
+	//std::cout << str.c_str() << std::endl;
+	//str.insert(0, '*');
+	//std::cout << str.c_str() << std::endl;
+
+	//std::cout << str.c_str() << std::endl;
+	//str += '(';
+	//std::cout << str.c_str() << std::endl;
+	//str += "TAT";
+	//std::cout << str.c_str() << std::endl;
 
 	//std::cout << str.c_str() << std::endl;
 	//str.push_back('(');
