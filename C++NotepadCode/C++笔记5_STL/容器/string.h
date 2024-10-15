@@ -12,11 +12,12 @@ namespace emansis {
 		iterator begin();
 		iterator end();
 #pragma endregion
-
-
 		const char* c_str() const;
 		size_t size() const;
 		char& operator[](size_t index);
+		void reserve(size_t newCapacity);
+		void push_back(char ch);
+		void append(const string& src);
 
 	private:
 		char* m_pData;
