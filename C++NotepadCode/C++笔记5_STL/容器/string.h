@@ -7,6 +7,7 @@ namespace emansis {
 	public:
 #pragma region 构造相关
 		string(const char* src = "");
+		string(const string& src);
 		~string();
 #pragma endregion
 #pragma region 迭代器相关
