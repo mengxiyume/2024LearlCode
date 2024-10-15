@@ -46,6 +46,9 @@
     <Filter Include="源文件\C++笔记5_STL\算法">
       <UniqueIdentifier>{84083c4f-2d01-4b5f-b926-c456dc576b5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\C++笔记5_STL\容器\String">
+      <UniqueIdentifier>{50cbf94c-6908-42ca-ba83-0d1bca584cc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -160,7 +163,7 @@
       <Filter>源文件\C++笔记5_STL\容器</Filter>
     </ClCompile>
     <ClCompile Include="C++笔记5_STL\容器\string.cpp">
-      <Filter>源文件\C++笔记5_STL\容器</Filter>
+      <Filter>源文件\C++笔记5_STL\容器\String</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="C++笔记5_STL\容器\container.h">
       <Filter>源文件\C++笔记5_STL\容器</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\容器\string.h">
+      <Filter>源文件\C++笔记5_STL\容器\String</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

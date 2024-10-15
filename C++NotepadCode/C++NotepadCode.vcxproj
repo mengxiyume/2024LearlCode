@@ -189,6 +189,7 @@
     <ClInclude Include="C++笔记5_STL\testC++5_STL.h" />
     <ClInclude Include="C++笔记5_STL\仿函数\functor.h" />
     <ClInclude Include="C++笔记5_STL\容器\container.h" />
+    <ClInclude Include="C++笔记5_STL\容器\string.h" />
     <ClInclude Include="C++笔记5_STL\空间配置器\spaceConfigurator.h" />
     <ClInclude Include="C++笔记5_STL\算法\algorithm.h" />
     <ClInclude Include="C++笔记5_STL\迭代器\iterator.h" />
