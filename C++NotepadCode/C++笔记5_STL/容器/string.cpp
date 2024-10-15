@@ -76,7 +76,8 @@ namespace emansis {
 			reserve(m_uSize + len);
 
 		//×·¼Ó×Ö·û´®
-		strcat(m_pData, src.c_str());
+		strcpy(m_pData + m_uSize, src.c_str());
+		m_uSize += len;
 	}
 }
 
