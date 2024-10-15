@@ -141,6 +141,20 @@ namespace emansis {
 			m_uSize -= len;
 		}
 	}
+	size_t string::find(char ch, size_t pos) {
+		assert(pos < m_uSize);
+		//在范围内查找
+		for (size_t i = pos; i < m_uSize; ++i)
+			if (m_pData[i] == ch)
+				return i;
+		//找不到返回-1
+		return -1;
+	}
+
+	size_t string::find(const char* str, size_t pos) {
+		const char* sub = strstr(m_pData + pos, str);
+		return sub ? sub - m_pData : -1;	//未查找到时返回-1
+	}
 }
 
 #include <iostream>
@@ -148,12 +162,16 @@ int main_container_string() {
 	emansis::string str = "Hello world!!!";
 
 	std::cout << str.c_str() << std::endl;
-	str.insert(6, "my ");
-	std::cout << str.c_str() << std::endl;
-	str.erase(6, 3);
-	std::cout << str.c_str() << std::endl;
-	str.erase(5);
-	std::cout << str.c_str() << std::endl;
+	std::cout << str.find('!', 0) << ' ' << str.find("Hello", 0) << std::endl;
+	std::cout << str.find("abc", 0) << std::endl;
+
+	//std::cout << str.c_str() << std::endl;
+	//str.insert(6, "my ");
+	//std::cout << str.c_str() << std::endl;
+	//str.erase(6, 3);
+	//std::cout << str.c_str() << std::endl;
+	//str.erase(5);
+	//std::cout << str.c_str() << std::endl;
 
 	//std::cout << str.c_str() << std::endl;
 	//str.insert(0, '*');

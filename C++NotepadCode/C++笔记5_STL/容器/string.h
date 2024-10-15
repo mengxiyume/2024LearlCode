@@ -30,6 +30,9 @@ namespace emansis {
 		void insert(size_t pos, const char* src);
 		void erase(size_t pos, size_t len = npos);
 
+		size_t find(char ch, size_t pos);
+		size_t find(const char* str, size_t pos);
+
 	private:
 		char* m_pData;
 		size_t m_uCapacity;
