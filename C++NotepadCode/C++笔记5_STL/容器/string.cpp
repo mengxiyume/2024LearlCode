@@ -55,6 +55,24 @@ namespace emansis {
 		strcpy(m_pData, src.c_str());
 		return *this;
 	}
+	bool string::operator>(const string right) const {
+		return strcmp(c_str(), right.c_str()) > 0;
+	}
+	bool string::operator>=(const string right) const {
+		return strcmp(c_str(), right.c_str()) >= 0;
+	}
+	bool string::operator<(const string right) const {
+		return strcmp(c_str(), right.c_str()) < 0;
+	}
+	bool string::operator<=(const string right) const {
+		return strcmp(c_str(), right.c_str()) <= 0;
+	}
+	bool string::operator==(const string right) const {
+		return strcmp(c_str(), right.c_str()) == 0;
+	}
+	bool string::operator!=(const string right) const {
+		return strcmp(c_str(), right.c_str()) != 0;
+	}
 #pragma endregion
 
 	const char* string::c_str() const {

@@ -20,6 +20,13 @@ namespace emansis {
 		string& operator+=(char ch);
 		string& operator+=(string str);
 		string& operator=(const string& src);
+
+		bool operator>(const string right) const;
+		bool operator>=(const string right) const;
+		bool operator<(const string right) const;
+		bool operator<=(const string right) const;
+		bool operator==(const string right) const;
+		bool operator!=(const string right) const;
 #pragma endregion
 
 		const char* c_str() const;
