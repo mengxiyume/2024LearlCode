@@ -13,11 +13,17 @@ namespace emansis {
 		m_pData = new char[m_uSize + 1];
 		strcpy(m_pData, src);
 	}
-	string::string(const string& src) 
-	: m_uSize(src.m_uSize)
-	, m_uCapacity(src.m_uCapacity){
-		m_pData = new char[m_uCapacity + 1];
-		strcpy(m_pData, src.c_str());
+	//传统写法
+	//string::string(const string& src) 
+	//: m_uSize(src.m_uSize)
+	//, m_uCapacity(src.m_uCapacity){
+	//	m_pData = new char[m_uCapacity + 1];
+	//	strcpy(m_pData, src.c_str());
+	//}
+	//现代写法
+	string::string(const string& src) {
+		string temp(src.c_str());
+		swap(temp);
 	}
 	string::~string() {
 		delete m_pData;
@@ -215,11 +221,19 @@ namespace emansis {
 	}
 	std::istream& operator>>(std::istream& is, string& str) {
 		str.clear();
-		char ch;
+		char cbIndex = 0;
+		char buffer[128];
 		do {
-			ch = is.get();
-			str += ch;
-		} while (ch != ' ' && ch != '\n');
+			if (cbIndex == 127) {
+				str[cbIndex] = '\0';
+				str += buffer;
+				cbIndex = 0;
+			}
+			buffer[cbIndex] = is.get();		//指针迭代
+			++cbIndex;
+		} while (buffer[cbIndex - 1] != ' ' && buffer[cbIndex - 1] != '\n');
+		buffer[cbIndex] = '\0';
+		str += buffer;
 		return is;
 	}
 	std::ostream& operator<<(std::ostream& is, const string& str) {
