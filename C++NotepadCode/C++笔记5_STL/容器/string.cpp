@@ -74,13 +74,6 @@ namespace emansis {
 		return strcmp(c_str(), right.c_str()) != 0;
 	}
 #pragma endregion
-
-	const char* string::c_str() const {
-		return m_pData;
-	}
-	size_t string::size() const {
-		return m_uSize;
-	}
 	void string::reserve(size_t newCapacity) {
 		if (m_uCapacity == newCapacity)
 			return;
@@ -175,6 +168,18 @@ namespace emansis {
 			m_uSize -= len;
 		}
 	}
+	void string::swap(string& str) {
+		std::swap(str.m_pData, m_pData);
+		std::swap(str.m_uSize, m_uSize);
+		std::swap(str.m_uCapacity, m_uCapacity);
+	}
+	void string::clear() {
+		m_pData[0] = '\0';
+		m_uSize = 0;
+	}
+	size_t string::size() const {
+		return m_uSize;
+	}
 	size_t string::find(char ch, size_t pos) {
 		assert(pos < m_uSize);
 		//在范围内查找
@@ -187,11 +192,6 @@ namespace emansis {
 	size_t string::find(const char* str, size_t pos) {
 		const char* sub = strstr(m_pData + pos, str);
 		return sub ? sub - m_pData : -1;	//未查找到时返回-1
-	}
-	void string::swap(string& str) {
-		std::swap(str.m_pData, m_pData);
-		std::swap(str.m_uSize, m_uSize);
-		std::swap(str.m_uCapacity, m_uCapacity);
 	}
 	string string::substr(size_t pos, size_t len) {
 		if (pos > m_uSize)
@@ -210,17 +210,35 @@ namespace emansis {
 			return sub;
 		}
 	}
+	const char* string::c_str() const {
+		return m_pData;
+	}
+	std::istream& operator>>(std::istream& is, string& str) {
+		str.clear();
+		char ch;
+		do {
+			ch = is.get();
+			str += ch;
+		} while (ch != ' ' && ch != '\n');
+		return is;
+	}
+	std::ostream& operator<<(std::ostream& is, const string& str) {
+		std::cout << str.c_str();
+		return is;
+	}
 }
 
 #include <iostream>
 int main_container_string() {
 	emansis::string str = "Hello world!!!";
 
-	std::cout << str.c_str() << std::endl;
+	std::cout << str << std::endl;
+	std::cin >> str;
+	std::cout << str << std::endl;
 
-	std::cout << str.substr(6, 5).c_str() << std::endl;
-	std::cout << str.substr(11).c_str() << std::endl;
-	
+	//std::cout << str.c_str() << std::endl;
+	//std::cout << str.substr(6, 5).c_str() << std::endl;
+	//std::cout << str.substr(11).c_str() << std::endl;
 
 	//std::cout << str.c_str() << str.size() << std::endl;
 	//str = emansis::string("wow");
