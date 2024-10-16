@@ -52,13 +52,19 @@ namespace emansis {
 		append(str);
 		return *this;
 	}
-	string& string::operator=(const string& src) {
-		if (&src == this)
-			return *this;
-		if (src.size() > m_uCapacity)
-			reserve(src.size());
-		m_uSize = src.m_uSize;
-		strcpy(m_pData, src.c_str());
+	//传统方式
+	//string& string::operator=(const string& src) {
+	//	if (&src == this)
+	//		return *this;
+	//	if (src.size() > m_uCapacity)
+	//		reserve(src.size());
+	//	m_uSize = src.m_uSize;
+	//	strcpy(m_pData, src.c_str());
+	//	return *this;
+	//}
+	//现代方式
+	string& string::operator=(string str) {
+		swap(str);
 		return *this;
 	}
 	bool string::operator>(const string right) const {

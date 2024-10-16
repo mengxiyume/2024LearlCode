@@ -25,7 +25,8 @@ namespace emansis {
 		bool operator!=(const string right) const;
 		string& operator+=(char ch);
 		string& operator+=(string str);
-		string& operator=(const string& src);
+		//string& operator=(const string& src);
+		string& operator=(string src);
 #pragma endregion
 		//更改空间大小
 		void reserve(size_t newCapacity);
