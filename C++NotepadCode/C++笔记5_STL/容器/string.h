@@ -19,10 +19,12 @@ namespace emansis {
 		char& operator[](size_t index);
 		string& operator+=(char ch);
 		string& operator+=(string str);
+		string& operator=(const string& src);
 #pragma endregion
 
 		const char* c_str() const;
 		size_t size() const;
+		//更改空间大小
 		void reserve(size_t newCapacity);
 		void push_back(char ch);
 		void append(const string& src);
@@ -33,6 +35,8 @@ namespace emansis {
 
 		size_t find(char ch, size_t pos);
 		size_t find(const char* str, size_t pos);
+
+		void swap(string& str);
 
 	private:
 		char* m_pData;

@@ -45,6 +45,15 @@ namespace emansis {
 		append(str);
 		return *this;
 	}
+	string& string::operator=(const string& src) {
+		if (&src == this)
+			return *this;
+		if (src.size() > m_uCapacity)
+			reserve(src.size());
+		m_uSize = src.m_uSize;
+		strcpy(m_pData, src.c_str());
+		return *this;
+	}
 #pragma endregion
 
 	const char* string::c_str() const {
@@ -53,7 +62,6 @@ namespace emansis {
 	size_t string::size() const {
 		return m_uSize;
 	}
-	//更改空间大小
 	void string::reserve(size_t newCapacity) {
 		if (m_uCapacity == newCapacity)
 			return;
@@ -62,7 +70,8 @@ namespace emansis {
 		char* pNewData = new char[newCapacity + 1];
 
 		//拷贝数据
-		strcpy(pNewData, m_pData);
+		memmove(pNewData, m_pData, newCapacity);
+		pNewData[newCapacity] = '\0';
 
 		//释放原空间
 		delete[] m_pData;
@@ -160,16 +169,24 @@ namespace emansis {
 		const char* sub = strstr(m_pData + pos, str);
 		return sub ? sub - m_pData : -1;	//未查找到时返回-1
 	}
+	void string::swap(string& str) {
+
+	}
+
 }
 
 #include <iostream>
 int main_container_string() {
 	emansis::string str = "Hello world!!!";
 
-	auto str1(str);
-	str1 += "TAT";
-	std::cout << str.c_str() << std::endl;
-	std::cout << str1.c_str() << std::endl;
+	std::cout << str.c_str() << str.size() << std::endl;
+	str = emansis::string("wow");
+	std::cout << str.c_str() << str.size() << std::endl;
+
+	//auto str1(str);
+	//str1 += "TAT";
+	//std::cout << str.c_str() << std::endl;
+	//std::cout << str1.c_str() << std::endl;
 
 	//std::cout << str.c_str() << std::endl;
 	//std::cout << str.find('!', 0) << ' ' << str.find("Hello", 0) << std::endl;
