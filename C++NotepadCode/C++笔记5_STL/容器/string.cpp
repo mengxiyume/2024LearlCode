@@ -4,6 +4,7 @@
 
 #include <cstring>
 #include <cassert>
+#include <algorithm>
 namespace emansis {
 #pragma region 构造相关
 	string::string(const char* src)
@@ -174,16 +175,38 @@ namespace emansis {
 		std::swap(str.m_uSize, m_uSize);
 		std::swap(str.m_uCapacity, m_uCapacity);
 	}
-
+	string string::substr(size_t pos, size_t len) {
+		if (pos > m_uSize)
+			return "";
+		if (len > m_uSize - pos) {
+			//有多少取多少
+			return string(m_pData + pos);
+		}
+		else {
+			//取中间部分
+			string sub;
+			sub.reserve(len);
+			memmove(sub.m_pData, m_pData + pos, len);
+			sub.m_uSize = len;
+			sub.m_pData[len] = '\0';
+			return sub;
+		}
+	}
 }
 
 #include <iostream>
 int main_container_string() {
 	emansis::string str = "Hello world!!!";
 
-	std::cout << str.c_str() << str.size() << std::endl;
-	str = emansis::string("wow");
-	std::cout << str.c_str() << str.size() << std::endl;
+	std::cout << str.c_str() << std::endl;
+
+	std::cout << str.substr(6, 5).c_str() << std::endl;
+	std::cout << str.substr(11).c_str() << std::endl;
+	
+
+	//std::cout << str.c_str() << str.size() << std::endl;
+	//str = emansis::string("wow");
+	//std::cout << str.c_str() << str.size() << std::endl;
 
 	//auto str1(str);
 	//str1 += "TAT";

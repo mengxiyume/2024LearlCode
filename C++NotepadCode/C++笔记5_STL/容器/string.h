@@ -37,6 +37,7 @@ namespace emansis {
 		size_t find(const char* str, size_t pos);
 
 		void swap(string& str);
+		string substr(size_t pos, size_t len = npos);
 
 	private:
 		char* m_pData;
