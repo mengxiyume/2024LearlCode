@@ -170,7 +170,9 @@ namespace emansis {
 		return sub ? sub - m_pData : -1;	//未查找到时返回-1
 	}
 	void string::swap(string& str) {
-
+		std::swap(str.m_pData, m_pData);
+		std::swap(str.m_uSize, m_uSize);
+		std::swap(str.m_uCapacity, m_uCapacity);
 	}
 
 }
