@@ -49,6 +49,9 @@
     <Filter Include="源文件\C++笔记5_STL\容器\String">
       <UniqueIdentifier>{50cbf94c-6908-42ca-ba83-0d1bca584cc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\C++笔记5_STL\容器\Vector">
+      <UniqueIdentifier>{e3cd1c80-838b-420e-b7ca-74582123de7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -165,6 +168,9 @@
     <ClCompile Include="C++笔记5_STL\容器\string.cpp">
       <Filter>源文件\C++笔记5_STL\容器\String</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记5_STL\容器\vectorTest.cpp">
+      <Filter>源文件\C++笔记5_STL\容器\Vector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
@@ -211,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="C++笔记5_STL\容器\string.h">
       <Filter>源文件\C++笔记5_STL\容器\String</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\容器\vector.h">
+      <Filter>源文件\C++笔记5_STL\容器\Vector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

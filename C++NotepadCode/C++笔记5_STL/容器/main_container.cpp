@@ -8,5 +8,6 @@ using namespace std;
 int main_container() {
 
 	//cout << "Hello! container!!!!" << endl;
-	return main_container_string();
+	//return main_container_string();
+	return main_container_vector();
 }

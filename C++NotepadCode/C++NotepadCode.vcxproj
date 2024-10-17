@@ -173,6 +173,7 @@
     <ClCompile Include="C++笔记5_STL\仿函数\main_functor.cpp" />
     <ClCompile Include="C++笔记5_STL\容器\main_container.cpp" />
     <ClCompile Include="C++笔记5_STL\容器\string.cpp" />
+    <ClCompile Include="C++笔记5_STL\容器\vectorTest.cpp" />
     <ClCompile Include="C++笔记5_STL\空间配置器\main_spaceConfigurator.cpp" />
     <ClCompile Include="C++笔记5_STL\算法\main_algorithm.cpp" />
     <ClCompile Include="C++笔记5_STL\迭代器\main_iterator.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="C++笔记5_STL\仿函数\functor.h" />
     <ClInclude Include="C++笔记5_STL\容器\container.h" />
     <ClInclude Include="C++笔记5_STL\容器\string.h" />
+    <ClInclude Include="C++笔记5_STL\容器\vector.h" />
     <ClInclude Include="C++笔记5_STL\空间配置器\spaceConfigurator.h" />
     <ClInclude Include="C++笔记5_STL\算法\algorithm.h" />
     <ClInclude Include="C++笔记5_STL\迭代器\iterator.h" />
