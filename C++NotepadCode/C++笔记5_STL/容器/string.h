@@ -43,7 +43,7 @@ namespace emansis {
 		string substr(size_t pos, size_t len = npos);
 		const char* c_str() const;
 	private:
-		char* m_pData = nullptr;
+		char* m_szData = nullptr;
 		size_t m_uCapacity;
 		size_t m_uSize;
 	};

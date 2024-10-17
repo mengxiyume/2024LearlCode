@@ -10,8 +10,8 @@ namespace emansis {
 	string::string(const char* src)
 		: m_uSize(strlen(src)) {
 		m_uCapacity = m_uSize;
-		m_pData = new char[m_uSize + 1];
-		strcpy(m_pData, src);
+		m_szData = new char[m_uSize + 1];
+		strcpy(m_szData, src);
 	}
 	//传统写法
 	//string::string(const string& src) 
@@ -26,23 +26,23 @@ namespace emansis {
 		swap(temp);
 	}
 	string::~string() {
-		delete m_pData;
-		m_pData = nullptr;
+		delete m_szData;
+		m_szData = nullptr;
 		m_uCapacity = 0;
 		m_uSize = 0;
 	}
 #pragma endregion
 #pragma region 迭代器相关
 	string::iterator string::begin() {
-		return m_pData;
+		return m_szData;
 	}
 	string::iterator string::end() {
-		return m_pData + m_uSize + 1;
+		return m_szData + m_uSize + 1;
 	}
 #pragma endregion
 #pragma region 操作符重载
 	char& string::operator[](size_t index) {
-		return m_pData[index];
+		return m_szData[index];
 	}
 	string& string::operator+=(char ch) {
 		push_back(ch);
@@ -94,14 +94,14 @@ namespace emansis {
 		char* pNewData = new char[newCapacity + 1];
 
 		//拷贝数据
-		memmove(pNewData, m_pData, newCapacity);
+		memmove(pNewData, m_szData, newCapacity);
 		pNewData[newCapacity] = '\0';
 
 		//释放原空间
-		delete[] m_pData;
+		delete[] m_szData;
 
 		//管理数据更新
-		m_pData = pNewData;
+		m_szData = pNewData;
 		m_uCapacity = newCapacity;
 	}
 	void string::push_back(char ch) {
@@ -111,8 +111,8 @@ namespace emansis {
 			reserve(newCapacity);
 		}
 		//尾插字符
-		m_pData[m_uSize] = ch;
-		m_pData[m_uSize + 1] = '\0';
+		m_szData[m_uSize] = ch;
+		m_szData[m_uSize + 1] = '\0';
 		++m_uSize;
 	}
 	void string::append(const string& src) {
@@ -122,7 +122,7 @@ namespace emansis {
 			reserve(m_uSize + len);
 
 		//追加字符串
-		strcpy(m_pData + m_uSize, src.c_str());
+		strcpy(m_szData + m_uSize, src.c_str());
 		m_uSize += len;
 	}
 	void string::insert(size_t pos, char ch) {
@@ -136,11 +136,11 @@ namespace emansis {
 		//将pos之后的字符向后移动一位
 		size_t end = m_uSize + 1;
 		while (end > pos) {
-			m_pData[end] = m_pData[end - 1];
+			m_szData[end] = m_szData[end - 1];
 			--end;
 		}
 		//插入字符
-		m_pData[pos] = ch;
+		m_szData[pos] = ch;
 		++m_uSize;
 	}
 	void string::insert(size_t pos, const char* src) {
@@ -155,12 +155,12 @@ namespace emansis {
 		//数据移动
 		size_t end = m_uSize + len;
 		while (end > pos + len - 1) {
-			m_pData[end] = m_pData[end - len];
+			m_szData[end] = m_szData[end - len];
 			--end;
 		}
 
 		//字符串写入
-		memcpy(m_pData + pos, src, len);
+		memcpy(m_szData + pos, src, len);
 		m_uSize += len;
 	}
 	void string::erase(size_t pos, size_t len) {
@@ -171,22 +171,22 @@ namespace emansis {
 
 		//超量删除处理
 		if (len == npos) {
-			m_pData[pos] = '\0';
+			m_szData[pos] = '\0';
 			m_uSize = pos;
 		}
 		//一般删除处理
 		else {
-			strcpy(m_pData + pos, m_pData + pos + len);
+			strcpy(m_szData + pos, m_szData + pos + len);
 			m_uSize -= len;
 		}
 	}
 	void string::swap(string& str) {
-		std::swap(str.m_pData, m_pData);
+		std::swap(str.m_szData, m_szData);
 		std::swap(str.m_uSize, m_uSize);
 		std::swap(str.m_uCapacity, m_uCapacity);
 	}
 	void string::clear() {
-		m_pData[0] = '\0';
+		m_szData[0] = '\0';
 		m_uSize = 0;
 	}
 	size_t string::size() const {
@@ -196,34 +196,34 @@ namespace emansis {
 		assert(pos < m_uSize);
 		//在范围内查找
 		for (size_t i = pos; i < m_uSize; ++i)
-			if (m_pData[i] == ch)
+			if (m_szData[i] == ch)
 				return i;
 		//找不到返回-1
 		return -1;
 	}
 	size_t string::find(const char* str, size_t pos) {
-		const char* sub = strstr(m_pData + pos, str);
-		return sub ? sub - m_pData : -1;	//未查找到时返回-1
+		const char* sub = strstr(m_szData + pos, str);
+		return sub ? sub - m_szData : -1;	//未查找到时返回-1
 	}
 	string string::substr(size_t pos, size_t len) {
 		if (pos > m_uSize)
 			return "";
 		if (len > m_uSize - pos) {
 			//有多少取多少
-			return string(m_pData + pos);
+			return string(m_szData + pos);
 		}
 		else {
 			//取中间部分
 			string sub;
 			sub.reserve(len);
-			memmove(sub.m_pData, m_pData + pos, len);
+			memmove(sub.m_szData, m_szData + pos, len);
 			sub.m_uSize = len;
-			sub.m_pData[len] = '\0';
+			sub.m_szData[len] = '\0';
 			return sub;
 		}
 	}
 	const char* string::c_str() const {
-		return m_pData;
+		return m_szData;
 	}
 	std::istream& operator>>(std::istream& is, string& str) {
 		str.clear();
