@@ -43,14 +43,14 @@
     <Filter Include="源文件\C++笔记5_STL\配接器">
       <UniqueIdentifier>{5f2bac47-cef6-4c84-a5e3-aef2a5dcf8e3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\C++笔记5_STL\算法">
-      <UniqueIdentifier>{84083c4f-2d01-4b5f-b926-c456dc576b5e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\C++笔记5_STL\容器\String">
       <UniqueIdentifier>{50cbf94c-6908-42ca-ba83-0d1bca584cc3}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\C++笔记5_STL\容器\Vector">
       <UniqueIdentifier>{e3cd1c80-838b-420e-b7ca-74582123de7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\算法">
+      <UniqueIdentifier>{84083c4f-2d01-4b5f-b926-c456dc576b5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +148,7 @@
       <Filter>源文件\C++笔记5_STL</Filter>
     </ClCompile>
     <ClCompile Include="C++笔记5_STL\算法\main_algorithm.cpp">
-      <Filter>源文件\C++笔记5_STL\算法</Filter>
+      <Filter>源文件\算法</Filter>
     </ClCompile>
     <ClCompile Include="C++笔记5_STL\配接器\main_adapter.cpp">
       <Filter>源文件\C++笔记5_STL\配接器</Filter>
@@ -198,7 +198,7 @@
       <Filter>源文件\C++笔记5_STL</Filter>
     </ClInclude>
     <ClInclude Include="C++笔记5_STL\算法\algorithm.h">
-      <Filter>源文件\C++笔记5_STL\算法</Filter>
+      <Filter>源文件\算法</Filter>
     </ClInclude>
     <ClInclude Include="C++笔记5_STL\配接器\adapter.h">
       <Filter>源文件\C++笔记5_STL\配接器</Filter>

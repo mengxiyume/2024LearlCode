@@ -45,8 +45,31 @@ int vectorTest03() {
 	return 0;
 }
 
+int vectorTest04() {
+	emansis::vector<int> v1;
+	emansis::vector<int> v2;
+	for (size_t i = 0; i < 5; ++i) {
+		v1 += i + 1;
+		//v2 += i + 1;
+	}
+	v2 = v1;
+	for (auto e : v1) {
+		cout << e << ' ';
+	}
+	cout << endl;
+	for (auto e : v2) {
+		cout << e << ' ';
+	}
+	cout << endl;
+	//cout << (v1 > v2) << endl;
+	//cout << (v1 < v2) << endl;
+	//cout << (v1 == v2) << endl;
+	return 0;
+}
+
 int main_container_vector() {
 	//return vectorTest01();
 	//return vectorTest02();
-	return vectorTest03();
+	//return vectorTest03();
+	return vectorTest04();
 }

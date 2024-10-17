@@ -10,20 +10,19 @@ namespace emansis {
 	class vector {
 	public:
 #pragma region 成员函数
-#pragma region 构造相关重载
-		vector()
-		: m_aData(nullptr)
-		, m_pStart(nullptr)
-		, m_pFinish(nullptr)
-		, m_pEndOfStorage(nullptr) {;}
+#pragma region 构造重载相关
+		vector() = default;
 		vector(const T& value) {
 			vector temp;
 			temp += value;
 			swap(temp);
 		}
 		vector(const vector<T>& src) {
-			vector<T> temp(src);
-			swap(temp);
+			//DEBUG:拷贝构造
+			reserve(src.capacity());
+			for (const auto e : src) {
+				push_back(e);
+			}
 		}
 		~vector() {
 			if (m_aData)
@@ -51,14 +50,14 @@ namespace emansis {
 			return m_pFinish;
 		}
 #pragma endregion
-#pragma region 空间管理
-		size_t size() {
+#pragma region 空间管理函数
+		size_t size() const {
 			return m_pFinish - m_pStart;
 		}
-		size_t capacity() {
+		size_t capacity() const {
 			return m_pEndOfStorage - m_pStart;
 		}
-		bool empty() {
+		bool empty() const {
 			return !(m_pFinish - m_pStart);
 		}
 		void resize(size_t newSize, T value = 0) {
@@ -96,7 +95,7 @@ namespace emansis {
 			m_aData			= temp;
 		}
 #pragma endregion
-#pragma region 成员访问
+#pragma region 成员访问相关
 		T& operator[](size_t pos) {
 			return at(pos);
 		}
@@ -131,7 +130,7 @@ namespace emansis {
 			return m_aData;
 		}
 #pragma endregion
-#pragma region 成员改动
+#pragma region 成员改动相关
 		void push_back(const T& value) {
 			//容量检测
 			if (size() + 1 > capacity()) {
@@ -187,6 +186,47 @@ namespace emansis {
 			}
 			//尾元素指针移动
 			--m_pFinish;
+		}
+#pragma endregion
+#pragma region 关系操作符重载
+		bool operator>(const vector<T>right) const {
+			int ret = compare(right);
+			return ret > 0;
+		}
+		bool operator>=(const vector<T>right) const {
+			int ret = compare(right);
+			return ret >= 0;
+		}
+		bool operator<(const vector<T>right) const {
+			int ret = compare(right);
+			return ret < 0;
+		}
+		bool operator<=(const vector<T>right) const {
+			int ret = compare(right);
+			return ret <= 0;
+		}
+		bool operator==(const vector<T>right) const {
+			int ret = compare(right);
+			return ret == 0;
+		}
+		bool operator!=(const vector<T>right) const {
+			int ret = compare(right);
+			return ret != 0;
+		}
+		int compare(const vector<T>& right) const {
+			int ret = (int)size() - (int)right.size();
+			//如果两个对象的数据量相等，则逐一比较其中的数据，否则数据量多的对象大
+			if (false == ret) {
+				//TODO:数据量相等，逐一比较其中的数据
+				iterator leftIt = begin(), rightIt = right.begin();
+				while (leftIt < end()) {
+					ret = *leftIt - *rightIt;
+					if (false == ret)
+						return ret;
+					++leftIt, ++rightIt;
+				}
+			}
+			return ret;
 		}
 #pragma endregion
 	private:
