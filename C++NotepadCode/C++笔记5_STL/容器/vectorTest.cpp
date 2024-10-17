@@ -31,7 +31,22 @@ int vectorTest02() {
 	return 0;
 }
 
+int vectorTest03() {
+	emansis::vector<int> v1;
+	for (size_t i = 0; i < 5; ++i) {
+		v1 += i + 1;
+	}
+	v1.erase(v1.size() - 1);
+	v1.insert(0, 90);
+	for (auto e : v1) {
+		cout << e << ' ';
+	}
+	cout << endl;
+	return 0;
+}
+
 int main_container_vector() {
 	//return vectorTest01();
-	return vectorTest02();
+	//return vectorTest02();
+	return vectorTest03();
 }

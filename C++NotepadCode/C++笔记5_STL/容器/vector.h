@@ -85,7 +85,7 @@ namespace emansis {
 			if (m_aData != nullptr) {
 				//已有空间时创建新空间并移动数据和释放旧空间
 				//移动数据
-				memmove(temp, m_aData, size());
+				memmove(temp, m_aData, size() * sizeof(T));
 				//释放旧空间
 				delete[] m_aData;
 			}
@@ -133,15 +133,19 @@ namespace emansis {
 #pragma endregion
 #pragma region 成员改动
 		void push_back(const T& value) {
+			//容量检测
 			if (size() + 1 > capacity()) {
 				size_t newCapacity = m_aData == 0 ? 4 : capacity() * 2;
 				reserve(newCapacity);
 			}
+			//尾插
 			*m_pFinish = value;
+			//尾元素指针移动
 			++m_pFinish;
 		}
 		void pop_back() {
 			assert(!empty());
+			//尾元素指针移动
 			--m_pFinish;
 		}
 		void swap(vector& right) {
@@ -155,6 +159,34 @@ namespace emansis {
 		}
 		void clear() {
 			m_pFinish = m_pStart;
+		}
+
+		void insert(size_t position, const T& value) {
+			assert(position <= size());
+			//容量检测
+			if (size() + 1 > capacity()) {
+				size_t newCapacity = m_aData == 0 ? 4 : capacity() * 2;
+				reserve(newCapacity);
+			}
+			//数据移动
+			for (size_t i = size(); i > position; --i) {
+				m_aData[i] = m_aData[i - 1];
+			}
+			//数据写入
+			m_aData[position] = value;
+
+			//尾元素指针移动
+			++m_pFinish;
+		}
+		void erase(size_t position) {
+			assert(position < size());
+			assert(!empty());
+			//数据移动
+			for (size_t i = position; i < size() - 1; ++i) {
+				m_aData[i] = m_aData[i + 1];
+			}
+			//尾元素指针移动
+			--m_pFinish;
 		}
 #pragma endregion
 	private:
