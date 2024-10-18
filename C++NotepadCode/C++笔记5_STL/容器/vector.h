@@ -179,7 +179,7 @@ namespace emansis {
 			//尾元素指针移动
 			++m_pFinish;
 		}
-		void insert(iterator position, const T& value) {
+		iterator insert(iterator position, const T& value) {
 			//TODO:迭代器版本insert
 			assert(position >= m_pStart && position <= m_pFinish);
 
@@ -200,9 +200,11 @@ namespace emansis {
 			//*position = value;
 			////尾指针更新
 			//++m_pFinish;
+			//return position + 1;
 
 			size_t uOffsetPosition = position - begin();
 			insert(uOffsetPosition, value);
+			return begin() + uOffsetPosition + 1;
 		}
 		void erase(size_t position) {
 			assert(position < size());
@@ -214,16 +216,20 @@ namespace emansis {
 			//尾元素指针移动
 			--m_pFinish;
 		}
-		void erase(iterator position) {
+		iterator erase(iterator position) {
 			//TODO:迭代器版本insert
 			assert(position >= m_pStart && position < m_pFinish);
 
 			//while (position < m_pFinish)
 			//	*position = *++position;
 			//--m_pFinish;
+			//if (position > m_pFinish)
+			//	--position;
+			//return position;
 
 			size_t uOffsetPosition = position - begin();
 			erase(uOffsetPosition);
+			return begin() + uOffsetPosition;
 		}
 		void clear() {
 			m_pFinish = m_pStart;

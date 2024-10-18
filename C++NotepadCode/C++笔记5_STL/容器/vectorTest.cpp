@@ -173,10 +173,33 @@ int vectorTest05() {
 	return 0;
 }
 
+//迭代器失效相关测试
+int vectorTest06() {
+	emansis::vector<int> v1;
+	auto v1It = v1.begin();
+	for (int i = 0; i < 5; ++i)
+		//防止迭代器失效，使用insert返回值更新现有迭代器
+		v1It = v1.insert(v1It, i + 1);
+	for (int i = 0; i < v1.size(); ++i)
+		cout << v1[i] << ' ';
+	cout << "iterator insert()" << endl;
+	v1It = find(v1.begin(), v1.end(), 5);
+	for (int i = 0; i < 5; ++i)
+		//防止迭代器失效，使用erase返回值-1更新现有迭代器
+		v1It = v1.erase(v1It) - 1;
+	for (int i = 0; i < v1.size(); ++i)
+		cout << v1[i] << ' ';
+	cout << "iterator erase()" << endl;
+
+	return 0;
+}
+
+
 int main_container_vector() {
 	//return vectorTest01();
 	//return vectorTest02();
 	//return vectorTest03();
 	//return vectorTest04();
-	return vectorTest05();
+	//return vectorTest05();
+	return vectorTest06();
 }
