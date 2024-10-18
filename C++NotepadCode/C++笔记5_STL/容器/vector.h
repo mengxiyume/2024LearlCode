@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <cstring>
 #include <cassert>
+#include <initializer_list>
 namespace emansis {
 
 	template<class T>
@@ -12,7 +13,7 @@ namespace emansis {
 	public:
 		vector() = default;
 		template<class InputIterator>
-		vector(InputIterator start, InputIterator finish) {
+		explicit vector(InputIterator start, InputIterator finish) {
 			vector<T> temp;
 			InputIterator curIt = start;
 			while (curIt < finish) {
@@ -21,17 +22,18 @@ namespace emansis {
 			}
 			swap(temp);
 		}
-		vector(const T& value) {
-			vector<T> temp;
-			temp += value;
-			swap(temp);
+		vector(std::initializer_list<T> il) {
+			reserve(il.size());
+			for (auto e : il) {
+				*this += e;
+			}
 		}
 		explicit vector(size_t n, const T& value = T()) {
 			vector<T> temp;
 			temp.resize(n, value);
 			swap(temp);
 		}
-		vector(const vector<T>& src) {
+		explicit vector(const vector<T>& src) {
 			reserve(src.capacity());
 			for (auto e : src) {
 				*this += e;
@@ -102,8 +104,13 @@ namespace emansis {
 			T* temp = new T[newCapacity];
 			if (m_aData != nullptr) {
 				//已有空间时创建新空间并移动数据和释放旧空间
-				//移动数据
-				memmove(temp, m_aData, size() * sizeof(T));
+				////移动数据	//浅拷贝，会出问题
+				////memmove(temp, m_aData, size() * sizeof(T));
+				//深拷贝
+				for (size_t i = 0; i < size(); ++i) {
+					temp[i] = m_aData[i];
+				}
+				
 				//释放旧空间
 				delete[] m_aData;
 			}

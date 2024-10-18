@@ -206,6 +206,21 @@ int vectorTest07() {
 	return 0;
 }
 
+int vectorTest08() {
+
+	emansis::vector<string> vStr = { "AAAAA", "AAAAA"};;
+	for (auto e : vStr)
+		cout << e << ' ';
+	cout << endl;
+	for (int i = 0; i < 5; ++i)
+		vStr += "11111";
+	for (auto e : vStr)
+		cout << e << ' ';
+	cout << endl;
+
+	return 0;
+}
+
 int main_container_vector() {
 	//return vectorTest01();
 	//return vectorTest02();
@@ -213,5 +228,6 @@ int main_container_vector() {
 	//return vectorTest04();
 	//return vectorTest05();
 	//return vectorTest06();
-	return vectorTest07();
+	//return vectorTest07();
+	return vectorTest08();
 }
