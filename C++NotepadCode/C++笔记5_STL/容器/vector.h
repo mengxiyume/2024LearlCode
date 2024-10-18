@@ -8,20 +8,18 @@ namespace emansis {
 
 	template<class T>
 	class vector {
+#pragma region 构造相关
 	public:
-#pragma region 成员函数
-#pragma region 构造重载相关
 		vector() = default;
-		vector(const T& value) {
+		vector(const t& value) {
 			vector temp;
 			temp += value;
 			swap(temp);
 		}
 		vector(const vector<T>& src) {
-			//DEBUG:拷贝构造
 			reserve(src.capacity());
-			for (const auto e : src) {
-				push_back(e);
+			for (auto e : src) {
+				*this += e;
 			}
 		}
 		~vector() {
@@ -29,11 +27,10 @@ namespace emansis {
 				delete[] m_aData;
 		}
 #pragma endregion
-		vector<T>& operator=(vector<T> right) {
+		vector<t>& operator=(vector<t> right) {
 			swap(right);
 			return *this;
 		}
-#pragma endregion
 #pragma region 迭代器相关
 		typedef			T* iterator;
 		typedef const	T* const_iterator;
@@ -41,6 +38,12 @@ namespace emansis {
 			return m_pStart;
 		}
 		iterator end() {
+			return m_pFinish;
+		}
+		const_iterator begin() const {
+			return m_pStart;
+		}
+		const_iterator end() const {
 			return m_pFinish;
 		}
 		const_iterator cbegin() const {
@@ -51,6 +54,7 @@ namespace emansis {
 		}
 #pragma endregion
 #pragma region 空间管理函数
+	public:
 		size_t size() const {
 			return m_pFinish - m_pStart;
 		}
@@ -89,13 +93,14 @@ namespace emansis {
 				delete[] m_aData;
 			}
 			//管理数据移动
-			m_pEndOfStorage	= temp + newCapacity;
-			m_pFinish		= temp + size();
-			m_pStart		= temp;
-			m_aData			= temp;
+			m_pEndOfStorage = temp + newCapacity;
+			m_pFinish = temp + size();
+			m_pStart = temp;
+			m_aData = temp;
 		}
 #pragma endregion
 #pragma region 成员访问相关
+	public:
 		T& operator[](size_t pos) {
 			return at(pos);
 		}
@@ -131,6 +136,7 @@ namespace emansis {
 		}
 #pragma endregion
 #pragma region 成员改动相关
+	public:
 		void push_back(const T& value) {
 			//容量检测
 			if (size() + 1 > capacity()) {
@@ -147,19 +153,15 @@ namespace emansis {
 			//尾元素指针移动
 			--m_pFinish;
 		}
-		void swap(vector& right) {
-			std::swap(m_aData,			right.m_aData);
-			std::swap(m_pStart,			right.m_pStart);
-			std::swap(m_pFinish,		right.m_pFinish);
-			std::swap(m_pEndOfStorage,	right.m_pEndOfStorage);
-		}
 		void operator+=(const T& value) {
 			push_back(value);
 		}
-		void clear() {
-			m_pFinish = m_pStart;
+		void swap(vector& right) {
+			std::swap(m_aData, right.m_aData);
+			std::swap(m_pStart, right.m_pStart);
+			std::swap(m_pFinish, right.m_pFinish);
+			std::swap(m_pEndOfStorage, right.m_pEndOfStorage);
 		}
-
 		void insert(size_t position, const T& value) {
 			assert(position <= size());
 			//容量检测
@@ -187,43 +189,48 @@ namespace emansis {
 			//尾元素指针移动
 			--m_pFinish;
 		}
+		void clear() {
+			m_pFinish = m_pStart;
+		}
 #pragma endregion
 #pragma region 关系操作符重载
-		bool operator>(const vector<T>right) const {
+	public:
+		bool operator>(const vector<t>right) const {
 			int ret = compare(right);
 			return ret > 0;
 		}
-		bool operator>=(const vector<T>right) const {
+		bool operator>=(const vector<t>right) const {
 			int ret = compare(right);
 			return ret >= 0;
 		}
-		bool operator<(const vector<T>right) const {
+		bool operator<(const vector<t>right) const {
 			int ret = compare(right);
 			return ret < 0;
 		}
-		bool operator<=(const vector<T>right) const {
+		bool operator<=(const vector<t>right) const {
 			int ret = compare(right);
 			return ret <= 0;
 		}
-		bool operator==(const vector<T>right) const {
+		bool operator==(const vector<t>right) const {
 			int ret = compare(right);
 			return ret == 0;
 		}
-		bool operator!=(const vector<T>right) const {
+		bool operator!=(const vector<t>right) const {
 			int ret = compare(right);
 			return ret != 0;
 		}
-		int compare(const vector<T>& right) const {
+	private:
+		int compare(const vector<t>& right) const {
 			int ret = (int)size() - (int)right.size();
 			//如果两个对象的数据量相等，则逐一比较其中的数据，否则数据量多的对象大
 			if (false == ret) {
-				//TODO:数据量相等，逐一比较其中的数据
-				iterator leftIt = begin(), rightIt = right.begin();
-				while (leftIt < end()) {
-					ret = *leftIt - *rightIt;
+				//todo:数据量相等，逐一比较其中的数据
+				iterator leftit = begin(), rightit = right.begin();
+				while (leftit < end()) {
+					ret = *leftit - *rightit;
 					if (false == ret)
 						return ret;
-					++leftIt, ++rightIt;
+					++leftit, ++rightit;
 				}
 			}
 			return ret;
@@ -235,8 +242,4 @@ namespace emansis {
 		T* m_pFinish;		//有效数据结束的位置
 		T* m_pEndOfStorage;	//申请的空间结束的位置
 	};
-	template<class T>
-	void swap(vector<T>& x, vector<T>& y) {
-		x.swap(y);
-	}
 }

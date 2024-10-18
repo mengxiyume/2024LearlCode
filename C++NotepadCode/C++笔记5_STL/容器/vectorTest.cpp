@@ -4,56 +4,155 @@
 #include <iostream>
 using namespace std;
 
+//int vectorTest01() {
+//	emansis::vector<int> v1;
+//	v1.resize(5, 3);
+//	for (auto e : v1) {
+//		cout << e << ' ';
+//	}
+//	cout << endl;
+//	return 0;
+//}
+//
+//int vectorTest02() {
+//	emansis::vector<int> v1(6);
+//	v1 += 9;
+//	for (auto e : v1) {
+//		cout << e << ' ';
+//	}
+//	cout << endl;
+//	cout << v1.front() << ' ' << v1.back() << endl;
+//	v1.clear();
+//	v1 += 32;
+//	for (auto e : v1) {
+//		cout << e << ' ';
+//	}
+//	cout << endl;
+//	return 0;
+//}
+//
+//int vectorTest03() {
+//	emansis::vector<int> v1;
+//	for (size_t i = 0; i < 5; ++i) {
+//		v1 += i + 1;
+//	}
+//	v1.erase(v1.size() - 1);
+//	v1.insert(0, 90);
+//	for (auto e : v1) {
+//		cout << e << ' ';
+//	}
+//	cout << endl;
+//	return 0;
+//}
+//
+//int vectorTest04() {
+//	emansis::vector<int> v1;
+//	for (size_t i = 0; i < 5; ++i) {
+//		v1 += i + 1;
+//	}
+//	for (auto e : v1) {
+//		cout << e << ' ';
+//	}
+//	cout << endl;
+//	return 0;
+//}
+//
+//int main_container_vector() {
+//	//return vectorTest01();
+//	//return vectorTest02();
+//	//return vectorTest03();
+//	//return vectorTest04();
+//	return 0;
+//}
+
 int vectorTest01() {
+
 	emansis::vector<int> v1;
-	v1.resize(5, 3);
-	for (auto e : v1) {
-		cout << e << ' ';
+	for (int i = 0; i < 5; ++i) {
+		v1 += i + 1;
 	}
-	cout << endl;
+	for (int i = 0; i < 5; ++i) {
+		cout << v1[i] << ' ';
+	}
 	return 0;
 }
 
-int vectorTest02() {
-	emansis::vector<int> v1(6);
-	v1 += 9;
-	for (auto e : v1) {
-		cout << e << ' ';
+int vectorTest02() { 
+	emansis::vector<int> v1, v2;
+	for (int i = 0; i < 5; ++i) {
+		v1 += i + 1;
+		v2 += (i + 1) * -1;
+	}
+	for (int i = 0; i < 5; ++i) {
+		cout << v1[i] << ' ';
 	}
 	cout << endl;
-	cout << v1.front() << ' ' << v1.back() << endl;
-	v1.clear();
-	v1 += 32;
-	for (auto e : v1) {
-		cout << e << ' ';
+	for (int i = 0; i < 5; ++i) {
+		cout << v2[i] << ' ';
 	}
 	cout << endl;
+	v1.swap(v2);
+	cout << endl;
+	for (int i = 0; i < 5; ++i) {
+		cout << v1[i] << ' ';
+	}
+	cout << endl;
+	for (int i = 0; i < 5; ++i) {
+		cout << v2[i] << ' ';
+	}
+	cout << endl;
+
 	return 0;
 }
 
 int vectorTest03() {
 	emansis::vector<int> v1;
-	for (size_t i = 0; i < 5; ++i) {
-		v1 += i + 1;
+	v1.resize(5, 999);
+	for (size_t i = 0; i < v1.size(); ++i) {
+		cout << v1[i] << ' ';
 	}
+	cout << "resize()" << endl;
+	v1.insert(v1.size(), 333);
+	v1.insert(v1.size() - 2, 333);
+	v1.insert(0, 333);
+	for (size_t i = 0; i < v1.size(); ++i) {
+		cout << v1[i] << ' ';
+	}
+	cout << "insert()" << endl;
+	v1.erase(0);
+	v1.erase(v1.size() - 3);
 	v1.erase(v1.size() - 1);
-	v1.insert(0, 90);
-	for (auto e : v1) {
-		cout << e << ' ';
+	for (size_t i = 0; i < v1.size(); ++i) {
+		cout << v1[i] << ' ';
 	}
-	cout << endl;
+	cout << "erase()" << endl;
+	v1.pop_back();
+	for (size_t i = 0; i < v1.size(); ++i) {
+		cout << v1[i] << ' ';
+	}
+	cout << "pop_back()" << endl;
+	v1.clear();
+	for (size_t i = 0; i < v1.size(); ++i) {
+		cout << v1[i] << ' ';
+	}
+	cout << "clear()" << endl;
+
 	return 0;
 }
 
 int vectorTest04() {
 	emansis::vector<int> v1;
-	for (size_t i = 0; i < 5; ++i) {
-		v1 += i + 1;
+	v1.resize(5, 999);
+	for (size_t i = 0; i < v1.size(); ++i) {
+		cout << v1[i] << ' ';
 	}
-	for (auto e : v1) {
-		cout << e << ' ';
+	cout << "resize()" << endl;
+	emansis::vector<int> v2(v1);
+	for (size_t i = 0; i < v1.size(); ++i) {
+		cout << v1[i] << ' ';
 	}
-	cout << endl;
+	cout << "resize()" << endl;
+
 	return 0;
 }
 
