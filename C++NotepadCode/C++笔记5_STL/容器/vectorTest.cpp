@@ -194,6 +194,17 @@ int vectorTest06() {
 	return 0;
 }
 
+int vectorTest07() {
+	string str("expensive!");
+	emansis::vector<int> v1(str.begin(), str.end());
+	cout << str << endl;
+	for (auto e : v1)
+		cout << e << ' ';
+	cout << endl;
+	emansis::vector<int> v2(10u, 0);
+	
+	return 0;
+}
 
 int main_container_vector() {
 	//return vectorTest01();
@@ -201,5 +212,6 @@ int main_container_vector() {
 	//return vectorTest03();
 	//return vectorTest04();
 	//return vectorTest05();
-	return vectorTest06();
+	//return vectorTest06();
+	return vectorTest07();
 }

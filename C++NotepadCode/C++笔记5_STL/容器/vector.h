@@ -11,9 +11,24 @@ namespace emansis {
 #pragma region 构造相关
 	public:
 		vector() = default;
+		template<class InputIterator>
+		vector(InputIterator start, InputIterator finish) {
+			vector<T> temp;
+			InputIterator curIt = start;
+			while (curIt < finish) {
+				temp += *curIt;
+				++curIt;
+			}
+			swap(temp);
+		}
 		vector(const T& value) {
 			vector<T> temp;
 			temp += value;
+			swap(temp);
+		}
+		explicit vector(size_t n, const T& value = T()) {
+			vector<T> temp;
+			temp.resize(n, value);
 			swap(temp);
 		}
 		vector(const vector<T>& src) {
