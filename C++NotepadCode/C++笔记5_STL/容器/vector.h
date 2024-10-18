@@ -11,8 +11,8 @@ namespace emansis {
 #pragma region 构造相关
 	public:
 		vector() = default;
-		vector(const t& value) {
-			vector temp;
+		vector(const T& value) {
+			vector<T> temp;
 			temp += value;
 			swap(temp);
 		}
@@ -27,7 +27,7 @@ namespace emansis {
 				delete[] m_aData;
 		}
 #pragma endregion
-		vector<t>& operator=(vector<t> right) {
+		vector<T>& operator=(vector<T> right) {
 			swap(right);
 			return *this;
 		}
@@ -165,7 +165,7 @@ namespace emansis {
 		void insert(size_t position, const T& value) {
 			assert(position <= size());
 			//容量检测
-			if (size() + 1 > capacity()) {
+			if (size() + 1 >= capacity()) {
 				size_t newCapacity = m_aData == 0 ? 4 : capacity() * 2;
 				reserve(newCapacity);
 			}
@@ -179,6 +179,31 @@ namespace emansis {
 			//尾元素指针移动
 			++m_pFinish;
 		}
+		void insert(iterator position, const T& value) {
+			//TODO:迭代器版本insert
+			assert(position >= m_pStart && position <= m_pFinish);
+
+			//iterator oldStart = m_pStart;
+			////容量检测
+			//if (size() + 1 >= capacity()) {
+			//	size_t newCapacity = m_aData == nullptr ? 4 : capacity() * 2;
+			//	reserve(newCapacity);	//迭代器指向更新
+			//	position = m_pStart + (position - oldStart);
+			//}
+			////数据移动
+			//iterator curIt = m_pFinish;
+			//while (curIt > position) {
+			//	*curIt = *(curIt - 1);
+			//	--curIt;
+			//}
+			////插入元素
+			//*position = value;
+			////尾指针更新
+			//++m_pFinish;
+
+			size_t uOffsetPosition = position - begin();
+			insert(uOffsetPosition, value);
+		}
 		void erase(size_t position) {
 			assert(position < size());
 			assert(!empty());
@@ -189,38 +214,49 @@ namespace emansis {
 			//尾元素指针移动
 			--m_pFinish;
 		}
+		void erase(iterator position) {
+			//TODO:迭代器版本insert
+			assert(position >= m_pStart && position < m_pFinish);
+
+			//while (position < m_pFinish)
+			//	*position = *++position;
+			//--m_pFinish;
+
+			size_t uOffsetPosition = position - begin();
+			erase(uOffsetPosition);
+		}
 		void clear() {
 			m_pFinish = m_pStart;
 		}
 #pragma endregion
 #pragma region 关系操作符重载
 	public:
-		bool operator>(const vector<t>right) const {
+		bool operator>(const vector<T>right) const {
 			int ret = compare(right);
 			return ret > 0;
 		}
-		bool operator>=(const vector<t>right) const {
+		bool operator>=(const vector<T>right) const {
 			int ret = compare(right);
 			return ret >= 0;
 		}
-		bool operator<(const vector<t>right) const {
+		bool operator<(const vector<T>right) const {
 			int ret = compare(right);
 			return ret < 0;
 		}
-		bool operator<=(const vector<t>right) const {
+		bool operator<=(const vector<T>right) const {
 			int ret = compare(right);
 			return ret <= 0;
 		}
-		bool operator==(const vector<t>right) const {
+		bool operator==(const vector<T>right) const {
 			int ret = compare(right);
 			return ret == 0;
 		}
-		bool operator!=(const vector<t>right) const {
+		bool operator!=(const vector<T>right) const {
 			int ret = compare(right);
 			return ret != 0;
 		}
 	private:
-		int compare(const vector<t>& right) const {
+		int compare(const vector<T>& right) const {
 			int ret = (int)size() - (int)right.size();
 			//如果两个对象的数据量相等，则逐一比较其中的数据，否则数据量多的对象大
 			if (false == ret) {

@@ -114,12 +114,12 @@ int vectorTest03() {
 	cout << "resize()" << endl;
 	v1.insert(v1.size(), 333);
 	v1.insert(v1.size() - 2, 333);
-	v1.insert(0, 333);
+	v1.insert((size_t)0, 333);
 	for (size_t i = 0; i < v1.size(); ++i) {
 		cout << v1[i] << ' ';
 	}
 	cout << "insert()" << endl;
-	v1.erase(0);
+	v1.erase((size_t)0);
 	v1.erase(v1.size() - 3);
 	v1.erase(v1.size() - 1);
 	for (size_t i = 0; i < v1.size(); ++i) {
@@ -141,7 +141,7 @@ int vectorTest03() {
 }
 
 int vectorTest04() {
-	emansis::vector<int> v1;
+	emansis::vector<int> v1(93);
 	v1.resize(5, 999);
 	for (size_t i = 0; i < v1.size(); ++i) {
 		cout << v1[i] << ' ';
@@ -149,9 +149,26 @@ int vectorTest04() {
 	cout << "resize()" << endl;
 	emansis::vector<int> v2(v1);
 	for (size_t i = 0; i < v1.size(); ++i) {
-		cout << v1[i] << ' ';
+		cout << v2[i] << ' ';
 	}
-	cout << "resize()" << endl;
+	cout << "¿½±´¹¹Ôì()" << endl;
+
+	return 0;
+}
+
+int vectorTest05() {
+	emansis::vector<int> v1;
+	for (size_t i = 0; i < 5; ++i)
+		//v1 += i + 1;
+		v1.insert(v1.begin(), i + 1);
+	for (size_t i = 0; i < 5; ++i)
+		cout << v1[i] << ' ';
+	cout << "iterator insert()" << endl;
+	for (size_t i = 0; i < 5; ++i)
+		v1.erase(v1.begin());
+	for (size_t i = 0; i < v1.size(); ++i)
+		cout << v1[i] << ' ';
+	cout << "iterator erase()" << endl;
 
 	return 0;
 }
@@ -160,5 +177,6 @@ int main_container_vector() {
 	//return vectorTest01();
 	//return vectorTest02();
 	//return vectorTest03();
-	return vectorTest04();
+	//return vectorTest04();
+	return vectorTest05();
 }
