@@ -3,9 +3,30 @@ using namespace std;
 
 #include "./list.h"
 
-int main_contaniner_List() {
+template<class T>
+void PrintList(emansis::list<T>& ls) {
+	if (ls.empty()) {
+		cout << "emptyList" << endl;
+		return;
+	}
+	for (const auto& e : ls)
+		cout << e << ' ';
+	cout << endl;
+}
 
-	//emansis::list<int> ls1;
-
+int ListTest01() {
+	emansis::list<int> ls1;
+	for (int i = 0; i < 5; ++i)
+		ls1.push_back(i + 1);
+	PrintList<int>(ls1);
+	while (!ls1.empty())
+		ls1.pop_back();
+	PrintList<int>(ls1);
+	
 	return 0;
+}
+
+int main_container_list() {
+
+	return ListTest01();
 }
