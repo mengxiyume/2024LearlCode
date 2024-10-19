@@ -19,14 +19,20 @@ int ListTest01() {
 	for (int i = 0; i < 5; ++i)
 		ls1.push_back(i + 1);
 	PrintList<int>(ls1);
+	cout << ls1.size() << endl;
 	while (!ls1.empty())
 		ls1.pop_back();
 	PrintList<int>(ls1);
-	
+
+	return 0;
+}
+
+int ListTest02() {
+
 	return 0;
 }
 
 int main_container_list() {
-
 	return ListTest01();
+	//return ListTest02();
 }

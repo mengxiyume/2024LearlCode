@@ -202,7 +202,7 @@ namespace emansis {
 			++m_pFinish;
 		}
 		iterator insert(iterator position, const T& value) {
-			//TODO:迭代器版本insert
+			//迭代器版本insert
 			assert(position >= m_pStart && position <= m_pFinish);
 
 			//iterator oldStart = m_pStart;
@@ -239,7 +239,7 @@ namespace emansis {
 			--m_pFinish;
 		}
 		iterator erase(iterator position) {
-			//TODO:迭代器版本insert
+			//迭代器版本insert
 			assert(position >= m_pStart && position < m_pFinish);
 
 			//while (position < m_pFinish)
@@ -288,7 +288,7 @@ namespace emansis {
 			int ret = (int)size() - (int)right.size();
 			//如果两个对象的数据量相等，则逐一比较其中的数据，否则数据量多的对象大
 			if (false == ret) {
-				//todo:数据量相等，逐一比较其中的数据
+				//数据量相等，逐一比较其中的数据
 				iterator leftit = begin(), rightit = right.begin();
 				while (leftit < end()) {
 					ret = *leftit - *rightit;

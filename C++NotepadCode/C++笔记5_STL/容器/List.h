@@ -28,27 +28,34 @@ namespace emansis {
 	};
 	#pragma endregion
 
-#pragma region 链表迭代器类
+	#pragma region 链表迭代器类
 	template<class T, class Refrence, class Pointer>
+	/// <summary>
+	/// 链表迭代器
+	/// </summary>
 	class listIterator {
-	private:
-		Node<T>* data;
 	public:
+		Node<T>* data;	//链表节点指针
 		typedef listIterator<T, Refrence, Pointer> Self;
+		/// <summary>
+		/// 链表迭代器构造
+		/// </summary>
+		/// <param name="it">用于构造迭代器的链表节点</param>
 		listIterator(Node<T>* it) : data(it) { ; }
+		#pragma region 操作符重载
 		/// <summary>
 		/// 前置++
 		/// </summary>
 		/// <returns>自增后的迭代器存放的变量的引用</returns>
-		Refrence operator++() {
+		Self operator++() {
 			data = data->m_pNext;
-			return data->m_tData;
+			return *this;
 		}
 		/// <summary>
 		/// 后置++
 		/// </summary>
 		/// <returns>自增前的迭代器存放的变量的引用</returns>
-		Refrence operator++(int) {
+		Self operator++(int) {
 			Self temp(data);
 			data = data->m_pNext;
 			return temp;
@@ -57,15 +64,15 @@ namespace emansis {
 		/// 前置--
 		/// </summary>
 		/// <returns>自减后的迭代器存放的变量的引用</returns>
-		Refrence operator--() {
+		Self operator--() {
 			data = data->m_pPrev;
-			return data;
+			return *this;
 		}
 		/// <summary>
 		/// 后置--
 		/// </summary>
 		/// <returns>自减前的迭代器存放的变量的引用</returns>
-		Refrence operator--(int) {
+		Self operator--(int) {
 			Self temp(data);
 			data = data->m_pPrev;
 			return temp;
@@ -82,13 +89,19 @@ namespace emansis {
 		/// </summary>
 		/// <returns>迭代器指向对象的地址</returns>
 		Pointer operator->() {
-			return &data->m_tData;
+			return &operator*();
 		}
-		bool operator!=(const Self& it) {
-			return data != it.data;
+		/// <summary>
+		/// 迭代器不相等关系操作符
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns></returns>
+		bool operator!=(const Self& right) {
+			return data != right.data;
 		}
+		#pragma endregion
 	};
-#pragma endregion
+	#pragma endregion
 
 	template<class T>
 	/// <summary>
@@ -128,22 +141,20 @@ namespace emansis {
 	public:
 		typedef listIterator<T, T&, T*>				iterator;
 		typedef listIterator<T, const T&, const T*> const_iterator;
-
 		/// <summary>
 		/// begin迭代器
 		/// </summary>
 		/// <returns>返回第一个元素的迭代器</returns>
 		iterator begin() {
 			assert(!empty());
-			return m_pHead->m_pNext;
+			return iterator(m_pHead->m_pNext);
 		}
 		/// <summary>
 		/// end迭代器
 		/// </summary>
 		/// <returns>返回最后一个元素的下一个位置的迭代器</returns>
 		iterator end() {
-			assert(!empty());
-			return m_pHead;
+			return iterator(m_pHead);
 		}
 		/// <summary>
 		/// begin迭代器
@@ -152,7 +163,7 @@ namespace emansis {
 		/// <returns>返回第一个元素的迭代器</returns>
 		iterator begin() const {
 			assert(!empty());
-			return m_pHead->m_pNext;
+			return iterator(m_pHead->m_pNext);
 		}
 		/// <summary>
 		/// end迭代器
@@ -160,8 +171,7 @@ namespace emansis {
 		/// <para>*只读迭代器*</para>
 		/// <returns>返回最后一个元素的下一个位置的迭代器</returns>
 		iterator end() const {
-			assert(!empty());
-			return m_pHead;
+			return iterator(m_pHead);
 		}
 		/// <summary>
 		/// const_begin迭代器
@@ -170,7 +180,7 @@ namespace emansis {
 		/// <returns>返回第一个元素的const迭代器</returns>
 		const_iterator cbegin() const {
 			assert(!empty());
-			return m_pHead->m_pNext;
+			return const_iterator(m_pHead->m_pNext);
 		}
 		/// <summary>
 		/// const_end迭代器
@@ -178,8 +188,7 @@ namespace emansis {
 		/// <para>*const迭代器*</para>
 		/// <returns>返回最后一个元素的下一个位置的const迭代器</returns>
 		const_iterator cend() const {
-			assert(!empty());
-			return m_pHead;
+			return const_iterator(m_pHead);
 		}
 	#pragma endregion
 	#pragma region 空间管理函数
@@ -191,7 +200,11 @@ namespace emansis {
 		/// <returns>返回链表中有效元素的个数</returns>
 		size_t size() {
 			assert(m_pHead);
-			//TODO:迭代器遍历计算size
+			//迭代器遍历计算size
+			size_t count = 0;
+			for (const auto& e : *this)
+				++count;
+			return count;
 		}
 		/// <summary>
 		/// 判空
@@ -207,6 +220,32 @@ namespace emansis {
 	#pragma endregion
 	#pragma region 成员改动相关
 	public:
+		iterator insert(iterator position, const T& value) {
+			//在position前插入新元素
+			assert(m_pHead);
+			//创建并填充新节点
+			Node<T>* newNode = new Node<T>(value);
+			//链接节点
+			newNode->m_pPrev				= position.data->m_pPrev;
+			newNode->m_pNext				= position.data;
+			position.data->m_pPrev->m_pNext = newNode;
+			position.data->m_pPrev			= newNode;
+
+			return ++position;
+		}
+		iterator erase(iterator position) {
+			//删除position位置的元素
+			assert(!empty());
+			//断开链接
+			Node<T>* next = position.data->m_pNext;
+			Node<T>* prev = position.data->m_pPrev;
+			next->m_pPrev = prev;
+			prev->m_pNext = next;
+			//删除节点
+			delete position.data;
+
+			return iterator(next);
+		}
 		/// <summary>
 		/// 尾插一个数据
 		/// </summary>
@@ -214,13 +253,15 @@ namespace emansis {
 		/// <param name="value">要插入的数据</param>
 		void push_back(const T& value) {
 			assert(m_pHead);
-			//获取一个新节点并填充值
-			Node<T>* newNode = new Node<T>(value);
-			//链接新节点
-			newNode->m_pPrev			= m_pHead->m_pPrev;
-			newNode->m_pNext			= m_pHead;
-			m_pHead->m_pPrev->m_pNext	= newNode;
-			m_pHead->m_pPrev			= newNode;
+			////获取一个新节点并填充值
+			//Node<T>* newNode = new Node<T>(value);
+			////链接新节点
+			//newNode->m_pPrev			= m_pHead->m_pPrev;
+			//newNode->m_pNext			= m_pHead;
+			//m_pHead->m_pPrev->m_pNext	= newNode;
+			//m_pHead->m_pPrev			= newNode;
+
+			insert(end(), value);
 		}
 		/// <summary>
 		/// 尾删一个节点
@@ -228,12 +269,14 @@ namespace emansis {
 		/// </summary>
 		void pop_back() {
 			assert(!empty());
-			//获取尾节点
-			Node<T>* popNode = m_pHead->m_pPrev;
-			//尾节点断开链接
-			popNode->m_pPrev->m_pNext	= popNode->m_pNext;
-			popNode->m_pNext->m_pPrev	= popNode->m_pPrev;
-			delete popNode;
+			////获取尾节点
+			//Node<T>* popNode = m_pHead->m_pPrev;
+			////尾节点断开链接
+			//popNode->m_pPrev->m_pNext	= popNode->m_pNext;
+			//popNode->m_pNext->m_pPrev	= popNode->m_pPrev;
+			//delete popNode;
+
+			erase(--end());
 		}
 		/// <summary>
 		/// 清除链表中的所有元素
