@@ -171,6 +171,7 @@
     <ClCompile Include="C++笔记4_模板\testTemplateFunction.cpp" />
     <ClCompile Include="C++笔记5_STL\main5.cpp" />
     <ClCompile Include="C++笔记5_STL\仿函数\main_functor.cpp" />
+    <ClCompile Include="C++笔记5_STL\容器\ListTest.cpp" />
     <ClCompile Include="C++笔记5_STL\容器\main_container.cpp" />
     <ClCompile Include="C++笔记5_STL\容器\string.cpp" />
     <ClCompile Include="C++笔记5_STL\容器\vectorTest.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="C++笔记5_STL\testC++5_STL.h" />
     <ClInclude Include="C++笔记5_STL\仿函数\functor.h" />
     <ClInclude Include="C++笔记5_STL\容器\container.h" />
+    <ClInclude Include="C++笔记5_STL\容器\List.h" />
     <ClInclude Include="C++笔记5_STL\容器\string.h" />
     <ClInclude Include="C++笔记5_STL\容器\vector.h" />
     <ClInclude Include="C++笔记5_STL\空间配置器\spaceConfigurator.h" />

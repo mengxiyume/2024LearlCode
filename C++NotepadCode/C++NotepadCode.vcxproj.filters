@@ -52,6 +52,9 @@
     <Filter Include="源文件\算法">
       <UniqueIdentifier>{84083c4f-2d01-4b5f-b926-c456dc576b5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\C++笔记5_STL\容器\List">
+      <UniqueIdentifier>{4a54f0e9-52a7-4670-8802-adf9d74351a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,6 +174,9 @@
     <ClCompile Include="C++笔记5_STL\容器\vectorTest.cpp">
       <Filter>源文件\C++笔记5_STL\容器\Vector</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记5_STL\容器\ListTest.cpp">
+      <Filter>源文件\C++笔记5_STL\容器\List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
@@ -220,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="C++笔记5_STL\容器\vector.h">
       <Filter>源文件\C++笔记5_STL\容器\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\容器\List.h">
+      <Filter>源文件\C++笔记5_STL\容器\List</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
