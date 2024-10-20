@@ -1,5 +1,6 @@
 #pragma once
 #include <cassert>
+#include <initializer_list>
 
 namespace emansis {
 	#pragma region 链表节点定义
@@ -110,7 +111,7 @@ namespace emansis {
 	class list {
 	#pragma region 结构成员
 	private:
-		Node<T>* m_pHead;
+		Node<T>* m_pHead;	//链表哨兵位
 	#pragma endregion
 	#pragma region 构造相关
 	public:
@@ -119,6 +120,12 @@ namespace emansis {
 		/// </summary>
 		list() {
 			initList();
+		}
+		list(std::initializer_list<int> src) {
+			initList();
+			for (const auto& e : src) {
+				push_back(e);
+			}
 		}
 		/// <summary>
 		/// 析构函数
@@ -167,8 +174,8 @@ namespace emansis {
 		}
 		/// <summary>
 		/// end迭代器
-		/// </summary>
 		/// <para>*只读迭代器*</para>
+		/// </summary>
 		/// <returns>返回最后一个元素的下一个位置的迭代器</returns>
 		iterator end() const {
 			return iterator(m_pHead);
@@ -184,8 +191,8 @@ namespace emansis {
 		}
 		/// <summary>
 		/// const_end迭代器
-		/// </summary>
 		/// <para>*const迭代器*</para>
+		/// </summary>
 		/// <returns>返回最后一个元素的下一个位置的const迭代器</returns>
 		const_iterator cend() const {
 			return const_iterator(m_pHead);
@@ -195,8 +202,8 @@ namespace emansis {
 	public:
 		/// <summary>
 		/// 计算链表中元素的数量
-		/// </summary>
 		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
 		/// <returns>返回链表中有效元素的个数</returns>
 		size_t size() {
 			assert(m_pHead);
@@ -217,9 +224,61 @@ namespace emansis {
 	#pragma endregion
 	#pragma region 成员访问相关
 	public:
+		/// <summary>
+		/// 获取链表中第一个元素
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// <para>*空链表调用该函数会报错*</para>
+		/// </summary>
+		/// <returns>链表中的第一个元素的引用</returns>
+		T& front() {
+			assert(m_pHead);
+			assert(!empty());
+			return m_pHead->m_pNext->m_tData;
+		}
+		/// <summary>
+		/// 获取链表中第一个元素
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// <para>*空链表调用该函数会报错*</para>
+		/// <para>*获取的数据不可更改*</para>
+		/// </summary>
+		/// <returns>链表中的第一个元素的const引用</returns>
+		const T& front() const {
+			assert(m_pHead);
+			assert(!empty());
+			return m_pHead->m_pNext->m_tData;
+		}
+		/// <summary>
+		/// 获取链表的最后一个元素
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// <para>*空链表调用该函数会报错*</para>
+		/// </summary>
+		/// <returns>链表中最后一个元素的引用</returns>
+		T& back() {
+			assert(m_pHead);
+			assert(!empty());
+			return m_pHead->m_pPrev->m_tData;
+		}
+		/// <summary>
+		/// 获取链表的最后一个元素
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// <para>*空链表调用该函数会报错*</para>
+		/// <para>*获取的数据不可更改*</para>
+		/// </summary>
+		/// <returns>链表中最后一个元素的引用</returns>
+		const T& back() const {
+			assert(m_pHead);
+			assert(!empty());
+			return m_pHead->m_pPrev->m_tData;
+		}
 	#pragma endregion
 	#pragma region 成员改动相关
 	public:
+		/// <summary>
+		/// 在指定迭代器前插入一个元素
+		/// </summary>
+		/// <param name="position">指向坐标的迭代器</param>
+		/// <param name="value">新插入的值</param>
+		/// <returns>新插入元素的下一个元素的迭代器</returns>
 		iterator insert(iterator position, const T& value) {
 			//在position前插入新元素
 			assert(m_pHead);
@@ -233,6 +292,12 @@ namespace emansis {
 
 			return ++position;
 		}
+		/// <summary>
+		/// 删除指定迭代器位置的元素
+		/// <para>*存在迭代器失效问题，请使用返回值更新迭代器*</para>
+		/// </summary>
+		/// <param name="position">指向坐标的迭代器</param>
+		/// <returns>被删除元素的下一个元素的迭代器</returns>
 		iterator erase(iterator position) {
 			//删除position位置的元素
 			assert(!empty());
@@ -248,8 +313,8 @@ namespace emansis {
 		}
 		/// <summary>
 		/// 尾插一个数据
-		/// </summary>
 		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
 		/// <param name="value">要插入的数据</param>
 		void push_back(const T& value) {
 			assert(m_pHead);

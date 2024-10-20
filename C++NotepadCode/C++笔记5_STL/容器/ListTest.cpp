@@ -27,12 +27,14 @@ int ListTest01() {
 	return 0;
 }
 
+//初始化列表测试
 int ListTest02() {
-
+	emansis::list<int> ls1 = { 1, 2, 3, 4, 5 };
+	PrintList<int>(ls1);
 	return 0;
 }
 
 int main_container_list() {
-	return ListTest01();
-	//return ListTest02();
+	//return ListTest01();
+	return ListTest02();
 }
