@@ -7,12 +7,24 @@
 #include <initializer_list>
 namespace emansis {
 
+	//TODO:迭代器类与反向迭代器类实现
 	template<class T>
+	/// <summary>
+	/// 顺序表
+	/// </summary>
 	class vector {
-#pragma region 构造相关
+	#pragma region 构造相关
 	public:
+		/// <summary>
+		/// 默认构造
+		/// </summary>
 		vector() = default;
 		template<class InputIterator>
+		/// <summary>
+		/// 迭代器区间初始化
+		/// </summary>
+		/// <param name="start">迭代器开始的位置</param>
+		/// <param name="finish">迭代器结束的下一个位置</param>
 		explicit vector(InputIterator start, InputIterator finish) {
 			vector<T> temp;
 			InputIterator curIt = start;
@@ -22,66 +34,181 @@ namespace emansis {
 			}
 			swap(temp);
 		}
+		/// <summary>
+		/// 初始化列表构造
+		/// </summary>
+		/// <param name="il">初始化列表</param>
 		vector(std::initializer_list<T> il) {
 			reserve(il.size());
 			for (auto e : il) {
 				*this += e;
 			}
 		}
+		/// <summary>
+		/// N项数值填充初始化
+		/// </summary>
+		/// <param name="n">初始化的数量</param>
+		/// <param name="value">需要填入的值</param>
 		explicit vector(size_t n, const T& value = T()) {
 			vector<T> temp;
 			temp.resize(n, value);
 			swap(temp);
 		}
+		/// <summary>
+		/// 拷贝构造
+		/// </summary>
+		/// <param name="src">被拷贝的顺序表对象</param>
 		explicit vector(const vector<T>& src) {
 			reserve(src.capacity());
-			for (auto e : src) {
+			for (const auto& e : src)
 				*this += e;
-			}
 		}
+		/// <summary>
+		/// 析构函数
+		/// </summary>
 		~vector() {
 			if (m_aData)
 				delete[] m_aData;
 		}
-#pragma endregion
+	#pragma endregion
 		vector<T>& operator=(vector<T> right) {
 			swap(right);
 			return *this;
 		}
-#pragma region 迭代器相关
-		typedef			T* iterator;
-		typedef const	T* const_iterator;
+	#pragma region 迭代器相关
+		#pragma region 正向迭代器
+		typedef			T* iterator;		//迭代器
+		typedef const	T* const_iterator;	//const迭代器
+		/// <summary>
+		/// begin迭代器
+		/// </summary>
+		/// <returns>第一个有效元素位置的迭代器</returns>
 		iterator begin() {
 			return m_pStart;
 		}
+		/// <summary>
+		/// end迭代器
+		/// </summary>
+		/// <returns>最后一个有效元素的下一个位置的迭代器</returns>
 		iterator end() {
 			return m_pFinish;
 		}
-		const_iterator begin() const {
+		/// <summary>
+		/// begin迭代器
+		/// <para>*只读迭代器</para>
+		/// </summary>
+		/// <returns>第一个有效元素位置的迭代器</returns>
+		iterator begin() const {
 			return m_pStart;
 		}
-		const_iterator end() const {
+		/// <summary>
+		/// end迭代器
+		/// <para>*只读迭代器</para>
+		/// </summary>
+		/// <returns>最后一个有效元素的下一个位置的迭代器</returns>
+		iterator end() const {
 			return m_pFinish;
 		}
+		/// <summary>
+		/// cbegin迭代器
+		/// <para>*const迭代器</para>
+		/// </summary>
+		/// <returns>第一个有效元素位置的迭代器</returns>
 		const_iterator cbegin() const {
 			return m_pStart;
 		}
+		/// <summary>
+		/// cend迭代器
+		/// <para>*const迭代器</para>
+		/// </summary>
+		/// <returns>最后一个有效元素的下一个位置的迭代器</returns>
 		const_iterator cend() const {
 			return m_pFinish;
 		}
-#pragma endregion
-#pragma region 空间管理函数
+		#pragma endregion
+		#pragma region 反向迭代器
+		typedef			T* reverse_iterator;		//反向迭代器
+		typedef const	T* const_reverse_iterator;	//const反向迭代器
+		/// <summary>
+		/// rbegin反向迭代器
+		/// </summary>
+		/// <returns>最后一个有效元素位置的反向迭代器</returns>
+		reverse_iterator rbegin() {
+			return m_pFinish - 1;
+		}
+		/// <summary>
+		/// rend反向迭代器
+		/// </summary>
+		/// <returns>第一个有效元素的上一个位置的反向迭代器</returns>
+		reverse_iterator rend() {
+			return m_pStart - 1;
+		}
+		/// <summary>
+		/// rbegin反向迭代器
+		/// <para>*只读迭代器</para>
+		/// </summary>
+		/// <returns>最后一个有效元素位置的反向迭代器</returns>
+		reverse_iterator rbegin() const {
+			return m_pFinish - 1;
+		}
+		/// <summary>
+		/// rend反向迭代器
+		/// <para>*只读迭代器</para>
+		/// </summary>
+		/// <returns>第一个有效元素的上一个位置的反向迭代器</returns>
+		reverse_iterator rend() const {
+			return m_pStart - 1;
+		}
+		/// <summary>
+		/// crbegin反向迭代器
+		/// <para>*const迭代器</para>
+		/// </summary>
+		/// <returns>最后一个有效元素位置的迭代器</returns>
+		const_reverse_iterator crbegin() const {
+			return m_pFinish - 1;
+		}
+		/// <summary>
+		/// crend迭代器
+		/// <para>*const迭代器</para>
+		/// </summary>
+		/// <returns>第一个有效元素的下一个位置的反向迭代器</returns>
+		const_reverse_iterator crend() const {
+			return m_pStart - 1;
+		}
+		#pragma endregion
+	#pragma endregion
+	#pragma region 空间管理函数
 	public:
+		/// <summary>
+		/// 顺序表中有效元素的数量
+		/// </summary>
+		/// <returns>有效元素的数量</returns>
 		size_t size() const {
 			return m_pFinish - m_pStart;
 		}
+		/// <summary>
+		/// 顺序表的容量
+		/// </summary>
+		/// <returns>容量</returns>
 		size_t capacity() const {
 			return m_pEndOfStorage - m_pStart;
 		}
+		/// <summary>
+		/// 当前顺序表是否为空表
+		/// </summary>
+		/// <returns>
+		/// 为空 : true
+		/// <para>else : false</para>
+		/// </returns>
 		bool empty() const {
 			return !(m_pFinish - m_pStart);
 		}
-		void resize(size_t newSize, T value = 0) {
+		/// <summary>
+		/// 设定当前有效元素的数量
+		/// </summary>
+		/// <param name="newSize">新设置的有效元素数量</param>
+		/// <param name="value">增加有效元素数量时填充的默认值</param>
+		void resize(size_t newSize, T value = T()) {
 			//缩小空间
 			if (newSize < size()) {
 				m_pFinish -= (size() - newSize);
@@ -99,7 +226,13 @@ namespace emansis {
 			}
 			m_pFinish = m_aData + newSize;
 		}
+		/// <summary>
+		/// 重设容量
+		/// <para>*填入容量为0时报错*</para>
+		/// </summary>
+		/// <param name="newCapacity">新的容量</param>
 		void reserve(size_t newCapacity) {
+			assert(newCapacity);
 			//没有空间时直接申请空间并初始化
 			T* temp = new T[newCapacity];
 			if (m_aData != nullptr) {
@@ -120,43 +253,95 @@ namespace emansis {
 			m_pStart = temp;
 			m_aData = temp;
 		}
-#pragma endregion
-#pragma region 成员访问相关
+	#pragma endregion
+	#pragma region 成员访问相关
 	public:
+		#pragma region 访问成员
+		/// <summary>
+		/// []
+		/// </summary>
+		/// <param name="pos">要访问的坐标</param>
+		/// <returns>指定坐标位置元素的引用</returns>
 		T& operator[](size_t pos) {
 			return at(pos);
 		}
+		/// <summary>
+		/// 访问指定坐标的元素
+		/// </summary>
+		/// <param name="pos">坐标</param>
+		/// <returns>指定坐标元素的引用</returns>
 		T& at(size_t pos) {
 			assert(pos < size());
 			return m_aData[pos];
 		}
+		/// <summary>
+		/// 顺序表中第一个元素
+		/// </summary>
+		/// <returns>第一个有效元素的引用</returns>
 		T& front() {
 			return *m_pStart;
 		}
+		/// <summary>
+		/// 顺序表中最后一个元素
+		/// </summary>
+		/// <returns>最有一个有效元素的引用</returns>
 		T& back() {
 			return *(m_pFinish - 1);
 		}
+		/// <summary>
+		/// 顺序表存放的数据
+		/// </summary>
+		/// <returns>存放数据位置的指针</returns>
 		T* data() {
 			return m_aData;
 		}
-		//访问const成员变量
+		#pragma endregion
+		#pragma region 访问const成员
+		/// <summary>
+		/// []
+		/// <para>*只读引用*</para>
+		/// </summary>
+		/// <param name="pos">要访问的坐标</param>
+		/// <returns>指定坐标位置元素的引用</returns>
 		const T& operator[](size_t pos) const {
 			return at(pos);
 		}
+		/// <summary>
+		/// 访问指定坐标的元素
+		/// <para>*只读引用*</para>
+		/// </summary>
+		/// <param name="pos">坐标</param>
+		/// <returns>指定坐标元素的引用</returns>
 		const T& at(size_t pos) const {
 			assert(pos < size());
 			return m_aData[pos];
 		}
+		/// <summary>
+		/// 顺序表中第一个元素
+		/// <para>*只读引用*</para>
+		/// </summary>
+		/// <returns>第一个有效元素的引用</returns>
 		const T& front() const {
 			return *m_pStart;
 		}
+		/// <summary>
+		/// 顺序表中最后一个元素
+		/// <para>*只读引用*</para>
+		/// </summary>
+		/// <returns>最有一个有效元素的引用</returns>
 		const T& back() const {
 			return *m_pFinish;
 		}
+		/// <summary>
+		/// 顺序表存放的数据
+		/// <para>*只读引用*</para>
+		/// </summary>
+		/// <returns>存放数据位置的指针</returns>
 		const T* data() const {
 			return m_aData;
 		}
-#pragma endregion
+		#pragma endregion
+	#pragma endregion
 #pragma region 成员改动相关
 	public:
 		void push_back(const T& value) {
