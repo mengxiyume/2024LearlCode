@@ -230,6 +230,11 @@ namespace emansis {
 				push_back(e);
 			}
 		}
+		list(const list<T>& src) {
+			initList();
+			for (const auto& e : src)
+				push_back(e);
+		}
 		/// <summary>
 		/// 析构函数
 		/// </summary>
@@ -247,6 +252,23 @@ namespace emansis {
 			m_pHead->m_pNext = m_pHead->m_pPrev = m_pHead;
 		}
 	#pragma endregion
+	public:
+		/// <summary>
+		/// 交换两链表的内容
+		/// </summary>
+		/// <param name="right">另一个链表</param>
+		void swap(list<T>& right) {
+			std::swap(*this, right);
+		}
+		/// <summary>
+		/// 赋值重载
+		/// </summary>
+		/// <param name="src">被复制的对象</param>
+		/// <returns>完成复制后得到的对象</returns>
+		list<T>& operator=(list<T> right) {
+			swap(right);
+			return *this;
+		}
 	#pragma region 迭代器相关
 	public:
 		#pragma region 正向迭代器
@@ -638,15 +660,8 @@ namespace emansis {
 			} 
 			//size不相等
 			else
-				return leftSize - rightSize;
+				return (int)leftSize - (int)rightSize;
 		}
 	#pragma endregion
-		/// <summary>
-		/// 交换两链表的内容
-		/// </summary>
-		/// <param name="right">另一个链表</param>
-		void swap(list<T>& right) {
-			std::swap(*this, right);
-		}
 	};
 }

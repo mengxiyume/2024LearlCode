@@ -60,9 +60,22 @@ int ListTest04() {
 	return 0;
 }
 
+//¸³ÖµÖØÔØ²âÊÔ
+int ListTest05() {
+	emansis::list<int> ls1 = { 1, 2, 3, 4, 5 };
+	emansis::list<int> ls2 = ls1;
+	//ls2.operator=(ls1);
+	ls2.push_back(9);
+	PrintList<int>(ls1);
+	PrintList<int>(ls2);
+
+	return 0;
+}
+
 int main_container_list() {
 	//return ListTest01();
 	//return ListTest02();
 	//return ListTest03();
-	return ListTest04();
+	//return ListTest04();
+	return ListTest05();
 }
