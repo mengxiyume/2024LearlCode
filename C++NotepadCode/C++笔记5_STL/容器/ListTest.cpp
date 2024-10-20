@@ -47,8 +47,22 @@ int ListTest03() {
 	return 0;
 }
 
+//·´Ïòµü´úÆ÷²âÊÔ
+int ListTest04() {
+	emansis::list<int> ls1 = { 1, 2, 3, 4, 5 };
+	emansis::list<int>::const_reverse_iterator it = ls1.crbegin();
+	while (it != ls1.crend()) {
+		cout << *it << ' ';
+		++it;
+	}
+	cout << endl;
+
+	return 0;
+}
+
 int main_container_list() {
 	//return ListTest01();
 	//return ListTest02();
-	return ListTest03();
+	//return ListTest03();
+	return ListTest04();
 }

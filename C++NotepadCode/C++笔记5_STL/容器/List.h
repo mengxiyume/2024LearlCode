@@ -33,73 +33,171 @@ namespace emansis {
 	#pragma region 链表正向迭代器类
 	template<class T, class Refrence, class Pointer>
 	/// <summary>
-	/// 链表迭代器
+	/// 链表正向迭代器
 	/// </summary>
 	class listIterator {
 	public:
-		Node<T>* data;	//链表节点指针
+		Node<T>* m_pNode;	//链表节点指针
 		typedef listIterator<T, Refrence, Pointer> Self;
 		/// <summary>
 		/// 链表迭代器构造
 		/// </summary>
 		/// <param name="it">用于构造迭代器的链表节点</param>
-		listIterator(Node<T>* it) : data(it) { ; }
+		listIterator(Node<T>* it) : m_pNode(it) { ; }
 		#pragma region 操作符重载
 		/// <summary>
 		/// 前置++
 		/// </summary>
-		/// <returns>自增后的迭代器存放的变量的引用</returns>
+		/// <returns>自增后的迭代器</returns>
 		Self operator++() {
-			data = data->m_pNext;
+			m_pNode = m_pNode->m_pNext;
 			return *this;
 		}
 		/// <summary>
 		/// 后置++
 		/// </summary>
-		/// <returns>自增前的迭代器存放的变量的引用</returns>
+		/// <returns>自增前的迭代器</returns>
 		Self operator++(int) {
-			Self temp(data);
-			data = data->m_pNext;
+			Self temp(m_pNode);
+			m_pNode = m_pNode->m_pNext;
 			return temp;
 		}
 		/// <summary>
 		/// 前置--
 		/// </summary>
-		/// <returns>自减后的迭代器存放的变量的引用</returns>
+		/// <returns>自减后的迭代器</returns>
 		Self operator--() {
-			data = data->m_pPrev;
+			m_pNode = m_pNode->m_pPrev;
 			return *this;
 		}
 		/// <summary>
 		/// 后置--
 		/// </summary>
-		/// <returns>自减前的迭代器存放的变量的引用</returns>
+		/// <returns>自减前的迭代器</returns>
 		Self operator--(int) {
-			Self temp(data);
-			data = data->m_pPrev;
+			Self temp(m_pNode);
+			m_pNode = m_pNode->m_pPrev;
 			return temp;
 		}
 		/// <summary>
 		/// 解引用
 		/// </summary>
-		/// <returns>迭代器指向对象的引用</returns>
+		/// <returns>迭代器指向对象数据的引用</returns>
 		Refrence operator*() {
-			return data->m_tData;
+			return m_pNode->m_tData;
 		}
 		/// <summary>
 		/// 成员访问
 		/// </summary>
-		/// <returns>迭代器指向对象的地址</returns>
+		/// <returns>迭代器指向对象数据的地址</returns>
 		Pointer operator->() {
 			return &operator*();
 		}
 		/// <summary>
 		/// 迭代器不相等关系操作符
 		/// </summary>
-		/// <param name="right">右操作数</param>
-		/// <returns></returns>
+		/// <param name="right">右操作数迭代器</param>
+		/// <returns>
+		/// left iterator != right iterator : true
+		/// <para>else : false </para>
+		/// </returns>
+		bool operator!=(const Self& right) const {
+			return m_pNode != right.m_pNode;
+		}
+		/// <summary>
+		/// 迭代器相等关系操作符
+		/// </summary>
+		/// <param name="right">右操作数迭代器</param>
+		/// <returns>
+		/// left iterator == right iterator : true
+		/// <para>else : false </para>
+		/// </returns>
+		bool operator==(const Self& right) const {
+			return m_pNode == right.m_pNode;
+		}
+		#pragma endregion
+	};
+	#pragma endregion
+	#pragma region 链表反向迭代器类
+	template<class T, class Refrence, class Pointer>
+	/// <summary>
+	/// 链表反向迭代器
+	/// </summary>
+	class listReverseIterator {
+	public:
+		Node<T>* m_pNode;
+		typedef listReverseIterator<T, Refrence, Pointer> Self;
+		listReverseIterator(Node<T>* it) : m_pNode(it) { ; }
+		#pragma region 操作符重载
+		/// <summary>
+		/// 反向前置++
+		/// </summary>
+		/// <returns>自增后的迭代器</returns>
+		Self operator++() {
+			m_pNode = m_pNode->m_pPrev;
+			return *this;
+		}
+		/// <summary>
+		/// 反向后置++
+		/// </summary>
+		/// <returns>自增前的迭代器</returns>
+		Self operator++(int) {
+			Self temp(m_pNode);
+			m_pNode = m_pNode->m_pPrev;
+			return temp;
+		}
+		/// <summary>
+		/// 反向前置--
+		/// </summary>
+		/// <returns>自减后的迭代器</returns>
+		Self operator--() {
+			m_pNode = m_pNode->m_pNext;
+			return *this;
+		}
+		/// <summary>
+		/// 反向后置--
+		/// </summary>
+		/// <returns>自减前的迭代器</returns>
+		Self operator--(int) {
+			Self temp(m_pNode);
+			m_pNode = m_pNode->m_pNext;
+			return temp;
+		}
+		/// <summary>
+		/// 解引用
+		/// </summary>
+		/// <returns>迭代器指向对象数据的引用</returns>
+		Refrence operator*() {
+			return m_pNode->m_tData;
+		}
+		/// <summary>
+		/// 成员访问
+		/// </summary>
+		/// <returns>迭代器指向对象数据的地址</returns>
+		Pointer operator->() {
+			return &operator*();
+		}
+		/// <summary>
+		/// 迭代器不相等关系操作符
+		/// </summary>
+		/// <param name="right">右操作数迭代器</param>
+		/// <returns>
+		/// left iterator != right iterator : true
+		/// <para>else : false </para>
+		/// </returns>
 		bool operator!=(const Self& right) {
-			return data != right.data;
+			return m_pNode != right.m_pNode;
+		}
+		/// <summary>
+		/// 迭代器相等关系操作符
+		/// </summary>
+		/// <param name="right">右操作数迭代器</param>
+		/// <returns>
+		/// left iterator == right iterator : true
+		/// <para>else : false </para>
+		/// </returns>
+		bool operator==(const Self& right) {
+			return m_pNode == right.m_pNode;
 		}
 		#pragma endregion
 	};
@@ -152,60 +250,122 @@ namespace emansis {
 	#pragma region 迭代器相关
 	public:
 		#pragma region 正向迭代器
-		typedef listIterator<T, T&, T*>				iterator;
-		typedef listIterator<T, const T&, const T*> const_iterator;
+		typedef listIterator<T, T&, T*>				iterator;		//迭代器
+		typedef listIterator<T, const T&, const T*> const_iterator;	//const迭代器
 		/// <summary>
 		/// begin迭代器
+		/// <para>*未初始化链表调用此函数会报错*</para>
 		/// </summary>
-		/// <returns>返回第一个元素的迭代器</returns>
+		/// <returns>返回第一个元素位置的迭代器</returns>
 		iterator begin() {
-			assert(!empty());
+			assert(m_pHead);
 			return iterator(m_pHead->m_pNext);
 		}
 		/// <summary>
 		/// end迭代器
+		/// <para>*未初始化链表调用此函数会报错*</para>
 		/// </summary>
-		/// <returns>返回最后一个元素的下一个位置的迭代器</returns>
+		/// <returns>返回最后一个元素的下一个元素位置的迭代器</returns>
 		iterator end() {
+			assert(m_pHead);
 			return iterator(m_pHead);
 		}
 		/// <summary>
 		/// begin迭代器
 		/// <para>*只读迭代器*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
 		/// </summary>
-		/// <returns>返回第一个元素的迭代器</returns>
+		/// <returns>返回第一个元素位置的迭代器</returns>
 		iterator begin() const {
-			assert(!empty());
+			assert(m_pHead);
 			return iterator(m_pHead->m_pNext);
 		}
 		/// <summary>
 		/// end迭代器
 		/// <para>*只读迭代器*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
 		/// </summary>
-		/// <returns>返回最后一个元素的下一个位置的迭代器</returns>
+		/// <returns>返回最后一个元素的下一个元素位置的迭代器</returns>
 		iterator end() const {
+			assert(m_pHead);
 			return iterator(m_pHead);
 		}
 		/// <summary>
 		/// const_begin迭代器
 		/// <para>*const迭代器*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
 		/// </summary>
 		/// <returns>返回第一个元素的const迭代器</returns>
 		const_iterator cbegin() const {
-			assert(!empty());
+			assert(m_pHead);
 			return const_iterator(m_pHead->m_pNext);
 		}
 		/// <summary>
 		/// const_end迭代器
 		/// <para>*const迭代器*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
 		/// </summary>
-		/// <returns>返回最后一个元素的下一个位置的const迭代器</returns>
+		/// <returns>返回最后一个元素的下一个元素位置的const迭代器</returns>
 		const_iterator cend() const {
+			assert(m_pHead);
 			return const_iterator(m_pHead);
 		}
 		#pragma endregion
 		#pragma region 反向迭代器
-
+		typedef listReverseIterator<T, T&, T*>				reverse_iterator;		//反向迭代器
+		typedef listReverseIterator<T, const T&, const T*>	const_reverse_iterator;	//反向const迭代器
+		/// <summary>
+		/// reverse_begin迭代器
+		/// <para>*未初始化链表调用此函数会报错*</para>
+		/// </summary>
+		/// <returns>返回链表最后一个元素位置的反向迭代器</returns>
+		reverse_iterator rbegin() {
+			return m_pHead->m_pPrev;
+		}
+		/// <summary>
+		/// reverse_begin迭代器
+		/// <para>*未初始化链表调用此函数会报错*</para>
+		/// </summary>
+		/// <returns>返回链表第一个元素的上一个元素位置的反向迭代器</returns>
+		reverse_iterator rend() {
+			return m_pHead;
+		}
+		/// <summary>
+		/// reverse_begin迭代器
+		/// <para>*指向内容不可更改*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
+		/// </summary>
+		/// <returns>返回链表最后一个元素位置的反向迭代器</returns>
+		reverse_iterator rbegin() const {
+			return m_pHead->m_pPrev;
+		}
+		/// <summary>
+		/// reverse_begin迭代器
+		/// <para>*指向内容不可更改*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
+		/// </summary>
+		/// <returns>返回链表第一个元素的上一个元素位置的反向迭代器</returns>
+		reverse_iterator rend() const {
+			return m_pHead;
+		}
+		/// <summary>
+		/// reverse_begin迭代器
+		/// <para>*const迭代器*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
+		/// </summary>
+		/// <returns>返回链表最后一个元素位置的反向迭代器</returns>
+		const_reverse_iterator crbegin() const {
+			return m_pHead->m_pPrev;
+		}
+		/// <summary>
+		/// reverse_begin迭代器
+		/// <para>*const迭代器*</para>
+		/// <para>*未初始化链表调用此函数会报错*</para>
+		/// </summary>
+		/// <returns>返回链表第一个元素的上一个元素位置的反向迭代器</returns>
+		const_reverse_iterator crend() const {
+			return m_pHead;
+		}
 		#pragma endregion
 	#pragma endregion
 	#pragma region 空间管理函数
@@ -295,10 +455,10 @@ namespace emansis {
 			//创建并填充新节点
 			Node<T>* newNode = new Node<T>(value);
 			//链接节点
-			newNode->m_pPrev				= position.data->m_pPrev;
-			newNode->m_pNext				= position.data;
-			position.data->m_pPrev->m_pNext = newNode;
-			position.data->m_pPrev			= newNode;
+			newNode->m_pPrev				= position.m_pNode->m_pPrev;
+			newNode->m_pNext				= position.m_pNode;
+			position.m_pNode->m_pPrev->m_pNext = newNode;
+			position.m_pNode->m_pPrev			= newNode;
 
 			return ++position;
 		}
@@ -312,12 +472,12 @@ namespace emansis {
 			//删除position位置的元素
 			assert(!empty());
 			//断开链接
-			Node<T>* next = position.data->m_pNext;
-			Node<T>* prev = position.data->m_pPrev;
+			Node<T>* next = position.m_pNode->m_pNext;
+			Node<T>* prev = position.m_pNode->m_pPrev;
 			next->m_pPrev = prev;
 			prev->m_pNext = next;
 			//删除节点
-			delete position.data;
+			delete position.m_pNode;
 
 			return iterator(next);
 		}
