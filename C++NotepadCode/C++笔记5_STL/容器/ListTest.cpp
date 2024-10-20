@@ -34,7 +34,21 @@ int ListTest02() {
 	return 0;
 }
 
+//¹ØÏµÔËËã·û²âÊÔ
+int ListTest03() {
+	emansis::list<int> ls1 = { 1, 2, 3, 4, 5 };
+	emansis::list<int> ls2 = { 1, 2, 3, 4, 6 };
+	emansis::list<int> ls3 = { 1, 2, 3, 4, 6 };
+
+	cout << (ls1 >= ls2) << endl;
+	cout << (ls1 <= ls2) << endl;
+	cout << (ls3 != ls2) << endl;
+
+	return 0;
+}
+
 int main_container_list() {
 	//return ListTest01();
-	return ListTest02();
+	//return ListTest02();
+	return ListTest03();
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <cassert>
 #include <initializer_list>
+#include <algorithm>
 
 namespace emansis {
 	#pragma region 链表节点定义
@@ -29,7 +30,7 @@ namespace emansis {
 	};
 	#pragma endregion
 
-	#pragma region 链表迭代器类
+	#pragma region 链表正向迭代器类
 	template<class T, class Refrence, class Pointer>
 	/// <summary>
 	/// 链表迭代器
@@ -121,6 +122,10 @@ namespace emansis {
 		list() {
 			initList();
 		}
+		/// <summary>
+		/// 使用初始化列表构造链表
+		/// </summary>
+		/// <param name="src">初始化列表</param>
 		list(std::initializer_list<int> src) {
 			initList();
 			for (const auto& e : src) {
@@ -146,6 +151,7 @@ namespace emansis {
 	#pragma endregion
 	#pragma region 迭代器相关
 	public:
+		#pragma region 正向迭代器
 		typedef listIterator<T, T&, T*>				iterator;
 		typedef listIterator<T, const T&, const T*> const_iterator;
 		/// <summary>
@@ -197,6 +203,10 @@ namespace emansis {
 		const_iterator cend() const {
 			return const_iterator(m_pHead);
 		}
+		#pragma endregion
+		#pragma region 反向迭代器
+
+		#pragma endregion
 	#pragma endregion
 	#pragma region 空间管理函数
 	public:
@@ -205,7 +215,7 @@ namespace emansis {
 		/// <para>*未初始化的链表调用该函数会报错*</para>
 		/// </summary>
 		/// <returns>返回链表中有效元素的个数</returns>
-		size_t size() {
+		size_t size() const  {
 			assert(m_pHead);
 			//迭代器遍历计算size
 			size_t count = 0;
@@ -217,7 +227,7 @@ namespace emansis {
 		/// 判空
 		/// </summary>
 		/// <returns>返回该链表是否为空链表</returns>
-		bool empty() {
+		bool empty() const  {
 			assert(m_pHead);
 			return (m_pHead->m_pNext == m_pHead);
 		}
@@ -355,9 +365,128 @@ namespace emansis {
 		}
 	#pragma endregion
 	#pragma region 关系运算符重载
-
+	public:
+		/// <summary>
+		/// >
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left > right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator>	(const list<T>& right) const  {
+			return compare(right) > 0;
+		}
+		/// <summary>
+		/// >=
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left >= right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator>=	(const list<T>& right) const  {
+			return compare(right) >= 0;
+		}
+		/// <summary>
+		/// <
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left < right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator<	(const list<T>& right) const  {
+			return compare(right) < 0;
+		}
+		/// <summary>
+		/// <=
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left <= right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator<=	(const list<T>& right) const  {
+			return compare(right) <= 0;
+		}
+		/// <summary>
+		/// ==
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left == right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator==	(const list<T>& right) const  {
+			return compare(right) == 0;
+		}
+		/// <summary>
+		/// !=
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left != right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator!=	(const list<T>& right) const {
+			return compare(right) != 0;
+		}
+	private:
+		/// <summary>
+		/// 对比两个链表
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的链表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left > right : 正数
+		/// <para>left &lt; right : 负数</para>
+		/// <para>left = right : 0</para>
+		/// </returns>
+		int compare		(const list<T>& right) const {
+			assert(m_pHead);
+			if (m_pHead == right.m_pHead)
+				return 0;
+			size_t leftSize = size(), rightSize = right.size();
+			if (leftSize - rightSize == 0) {
+				//开始逐个比较
+				const_iterator lIt = cbegin(), rIt = right.cbegin();
+				while (lIt != cend()) {
+					if (*lIt > *rIt) {
+						return 1;
+					}
+					else if (*lIt < *rIt) {
+						return -1;
+					}
+					//迭代器更新
+					++lIt, ++rIt;
+				}
+				return 0;
+			} 
+			//size不相等
+			else
+				return leftSize - rightSize;
+		}
 	#pragma endregion
-
-
+		/// <summary>
+		/// 交换两链表的内容
+		/// </summary>
+		/// <param name="right">另一个链表</param>
+		void swap(list<T>& right) {
+			std::swap(*this, right);
+		}
 	};
 }
