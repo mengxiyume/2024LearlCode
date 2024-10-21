@@ -55,6 +55,12 @@
     <Filter Include="源文件\C++笔记5_STL\容器\List">
       <UniqueIdentifier>{4a54f0e9-52a7-4670-8802-adf9d74351a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\C++笔记5_STL\容器\容器适配器">
+      <UniqueIdentifier>{1a2ac13f-cbe6-4a84-9fd7-9af9e77180be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\C++笔记5_STL\容器\容器适配器\Stack">
+      <UniqueIdentifier>{2ad989cc-9d3a-4300-906f-66660019cd37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -177,6 +183,9 @@
     <ClCompile Include="C++笔记5_STL\容器\ListTest.cpp">
       <Filter>源文件\C++笔记5_STL\容器\List</Filter>
     </ClCompile>
+    <ClCompile Include="C++笔记5_STL\容器\stack.cpp">
+      <Filter>源文件\C++笔记5_STL\容器\容器适配器\Stack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test.h">
@@ -229,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="C++笔记5_STL\容器\List.h">
       <Filter>源文件\C++笔记5_STL\容器\List</Filter>
+    </ClInclude>
+    <ClInclude Include="C++笔记5_STL\容器\stack.h">
+      <Filter>源文件\C++笔记5_STL\容器\容器适配器\Stack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
