@@ -183,7 +183,7 @@
     <ClCompile Include="C++笔记5_STL\容器\ListTest.cpp">
       <Filter>源文件\C++笔记5_STL\容器\List</Filter>
     </ClCompile>
-    <ClCompile Include="C++笔记5_STL\容器\stack.cpp">
+    <ClCompile Include="C++笔记5_STL\容器\stackTest.cpp">
       <Filter>源文件\C++笔记5_STL\容器\容器适配器\Stack</Filter>
     </ClCompile>
   </ItemGroup>

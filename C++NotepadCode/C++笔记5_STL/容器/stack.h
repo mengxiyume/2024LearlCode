@@ -17,13 +17,7 @@ namespace emansis {
 		Container* m_pData;	//用于存储栈数据的容器
 	#pragma endregion
 	#pragma region 成员函数
-	public:
-		/// <summary>
-		/// 默认构造函数
-		/// </summary>
-		stack() {
-			initStack();
-		}
+	private:
 		/// <summary>
 		/// 初始化栈
 		/// <para>*重复调用会报错*</para>
@@ -31,6 +25,13 @@ namespace emansis {
 		void initStack() {
 			assert(!m_pData);
 			m_pData = new Container();
+		}
+	public:
+		/// <summary>
+		/// 默认构造函数
+		/// </summary>
+		stack() {
+			initStack();
 		}
 		/// <summary>
 		///  压入一个数据
