@@ -28,10 +28,18 @@ namespace emansis {
 		}
 	public:
 		/// <summary>
-		/// 默认构造函数
+		/// 构造函数 初始化栈
 		/// </summary>
-		stack() {
+		stack() : m_pData(nullptr){
 			initStack();
+		}
+		/// <summary>
+		/// 析构函数
+		/// <para>*空间被提前释放会报错*</para>
+		/// </summary>
+		~stack() {
+			assert(m_pData);
+			delete m_pData;
 		}
 		/// <summary>
 		///  压入一个数据
