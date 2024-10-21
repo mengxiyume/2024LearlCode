@@ -1,8 +1,6 @@
 #pragma once
 #include "./vector.h"
 #include <initializer_list>
-#include <algorithm>
-
 namespace emansis {
 #pragma region 栈
 	/// <summary>
@@ -82,8 +80,10 @@ namespace emansis {
 		/// 交换两栈数据
 		/// </summary>
 		/// <param name="right">右操作数</param>
-		void swap(stack<T,Container>& right) {
-			std::swap(*this, right);
+		void swap(stack& right) {
+			Container* temp = m_pData;
+			m_pData = right.m_pData;
+			right.m_pData = temp;
 		}
 	#pragma endregion
 	};
