@@ -225,20 +225,20 @@ namespace emansis {
 		/// <summary>
 		/// 构造一个空链表
 		/// </summary>
-		list() {
+		list() : m_pHead(nullptr) {
 			initList();
 		}
 		/// <summary>
 		/// 使用初始化列表构造链表
 		/// </summary>
 		/// <param name="src">初始化列表</param>
-		list(std::initializer_list<int> src) {
+		list(std::initializer_list<int> src) : m_pHead(nullptr) {
 			initList();
 			for (const auto& e : src) {
 				push_back(e);
 			}
 		}
-		list(const list<T>& src) {
+		list(const list<T>& src) : m_pHead(nullptr) {
 			initList();
 			for (const auto& e : src)
 				push_back(e);
@@ -254,8 +254,10 @@ namespace emansis {
 		/// <summary>
 		/// 链表初始化
 		/// <para>申请头节点空间并链接</para>
+		/// <para>*重复调用会报错*</para>
 		/// </summary>
 		void initList() {
+			assert(!m_pHead);
 			m_pHead = new Node<T>;
 			m_pHead->m_pNext = m_pHead->m_pPrev = m_pHead;
 		}
