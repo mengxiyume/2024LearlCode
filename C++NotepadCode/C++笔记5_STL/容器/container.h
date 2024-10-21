@@ -5,3 +5,4 @@ int main_container_string();
 int main_container_vector();
 int main_container_list();
 int main_container_stack();
+int main_container_queue();

@@ -11,5 +11,6 @@ int main_container() {
 	//return main_container_string();
 	//return main_container_vector();
 	//return main_container_list();
-	return main_container_stack();
+	//return main_container_stack();
+	return main_container_queue();
 }
