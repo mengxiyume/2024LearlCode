@@ -1,4 +1,4 @@
-#pragma once
+	#pragma once
 
 #include <algorithm>
 #include <cstddef>
@@ -13,7 +13,7 @@ namespace emansis {
 	/// 顺序表
 	/// </summary>
 	class vector {
-	#pragma region 构造相关
+#pragma region 构造相关
 	public:
 		/// <summary>
 		/// 默认构造
@@ -70,13 +70,18 @@ namespace emansis {
 			if (m_aData)
 				delete[] m_aData;
 		}
-	#pragma endregion
+#pragma endregion
+		/// <summary>
+		/// 赋值重载
+		/// </summary>
+		/// <param name="right">被复制的对象</param>
+		/// <returns>完成复制后得到的对象</returns>
 		vector<T>& operator=(vector<T> right) {
 			swap(right);
 			return *this;
 		}
-	#pragma region 迭代器相关
-		#pragma region 正向迭代器
+#pragma region 迭代器相关
+#pragma region 正向迭代器
 		typedef			T* iterator;		//迭代器
 		typedef const	T* const_iterator;	//const迭代器
 		/// <summary>
@@ -125,8 +130,8 @@ namespace emansis {
 		const_iterator cend() const {
 			return m_pFinish;
 		}
-		#pragma endregion
-		#pragma region 反向迭代器
+#pragma endregion
+#pragma region 反向迭代器
 		typedef			T* reverse_iterator;		//反向迭代器
 		typedef const	T* const_reverse_iterator;	//const反向迭代器
 		/// <summary>
@@ -175,9 +180,9 @@ namespace emansis {
 		const_reverse_iterator crend() const {
 			return m_pStart - 1;
 		}
-		#pragma endregion
-	#pragma endregion
-	#pragma region 空间管理函数
+#pragma endregion
+#pragma endregion
+#pragma region 空间管理函数
 	public:
 		/// <summary>
 		/// 顺序表中有效元素的数量
@@ -243,7 +248,7 @@ namespace emansis {
 				for (size_t i = 0; i < size(); ++i) {
 					temp[i] = m_aData[i];
 				}
-				
+
 				//释放旧空间
 				delete[] m_aData;
 			}
@@ -253,13 +258,14 @@ namespace emansis {
 			m_pStart = temp;
 			m_aData = temp;
 		}
-	#pragma endregion
-	#pragma region 成员访问相关
+#pragma endregion
+#pragma region 成员访问相关
 	public:
-		#pragma region 访问成员
+#pragma region 访问成员
 		/// <summary>
 		/// []
-		/// </summary>
+		/// </summary>		/// <para>*空表调用该函数会报错*</para>
+		/// <para>*越界访问会报错*</para>
 		/// <param name="pos">要访问的坐标</param>
 		/// <returns>指定坐标位置元素的引用</returns>
 		T& operator[](size_t pos) {
@@ -267,36 +273,45 @@ namespace emansis {
 		}
 		/// <summary>
 		/// 访问指定坐标的元素
+		/// <para>*空表调用该函数会报错*</para>
+		/// <para>*越界访问会报错*</para>
 		/// </summary>
 		/// <param name="pos">坐标</param>
 		/// <returns>指定坐标元素的引用</returns>
 		T& at(size_t pos) {
+			assert(m_aData);
 			assert(pos < size());
 			return m_aData[pos];
 		}
 		/// <summary>
-		/// 顺序表中第一个元素
+		/// 顺序表中第一个元素		
+		/// <para>*空表调用该函数会报错*</para>
 		/// </summary>
 		/// <returns>第一个有效元素的引用</returns>
 		T& front() {
+			assert(m_pStart);
 			return *m_pStart;
 		}
 		/// <summary>
 		/// 顺序表中最后一个元素
+		/// <para>*空表调用该函数会报错*</para>
 		/// </summary>
 		/// <returns>最有一个有效元素的引用</returns>
 		T& back() {
+			assert(m_pFinish);
 			return *(m_pFinish - 1);
 		}
 		/// <summary>
 		/// 顺序表存放的数据
+		/// <para>*空表调用该函数会报错*</para>
 		/// </summary>
 		/// <returns>存放数据位置的指针</returns>
 		T* data() {
+			assert(m_aData);
 			return m_aData;
 		}
-		#pragma endregion
-		#pragma region 访问const成员
+#pragma endregion
+#pragma region 访问const成员
 		/// <summary>
 		/// []
 		/// <para>*只读引用*</para>
@@ -340,10 +355,14 @@ namespace emansis {
 		const T* data() const {
 			return m_aData;
 		}
-		#pragma endregion
-	#pragma endregion
+#pragma endregion
+#pragma endregion
 #pragma region 成员改动相关
 	public:
+		/// <summary>
+		/// 在顺序表的尾部插入一个元素
+		/// </summary>
+		/// <param name="value">要插入的元素</param>
 		void push_back(const T& value) {
 			//容量检测
 			if (size() + 1 > capacity()) {
@@ -355,20 +374,31 @@ namespace emansis {
 			//尾元素指针移动
 			++m_pFinish;
 		}
+		/// <summary>
+		/// 在顺序表的尾部删除一个元素
+		/// <para>*空表调用该函数会报错*</para>
+		/// </summary>
 		void pop_back() {
 			assert(!empty());
 			//尾元素指针移动
 			--m_pFinish;
 		}
-		void operator+=(const T& value) {
-			push_back(value);
-		}
+		/// <summary>
+		/// 交换两表的内容
+		/// </summary>
+		/// <param name="right">右操作数</param>
 		void swap(vector& right) {
 			std::swap(m_aData, right.m_aData);
 			std::swap(m_pStart, right.m_pStart);
 			std::swap(m_pFinish, right.m_pFinish);
 			std::swap(m_pEndOfStorage, right.m_pEndOfStorage);
 		}
+		/// <summary>
+		/// 在指定坐标插入一个元素
+		/// <para>*坐标越界会报错*</para>
+		/// </summary>
+		/// <param name="position">新插入元素的坐标</param>
+		/// <param name="value">新插入的元素</param>
 		void insert(size_t position, const T& value) {
 			assert(position <= size());
 			//容量检测
@@ -386,6 +416,65 @@ namespace emansis {
 			//尾元素指针移动
 			++m_pFinish;
 		}
+		/// <summary>
+		/// 删除指定坐标的元素
+		/// </summary>
+		/// <param name="position">要删除的元素的坐标</param>
+		void erase(size_t position) {
+			assert(position < size());
+			assert(!empty());
+			//数据移动
+			for (size_t i = position; i < size() - 1; ++i) {
+				m_aData[i] = m_aData[i + 1];
+			}
+			//尾元素指针移动
+			--m_pFinish;
+		}
+		/// <summary>
+		/// 清空顺序表
+		/// </summary>
+		void clear() {
+			m_pFinish = m_pStart;
+		}
+		/// <summary>
+		/// += 尾插一个元素
+		/// <para>*未初始化表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="value">要插入的元素</param>
+		void operator+=(const T& value) {
+			assert(m_aData);
+			push_back(value);
+		}
+		/// <summary>
+		///  删除指定坐标的元素
+		/// <para>*越界访问会报错*</para>
+		/// <para>*存在迭代器失效问题，请使用返回值更新迭代器*</para>
+		/// </summary>
+		/// <param name="position">要删除元素坐标的迭代器</param>
+		/// <returns>被删除元素位置的迭代器</returns>
+		iterator erase(iterator position) {
+			//迭代器版本insert
+			assert(position >= m_pStart && position < m_pFinish);
+
+			//while (position < m_pFinish)
+			//	*position = *++position;
+			//--m_pFinish;
+			//if (position > m_pFinish)
+			//	--position;
+			//return position;
+
+			size_t uOffsetPosition = position - begin();
+			erase(uOffsetPosition);
+			return begin() + uOffsetPosition;
+		}
+		/// <summary>
+		/// 在指定坐标插入一个元素
+		/// <para>*越界访问会报错*</para>
+		/// <para>*存在迭代器失效问题，请使用返回值更新迭代器*</para>
+		/// </summary>
+		/// <param name="position">新插入元素坐标的迭代器</param>
+		/// <param name="value">新插入元素的下一个元素的迭代器</param>
+		/// <returns></returns>
 		iterator insert(iterator position, const T& value) {
 			//迭代器版本insert
 			assert(position >= m_pStart && position <= m_pFinish);
@@ -413,82 +502,136 @@ namespace emansis {
 			insert(uOffsetPosition, value);
 			return begin() + uOffsetPosition + 1;
 		}
-		void erase(size_t position) {
-			assert(position < size());
-			assert(!empty());
-			//数据移动
-			for (size_t i = position; i < size() - 1; ++i) {
-				m_aData[i] = m_aData[i + 1];
-			}
-			//尾元素指针移动
-			--m_pFinish;
-		}
-		iterator erase(iterator position) {
-			//迭代器版本insert
-			assert(position >= m_pStart && position < m_pFinish);
-
-			//while (position < m_pFinish)
-			//	*position = *++position;
-			//--m_pFinish;
-			//if (position > m_pFinish)
-			//	--position;
-			//return position;
-
-			size_t uOffsetPosition = position - begin();
-			erase(uOffsetPosition);
-			return begin() + uOffsetPosition;
-		}
-		void clear() {
-			m_pFinish = m_pStart;
-		}
 #pragma endregion
 #pragma region 关系操作符重载
 	public:
-		bool operator>(const vector<T>right) const {
-			int ret = compare(right);
-			return ret > 0;
+		/// <summary>
+		/// &gt;
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的顺序表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// <para>left &gt; right : true</para>
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator>	(const vector<T>& right) const {
+			return compare(right) > 0;
 		}
-		bool operator>=(const vector<T>right) const {
-			int ret = compare(right);
-			return ret >= 0;
+		/// <summary>
+		/// &gt;=
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的顺序表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// <para>left &gt;= right : true</para>
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator>=	(const vector<T>& right) const {
+			return compare(right) >= 0;
 		}
-		bool operator<(const vector<T>right) const {
-			int ret = compare(right);
-			return ret < 0;
+		/// <summary>
+		/// &lt;
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的顺序表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// <para>left &lt; right : true</para>
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator<	(const vector<T>& right) const {
+			return compare(right) < 0;
 		}
-		bool operator<=(const vector<T>right) const {
-			int ret = compare(right);
-			return ret <= 0;
+		/// <summary>
+		/// &lt;=
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的顺序表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// <para>left &lt;= right : true</para>
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator<=	(const vector<T>& right) const {
+			return compare(right) <= 0;
 		}
-		bool operator==(const vector<T>right) const {
-			int ret = compare(right);
-			return ret == 0;
+		/// <summary>
+		/// ==
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的顺序表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left == right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator==	(const vector<T>& right) const {
+			return compare(right) == 0;
 		}
-		bool operator!=(const vector<T>right) const {
-			int ret = compare(right);
-			return ret != 0;
+		/// <summary>
+		/// !=
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的顺序表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left != right : true
+		/// <para>else : false</para>
+		/// </returns>
+		bool operator!=	(const vector<T>& right) const {
+			return compare(right) != 0;
 		}
 	private:
+		/// <summary>
+		/// 对比两个顺序表
+		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
+		/// <para>*未初始化的顺序表调用该函数会报错*</para>
+		/// </summary>
+		/// <param name="right">右操作数</param>
+		/// <returns>
+		/// left &gt; right : 正数
+		/// <para>left &lt; right : 负数</para>
+		/// <para>left = right : 0</para>
+		/// </returns>
 		int compare(const vector<T>& right) const {
-			int ret = (int)size() - (int)right.size();
-			//如果两个对象的数据量相等，则逐一比较其中的数据，否则数据量多的对象大
-			if (false == ret) {
-				//数据量相等，逐一比较其中的数据
-				iterator leftit = begin(), rightit = right.begin();
-				while (leftit < end()) {
-					ret = *leftit - *rightit;
-					if (false == ret)
-						return ret;
-					++leftit, ++rightit;
+			assert(m_aData);
+			size_t leftSize = size(), rightSize = right.size();
+			if (leftSize == rightSize) {
+				//size相等，逐个比较内容
+				const_iterator lIt = cbegin(), rIt = right.cbegin();
+				while (lIt != cend()) {
+					if (*lIt > *rIt)
+						return 1;
+					else if (*lIt < *rIt)
+						return -1;
+					++lIt, ++rIt;
 				}
+				//所有内容都相等返回0
+				return 0;
 			}
-			return ret;
+			else
+				return (int)leftSize - (int)rightSize;
+			//int ret = (int)size() - (int)right.size();
+			////如果两个对象的数据量相等，则逐一比较其中的数据，否则数据量多的对象大
+			//if (false == ret) {
+			//	//数据量相等，逐一比较其中的数据
+			//	iterator leftit = begin(), rightit = right.begin();
+			//	while (leftit < end()) {
+			//		ret = *leftit - *rightit;
+			//		if (false == ret)
+			//			return ret;
+			//		++leftit, ++rightit;
+			//	}
+			//}
+			//return ret;
 		}
 #pragma endregion
 	private:
 		T* m_aData;			//数据存放的位置
 		T* m_pStart;		//有效数据开始的位置
-		T* m_pFinish;		//有效数据结束的位置
+		T* m_pFinish;		//有效数据结束的位置的下一个位置
 		T* m_pEndOfStorage;	//申请的空间结束的位置
 	};
 }
