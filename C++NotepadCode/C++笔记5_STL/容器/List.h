@@ -5,10 +5,12 @@
 
 namespace emansis {
 	#pragma region 链表节点定义
-	template<class T>
+
 	/// <summary>
-	/// 单个链表节点
+	/// 单个链表节点类
 	/// </summary>
+	/// <typeparam name="T">链表节点存放的数据类型</typeparam>
+	template<class T>
 	struct Node {
 		#pragma region 构造相关
 		/// <summary>
@@ -31,10 +33,13 @@ namespace emansis {
 	#pragma endregion
 
 	#pragma region 链表正向迭代器类
-	template<class T, class Refrence, class Pointer>
 	/// <summary>
-	/// 链表正向迭代器
+	/// 链表正向迭代器类
 	/// </summary>
+	/// <typeparam name="T">迭代器指向的元素类型</typeparam>
+	/// <typeparam name="Refrence">迭代器指向元素类型的引用</typeparam>
+	/// <typeparam name="Pointer">迭代器指向元素类型的指针</typeparam>
+	template<class T, class Refrence, class Pointer>
 	class listIterator {
 	public:
 		Node<T>* m_pNode;	//链表节点指针
@@ -87,7 +92,7 @@ namespace emansis {
 			return m_pNode->m_tData;
 		}
 		/// <summary>
-		/// 成员访问
+		/// -&gt;
 		/// </summary>
 		/// <returns>迭代器指向对象数据的地址</returns>
 		Pointer operator->() {
@@ -119,10 +124,13 @@ namespace emansis {
 	};
 	#pragma endregion
 	#pragma region 链表反向迭代器类
-	template<class T, class Refrence, class Pointer>
 	/// <summary>
-	/// 链表反向迭代器
+	/// 链表反向迭代器类
 	/// </summary>
+	/// <typeparam name="T">迭代器指向的元素类型</typeparam>
+	/// <typeparam name="Refrence">迭代器指向元素类型的引用</typeparam>
+	/// <typeparam name="Pointer">迭代器指向元素类型的指针</typeparam>
+	template<class T, class Refrence, class Pointer>
 	class listReverseIterator {
 	public:
 		Node<T>* m_pNode;
@@ -253,13 +261,6 @@ namespace emansis {
 		}
 	#pragma endregion
 	public:
-		/// <summary>
-		/// 交换两链表的内容
-		/// </summary>
-		/// <param name="right">另一个链表</param>
-		void swap(list<T>& right) {
-			std::swap(*this, right);
-		}
 		/// <summary>
 		/// 赋值重载
 		/// </summary>
@@ -466,6 +467,13 @@ namespace emansis {
 	#pragma region 成员改动相关
 	public:
 		/// <summary>
+		/// 交换两链表的内容
+		/// </summary>
+		/// <param name="right">另一个链表</param>
+		void swap(list<T>& right) {
+			std::swap(*this, right);
+		}
+		/// <summary>
 		/// 在指定迭代器前插入一个元素
 		/// </summary>
 		/// <param name="position">指向坐标的迭代器</param>
@@ -549,52 +557,52 @@ namespace emansis {
 	#pragma region 关系运算符重载
 	public:
 		/// <summary>
-		/// >
+		/// &gt;
 		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
 		/// <para>*未初始化的链表调用该函数会报错*</para>
 		/// </summary>
 		/// <param name="right">右操作数</param>
 		/// <returns>
-		/// left > right : true
+		/// left &gt; right : true
 		/// <para>else : false</para>
 		/// </returns>
 		bool operator>	(const list<T>& right) const  {
 			return compare(right) > 0;
 		}
 		/// <summary>
-		/// >=
+		/// &gt;=
 		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
 		/// <para>*未初始化的链表调用该函数会报错*</para>
 		/// </summary>
 		/// <param name="right">右操作数</param>
 		/// <returns>
-		/// left >= right : true
+		/// left &gt;= right : true
 		/// <para>else : false</para>
 		/// </returns>
 		bool operator>=	(const list<T>& right) const  {
 			return compare(right) >= 0;
 		}
 		/// <summary>
-		/// <
+		/// &lt;
 		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
 		/// <para>*未初始化的链表调用该函数会报错*</para>
 		/// </summary>
 		/// <param name="right">右操作数</param>
 		/// <returns>
-		/// left < right : true
+		/// left &lt; right : true
 		/// <para>else : false</para>
 		/// </returns>
 		bool operator<	(const list<T>& right) const  {
 			return compare(right) < 0;
 		}
 		/// <summary>
-		/// <=
+		/// &lt;=
 		/// <para>优先比较元素数量，数量相等依次比较元素的大小</para>
 		/// <para>*未初始化的链表调用该函数会报错*</para>
 		/// </summary>
 		/// <param name="right">右操作数</param>
 		/// <returns>
-		/// left <= right : true
+		/// <para>left &lt;= right : true</para>
 		/// <para>else : false</para>
 		/// </returns>
 		bool operator<=	(const list<T>& right) const  {
@@ -634,7 +642,7 @@ namespace emansis {
 		/// </summary>
 		/// <param name="right">右操作数</param>
 		/// <returns>
-		/// left > right : 正数
+		/// left &gt; right : 正数
 		/// <para>left &lt; right : 负数</para>
 		/// <para>left = right : 0</para>
 		/// </returns>
