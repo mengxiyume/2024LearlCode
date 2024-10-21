@@ -2,6 +2,7 @@
 
 #include "./vector.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 
 //int vectorTest01() {
@@ -183,7 +184,7 @@ int vectorTest06() {
 	for (int i = 0; i < v1.size(); ++i)
 		cout << v1[i] << ' ';
 	cout << "iterator insert()" << endl;
-	v1It = find(v1.begin(), v1.end(), 5);
+	v1It = find(v1.begin().m_pData, v1.end().m_pData, 5);
 	for (int i = 0; i < 5; ++i)
 		//防止迭代器失效，使用erase返回值-1更新现有迭代器
 		v1It = v1.erase(v1It) - 1;
@@ -221,6 +222,22 @@ int vectorTest08() {
 	return 0;
 }
 
+int vectorTest09() {
+	emansis::vector<int> v1 = { 1,2,3,4,5 };
+	vector<int> v2 = { 1,2,3,4,5 };
+	auto it = v1.crbegin();
+	while (it != v1.crend()) {
+		cout << *it << ' ';
+		++it;
+	}
+	cout << endl;
+	cout << (v1.crbegin() < v1.crend()) << endl;
+	cout << (v1.cbegin() < v1.cend()) << endl;
+	cout << (v2.cbegin() < v2.cend()) << endl;
+	cout << (v2.crbegin() < v2.crend()) << endl;
+	return 0;
+}
+
 int main_container_vector() {
 	//return vectorTest01();
 	//return vectorTest02();
@@ -229,5 +246,6 @@ int main_container_vector() {
 	//return vectorTest05();
 	//return vectorTest06();
 	//return vectorTest07();
-	return vectorTest08();
+	//return vectorTest08();
+	return vectorTest09();
 }
